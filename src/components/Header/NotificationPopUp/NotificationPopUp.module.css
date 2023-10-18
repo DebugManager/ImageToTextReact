@@ -1,0 +1,91 @@
+.notificationWrapper {
+    opacity: 0;
+    top: 34px;
+    left: -100px;
+    right: -100px;
+    position: absolute;
+    visibility: hidden;
+    transition: all 0.5s ease;
+    transform: translateX(100%);
+    overflow: hidden;
+    padding: 14px 15px 14px 15px;
+    box-shadow: 1px 4px 15px 4px rgba(0, 0, 0, 0.10);
+}
+
+.notificationWrapperOpened {
+    display: flex;
+    flex-direction: column;
+    background-color: #ffff;
+    z-index: 1;
+    opacity: 1;
+    visibility: visible;
+    transition: all 0.5s ease;
+    transform: translateX(0);
+    top: 34px;
+    left: -100px;
+    right: -100px;
+    border-radius: 10px;
+}
+
+.notTitle {
+    color: #343A40;
+    font-family: Poppins;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 16px;
+}
+
+.dayStyles {
+    color: #343A40;
+    font-family: Poppins;
+    font-size: 13px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 16px;
+    margin-top: 18px;
+}
+
+.tasksWrapper {
+    display: flex;
+    align-items: center;
+    margin-top: 12px;
+}
+
+.taskTextWrapper {
+    display: flex;
+    flex-direction: column;
+    margin-left: 12px;
+}
+
+
+.textDescription {
+    color: #495057;
+    /* Text S/Regular */
+    font-family: Poppins;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 15px;
+    text-transform: capitalize;
+}
+
+.time {
+    color: #74788D;
+    font-family: Poppins;
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 14px;
+    text-transform: capitalize;
+    margin-top: 8px;
+}
+
+.inputCheckBox {
+    accent-color: #34C38F;
+}
+
+.inputCheckBox:checked::before {
+    border: 2px solid #fff;
+    /* Змініть колір контуру галочки на білий */
+    opacity: 1;
+}
