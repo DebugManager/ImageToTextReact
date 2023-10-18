@@ -1,0 +1,43 @@
+.profileWrapper {
+    top: 45px;
+    right: 30px;
+    opacity: 0;
+    z-index: 1;
+    position: absolute;
+    visibility: hidden;
+    transition: all 0.5s ease;
+    transform: translateY(-100%);
+    overflow: hidden;
+    padding: 14px 15px 14px 15px;
+    box-shadow: 1px 4px 15px 4px rgba(0, 0, 0, 0.10);
+}
+
+.profileWrapperOpened {
+    display: flex;
+    flex-direction: column;
+    background-color: #ffff;
+    z-index: 1;
+    opacity: 1;
+    visibility: visible;
+    transition: all 0.5s ease;
+    transform: translateY(0);
+    top: 45px;
+    right: 30px;
+    border-radius: 10px;
+}
+
+.optionStyles {
+    color: #495057;
+    font-family: Poppins;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 15px;
+    text-transform: capitalize;
+    text-align: center;
+    padding: 10px 14px 10px 14px;
+}
+
+.optionStyles:hover {
+    background-color: #EFF2F7;
+    cursor: pointer;
+}
