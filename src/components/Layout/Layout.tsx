@@ -1,15 +1,16 @@
 import React from 'react';
+import { Outlet } from 'react-router-dom';
 import { Header } from '../Header';
 import { SideBar } from '../SideBar';
 import styles from './Layout.module.css';
 
-const Layout = ({ children }: { children: React.ReactNode }) => {
+const Layout = () => {
     return (
         <div className={styles.wrapper}>
             <Header />
             <div className={styles.rowWrapper}>
                 <SideBar />
-                {children}
+                <Outlet />
             </div>
 
         </div>

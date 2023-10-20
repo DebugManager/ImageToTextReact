@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { Controller } from 'react-hook-form';
 
-
 import styles from './SignUpForm.module.css';
 
 import icon from '../../assets/auth/eye-off.svg';

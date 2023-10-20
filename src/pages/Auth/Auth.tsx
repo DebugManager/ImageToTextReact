@@ -2,12 +2,18 @@ import React, { useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as Yup from 'yup';
+import { Navigate } from "react-router-dom";
+
+import { userRegistration, userLogin } from '../../services/auth.service';
 
 import { LoginForm, SignUpForm, ResetPassForm } from '../../components';
 
 import styles from './Auth.module.css';
+import routes from '../../routes';
 
 type FormType = 'loginForm' | 'signUpForm' | 'resetPasswordForm';
+
+
 
 const validationSchema = Yup.object().shape({
     newPass: Yup.string()
@@ -39,10 +45,11 @@ const loginValidationSchema = Yup.object().shape({
         .min(8, 'Password must be at least 8 characters'),
 });
 
-
 const Auth: React.FC = () => {
     const [formName, setFormName] = useState<FormType>('signUpForm');
     const [formValidationSchema, setFormValidationSchema] = useState<Yup.AnyObjectSchema | null>(null);
+    const [isAuthenticated, setIsAuthenticated] = useState<boolean>();
+
 
     useEffect(() => {
         if (formName === 'signUpForm') {
@@ -59,8 +66,35 @@ const Auth: React.FC = () => {
         resolver: formValidationSchema ? yupResolver(formValidationSchema) : undefined,
     });
 
-    const handleFormSubmit = (data: any) => {
-        console.log(data);
+    const handleFormSubmit = async (data: any) => {
+        if (
+            data?.confirmPassword &&
+            data?.createPassword &&
+            data?.email &&
+            data?.firstName &&
+            data?.lastName
+        ) {
+            const userData = {
+                first_name: data.firstName,
+                last_name: data.lastName,
+                email: data.email,
+                password: data.createPassword,
+            };
+
+            userRegistration(userData);
+
+        } else if (data?.loginPassword && data?.email) {
+            const userData = {
+                email: data.email,
+                password: data.loginPassword,
+            };
+
+            const res = await userLogin(userData);
+            if (res === 'ok') {
+                setIsAuthenticated(true);
+            }
+
+        }
     };
 
     const handleFormChange = (newForm: FormType) => {
@@ -95,6 +129,7 @@ const Auth: React.FC = () => {
                     errors={errors}
                 />
             }
+            {isAuthenticated && <Navigate to={routes.mainPath} />}
         </div>
     );
 };
