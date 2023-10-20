@@ -1,7 +1,8 @@
 .notificationWrapper {
+    display: none;
+    width: 198px;
     opacity: 0;
-    top: 34px;
-    left: -100px;
+    left: -122px;
     right: -100px;
     position: absolute;
     visibility: hidden;
@@ -22,7 +23,7 @@
     transition: all 0.5s ease;
     transform: translateX(0);
     top: 34px;
-    left: -100px;
+    left: -122px;
     right: -100px;
     border-radius: 10px;
 }
@@ -39,7 +40,7 @@
 .dayStyles {
     color: #343A40;
     font-family: Poppins;
-    font-size: 13px;
+    font-size: 9px;
     font-style: normal;
     font-weight: 500;
     line-height: 16px;
@@ -61,9 +62,8 @@
 
 .textDescription {
     color: #495057;
-    /* Text S/Regular */
     font-family: Poppins;
-    font-size: 12px;
+    font-size: 8px;
     font-style: normal;
     font-weight: 400;
     line-height: 15px;
@@ -73,7 +73,7 @@
 .time {
     color: #74788D;
     font-family: Poppins;
-    font-size: 12px;
+    font-size: 7px;
     font-weight: 400;
     line-height: 14px;
     text-transform: capitalize;
@@ -86,6 +86,5 @@
 
 .inputCheckBox:checked::before {
     border: 2px solid #fff;
-    /* Змініть колір контуру галочки на білий */
     opacity: 1;
 }

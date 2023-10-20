@@ -1,6 +1,8 @@
  const routes = {
+    index: '/',
     mainPath: "/index/main",
-    index: '/'
+    pricing: '/pricing',
+    pricingId: '/pricing/:id',
 }
 
 export default routes

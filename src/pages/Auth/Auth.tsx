@@ -49,7 +49,7 @@ const Auth: React.FC = () => {
     const [formName, setFormName] = useState<FormType>('signUpForm');
     const [formValidationSchema, setFormValidationSchema] = useState<Yup.AnyObjectSchema | null>(null);
     const [isAuthenticated, setIsAuthenticated] = useState<boolean>();
-
+    const [isLoading, setIsLoading] = useState(false);
 
     useEffect(() => {
         if (formName === 'signUpForm') {
@@ -74,6 +74,7 @@ const Auth: React.FC = () => {
             data?.firstName &&
             data?.lastName
         ) {
+            setIsLoading(true);
             const userData = {
                 first_name: data.firstName,
                 last_name: data.lastName,
@@ -84,6 +85,7 @@ const Auth: React.FC = () => {
             userRegistration(userData);
 
         } else if (data?.loginPassword && data?.email) {
+            setIsLoading(true);
             const userData = {
                 email: data.email,
                 password: data.loginPassword,
@@ -92,9 +94,11 @@ const Auth: React.FC = () => {
             const res = await userLogin(userData);
             if (res === 'ok') {
                 setIsAuthenticated(true);
+                setIsLoading(false);
             }
 
         }
+
     };
 
     const handleFormChange = (newForm: FormType) => {
@@ -111,6 +115,7 @@ const Auth: React.FC = () => {
                     onSubmit={handleSubmit(handleFormSubmit)}
                     control={control}
                     errors={errors}
+                    isLoading={isLoading}
                 />
             }
             {formName === 'signUpForm' &&
@@ -119,6 +124,7 @@ const Auth: React.FC = () => {
                     onSubmit={handleSubmit(handleFormSubmit)}
                     control={control}
                     errors={errors}
+                    isLoading={isLoading}
                 />
             }
             {formName === 'resetPasswordForm' &&
@@ -129,7 +135,7 @@ const Auth: React.FC = () => {
                     errors={errors}
                 />
             }
-            {isAuthenticated && <Navigate to={routes.mainPath} />}
+            {isAuthenticated && <Navigate to={routes.pricing} />}
         </div>
     );
 };

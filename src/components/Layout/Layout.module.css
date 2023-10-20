@@ -1,8 +1,20 @@
+body {
+    height: 100vh;
+}
+
 .wrapper {
     display: flex;
     flex-direction: column;
+    height: 100%;
 }
 
 .rowWrapper {
     display: flex;
+}
+
+.footer {
+    position: absolute;
+    right: 0;
+    left: 0;
+    bottom: 0;
 }

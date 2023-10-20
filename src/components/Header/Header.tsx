@@ -8,10 +8,6 @@ import flag from '../../assets/header/flag.png';
 import arrow from '../../assets/header/arrow.svg';
 import bell from '../../assets/header/bell.svg';
 
-
-
-
-
 const Header = () => {
     const isNotification = true;
     const [openNotification, setOpenNotification] = useState<boolean>(false);
@@ -37,9 +33,7 @@ const Header = () => {
                 <div className={styles.flagWrapper}>
                     <img src={flag} alt='moon' className={styles.flagImage} />
 
-                    <div className={styles.arrowWrapper}>
-                        <img src={arrow} alt='moon' className={styles.arrowImage} />
-                    </div>
+                    <img src={arrow} alt='moon' className={styles.arrowImage} />
                 </div>
 
                 <div className={styles.bellWrapper}>
@@ -51,9 +45,7 @@ const Header = () => {
                 <>
                     <div className={styles.userData} onClick={handleProfilePopUp}>
                         <p className={styles.userName}>henry</p>
-                        <div className={styles.arrowWrapper}>
-                            <img src={arrow} alt='moon' className={styles.arrowImage} />
-                        </div>
+                        <img src={arrow} alt='moon' className={styles.arrowImage} />
 
                     </div>
                     <ProfilePopUp isOpen={openPorfile} />

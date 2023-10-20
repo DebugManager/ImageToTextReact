@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Controller } from 'react-hook-form';
+import { CircleLoader } from 'react-spinners';
 
 import styles from './LoginForm.module.css';
 
@@ -13,9 +14,10 @@ interface ILogin {
     onSubmit: (data: any) => void;
     control: any;
     errors: any,
+    isLoading: boolean,
 }
 
-const LoginForm = ({ changeForm, onSubmit, control, errors }: ILogin) => {
+const LoginForm = ({ changeForm, onSubmit, control, errors, isLoading }: ILogin) => {
     const [showPassword, setShowPassword] = useState<boolean>(false);
 
     return (
@@ -81,7 +83,8 @@ const LoginForm = ({ changeForm, onSubmit, control, errors }: ILogin) => {
                             )}
                         />
                     </div>
-                    <button className={styles.button} type='submit'>Login</button>
+                    <button className={styles.button} type="submit">{isLoading ? <CircleLoader loading={isLoading} color={'#FFF'} size={10} /> : 'Login'}</button>
+
                 </form>
             </div>
             <div className={styles.downDescription}>

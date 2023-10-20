@@ -20,8 +20,7 @@
 }
 
 .moonWrapper {
-    width: 24px;
-    height: 24px;
+    width: 10px;
     margin-right: 21px;
     cursor: pointer;
 }
@@ -34,29 +33,26 @@
 .flagWrapper {
     display: flex;
     align-items: center;
-    height: 24px;
+    height: 12px;
     margin-right: 21px;
     cursor: pointer;
 }
 
 .flagImage {
-    width: 100%;
+    width: auto;
     height: 100%;
 }
 
 .arrowWrapper {
-    height: 15px;
-    width: 25px;
+    width: 8px;
 }
 
 .arrowImage {
-    height: 100%;
-    width: 100%;
+    width: 8px;
 }
 
 .bellWrapper {
-    width: 24px;
-    height: 24px;
+    width: 10px;
     position: relative;
     margin-right: 21px;
     cursor: pointer;
@@ -68,12 +64,12 @@
 }
 
 .notification {
-    width: 9px;
-    height: 9px;
+    width: 3px;
+    height: 3px;
     background: #F46A6A;
     border-radius: 50%;
     position: absolute;
-    top: 2px;
+    top: 6px;
     right: 2px;
 }
 
@@ -85,7 +81,7 @@
 
 .userName {
     font-family: Poppins;
-    font-size: 18px;
+    font-size: 8px;
     font-weight: 400;
     line-height: 15px;
     text-transform: capitalize;

@@ -4,4 +4,6 @@ export * from './Layout';
 export * from './LoginForm';
 export * from './SigUpForm';
 export * from './ResetPassForm';
+export * from './Footer';
+
 
