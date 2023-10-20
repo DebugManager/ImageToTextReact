@@ -20,3 +20,12 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.Toastify__toast {
+  background: rgba(0, 0, 0, 0.8);
+  color: #fff;
+}
+
+.Toastify__progress-bar {
+  background: #556EE6;
+}
