@@ -1,0 +1,169 @@
+.planWrapper {
+    display: flex;
+    flex-direction: column;
+    /* padding: 10px 12px; */
+    background: var(--text-color-10, #FFF);
+    border-radius: 4px;
+}
+
+.curPlan {
+    display: flex;
+    padding: 3px 10px;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    align-self: stretch;
+    border-radius: 4px 4px 0px 0px;
+    background: var(--primary-main, #556EE6);
+
+    color: var(--text-color-10, #FFF);
+    font-family: Poppins;
+    font-size: 7px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 14px;
+    text-transform: capitalize;
+}
+
+.planType {
+    color: var(--text-color-60, #495057);
+    font-family: Poppins;
+    font-size: 9px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 16px;
+}
+
+.planName {
+    color: var(--text-color-60, #495057);
+    font-family: Poppins;
+    font-size: 7px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 14px;
+    text-transform: capitalize;
+    margin-top: 4px;
+}
+
+.priceWrapper {
+    display: flex;
+    margin-top: 28px;
+}
+
+.price {
+    display: flex;
+}
+
+.valute {
+    color: var(--text-color-60, #495057);
+    text-align: center;
+    font-family: Poppins;
+    font-size: 7px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 14px;
+    text-transform: capitalize;
+}
+
+.priceData {
+    color: var(--text-color-60, #495057);
+    text-align: center;
+    font-family: Poppins;
+    font-size: 13px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 20px;
+    text-transform: capitalize;
+    margin-left: 2px;
+}
+
+.payFor {
+    color: var(--text-color-60, #495057);
+    font-family: Poppins;
+    font-size: 7px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 14px;
+    text-transform: capitalize;
+    margin-left: 4px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+}
+
+.line {
+    position: relative;
+    margin-top: 28px;
+}
+
+.lineImg {
+    width: 100%;
+}
+
+.btnSelect {
+    display: flex;
+    padding: 2px 8px;
+    justify-content: center;
+    align-items: center;
+    gap: 4px;
+    border-radius: 4px;
+    background: var(--main-main, #556EE6);
+
+    color: var(--text-color-white, #FFF);
+    font-family: Poppins;
+    font-size: 7px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 14px;
+    text-transform: capitalize;
+    border: none;
+
+    position: absolute;
+    top: 5px;
+    left: 57px;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.optionWrapper {
+    display: flex;
+    flex-direction: column;
+    margin-top: 28px;
+}
+
+.options {
+    display: flex;
+    align-items: center;
+}
+
+.optionName {
+    color: #495057;
+    font-family: Poppins;
+    font-size: 7px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 14px;
+    text-transform: capitalize;
+    margin-left: 4px;
+}
+
+.cancelBtn {
+    display: flex;
+    padding: 2px 8px;
+    justify-content: center;
+    align-items: center;
+    gap: 4px;
+    border-radius: 4px;
+    background: var(--text-color-60, #EFF2F7);
+
+    color: var(--text-color-20, #495057);
+    font-family: Poppins;
+    font-size: 7px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 14px;
+    text-transform: capitalize;
+    border: none;
+    margin: 28px auto 0 auto;
+    cursor: pointer;
+}

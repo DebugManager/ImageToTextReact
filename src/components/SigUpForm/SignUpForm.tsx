@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Controller } from 'react-hook-form';
-
+import { CircleLoader } from 'react-spinners';
 import styles from './SignUpForm.module.css';
 
 import icon from '../../assets/auth/eye-off.svg';
@@ -12,9 +12,10 @@ interface ISignUp {
     onSubmit: (data: any) => void;
     control: any;
     errors: any,
+    isLoading: boolean,
 }
 
-const SignUpForm = ({ changeForm, onSubmit, control, errors }: ISignUp) => {
+const SignUpForm = ({ changeForm, onSubmit, control, errors, isLoading }: ISignUp) => {
     const [showPassword, setShowPassword] = useState<boolean>(false);
     const [showRepPassword, setShowRepPassword] = useState<boolean>(false);
 
@@ -164,7 +165,7 @@ const SignUpForm = ({ changeForm, onSubmit, control, errors }: ISignUp) => {
                         />
                     </div>
 
-                    <button className={styles.button} type="submit">Sign Up</button>
+                    <button className={styles.button} type="submit">{isLoading ? <CircleLoader loading={isLoading} color={'#FFF'} size={10} /> : 'Sign Up'}</button>
                 </form>
             </div>
             <p className={styles.downDescription}>Have an account?<span className={styles.link} onClick={() => changeForm('loginForm')}> Login</span>.</p>

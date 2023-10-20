@@ -1,0 +1,26 @@
+.infoWrapper {
+    display: flex;
+    flex-direction: column;
+    width: 128px;
+}
+
+.title {
+    color: var(--text-color-90, #495057);
+    font-family: Poppins;
+    font-size: 11px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 17px;
+}
+
+.description {
+    color: var(--text-color-90, #495057);
+    font-family: Poppins;
+    font-size: 7px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 14px;
+    text-transform: capitalize;
+    margin-top: 14px;
+    cursor: pointer;
+}
