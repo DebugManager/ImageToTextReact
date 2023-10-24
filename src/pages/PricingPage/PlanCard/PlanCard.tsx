@@ -1,10 +1,13 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 
 import styles from './PlanCard.module.css';
 
 import line from '../../../assets/planCard/line.svg';
 import checkBox from '../../../assets/planCard/presentedPlan.svg';
+import { OnHoldModal } from './Modals/OnHoldModal';
+import { FeedBackModal } from './Modals/FeedBackModal';
+import { FinalModal } from './Modals/FinalModal';
 
 type Plan = {
     id: number;
@@ -27,6 +30,32 @@ interface PlanCardProps {
 }
 
 const PlanCard: React.FC<PlanCardProps> = ({ plan, currentPlanId }) => {
+    const [open, setOpen] = useState<boolean>(false);
+    const [openFeedBackModal, setOpenFeedBackModal] = useState<boolean>(false);
+    const [openFinalModal, setOpenFinalModal] = useState<boolean>(false);
+
+    const handleOpen = () => {
+        setOpen(true);
+    };
+
+    const handleClose = () => {
+        setOpen(false);
+        setOpenFeedBackModal(true);
+    };
+
+    const handleCloseFeedBack = () => {
+        setOpenFeedBackModal(false);
+    }
+
+    const handleSubmitFeedBack = () => {
+        setOpenFeedBackModal(false);
+        setOpenFinalModal(true);
+    }
+
+    const handleCloseAll = () => {
+        setOpenFinalModal(false);
+    }
+
     return (
         <div>
             <div className={styles.planWrapper} style={currentPlanId && currentPlanId === plan.id ? { padding: '0' } : { padding: '10px 12px' }}>
@@ -98,10 +127,27 @@ const PlanCard: React.FC<PlanCardProps> = ({ plan, currentPlanId }) => {
                     </div>
 
                     {
-                        currentPlanId === plan.id && <button className={styles.cancelBtn}>Cancel</button>
+                        currentPlanId === plan.id && <button className={styles.cancelBtn} onClick={handleOpen}>Cancel</button>
                     }
                 </div>
             </div>
+
+            <OnHoldModal
+                open={open}
+                handleClose={handleClose}
+            />
+
+            <FeedBackModal
+                openFeedBackModal={openFeedBackModal}
+                handleCloseFeedBack={handleCloseFeedBack}
+                handleSubmitFeedBack={handleSubmitFeedBack}
+            />
+
+            <FinalModal
+                openFinalModal={openFinalModal}
+                handleCloseAll={handleCloseAll}
+            />
+
         </div>
     );
 }

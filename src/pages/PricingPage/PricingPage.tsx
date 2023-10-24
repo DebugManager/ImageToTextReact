@@ -25,8 +25,6 @@ type Plan = {
 
 type PricingTypes = 'Mounthly' | 'Annual';
 
-// const currentPlanId = 3;
-
 const PricingPage = () => {
     const [typeOfPrice, setTypeOfPrice] = useState<PricingTypes>('Mounthly');
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
