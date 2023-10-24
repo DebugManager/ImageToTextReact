@@ -6,31 +6,32 @@ import styles from './PlanCard.module.css';
 import line from '../../../assets/planCard/line.svg';
 import checkBox from '../../../assets/planCard/presentedPlan.svg';
 
-type PlanOption = {
-    id: number;
-    name: string;
-    isPresented: boolean;
-};
-
 type Plan = {
     id: number;
     type: string;
     name: string;
-    price: string;
-    option: PlanOption[];
+    price: number;
+    option1: string;
+    option2: string;
+    option3: string;
+    option4: string;
+    option5: string;
+    option6: string;
+    option7: string;
+    option8: string;
 };
 
 interface PlanCardProps {
     plan: Plan;
-    currentPlanId: number;
+    currentPlanId?: number;
 }
 
 const PlanCard: React.FC<PlanCardProps> = ({ plan, currentPlanId }) => {
     return (
         <div>
-            <div className={styles.planWrapper} style={currentPlanId === plan.id ? { padding: '0' } : { padding: '10px 12px' }}>
-                {currentPlanId === plan.id && <div className={styles.curPlan}>Current Plan</div>}
-                <div style={currentPlanId === plan.id ? { padding: '10px 12px' } : { padding: '0' }}>
+            <div className={styles.planWrapper} style={currentPlanId && currentPlanId === plan.id ? { padding: '0' } : { padding: '10px 12px' }}>
+                {currentPlanId && currentPlanId === plan.id && <div className={styles.curPlan}>Current Plan</div>}
+                <div style={currentPlanId && currentPlanId === plan.id ? { padding: '10px 12px' } : { padding: '0' }}>
                     <p className={styles.planType}>{plan.type}</p>
                     <p className={styles.planName}>{plan.name}</p>
                     <div className={styles.priceWrapper}>
@@ -47,15 +48,53 @@ const PlanCard: React.FC<PlanCardProps> = ({ plan, currentPlanId }) => {
                     </div>
 
                     <div className={styles.optionWrapper}>
-                        {
-                            plan.option.map((option) =>
-                            (
-                                <div className={styles.options}>
-                                    <img alt='checkbox' src={checkBox} />
-                                    <p className={styles.optionName}>{option.name}</p>
-                                </div>
-                            ))
-                        }
+                        {plan.option1 && (
+                            <div className={styles.options}>
+                                <img alt='checkbox' src={checkBox} />
+                                <p className={styles.optionName}>{plan.option1}</p>
+                            </div>)}
+
+                        {plan.option2 && (
+                            <div className={styles.options}>
+                                <img alt='checkbox' src={checkBox} />
+                                <p className={styles.optionName}>{plan.option2}</p>
+                            </div>)}
+
+                        {plan.option3 && (
+                            <div className={styles.options}>
+                                <img alt='checkbox' src={checkBox} />
+                                <p className={styles.optionName}>{plan.option3}</p>
+                            </div>)}
+
+                        {plan.option4 && (
+                            <div className={styles.options}>
+                                <img alt='checkbox' src={checkBox} />
+                                <p className={styles.optionName}>{plan.option4}</p>
+                            </div>)}
+
+                        {plan.option5 && (
+                            <div className={styles.options}>
+                                <img alt='checkbox' src={checkBox} />
+                                <p className={styles.optionName}>{plan.option5}</p>
+                            </div>)}
+
+                        {plan.option6 && (
+                            <div className={styles.options}>
+                                <img alt='checkbox' src={checkBox} />
+                                <p className={styles.optionName}>{plan.option6}</p>
+                            </div>)}
+
+                        {plan.option7 && (
+                            <div className={styles.options}>
+                                <img alt='checkbox' src={checkBox} />
+                                <p className={styles.optionName}>{plan.option7}</p>
+                            </div>)}
+
+                        {plan.option8 && (
+                            <div className={styles.options}>
+                                <img alt='checkbox' src={checkBox} />
+                                <p className={styles.optionName}>{plan.option8}</p>
+                            </div>)}
                     </div>
 
                     {

@@ -5,5 +5,6 @@ export * from './LoginForm';
 export * from './SigUpForm';
 export * from './ResetPassForm';
 export * from './Footer';
+export * from './ForgotPassForm';
 
 

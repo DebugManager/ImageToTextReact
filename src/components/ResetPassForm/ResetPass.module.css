@@ -11,10 +11,6 @@
     margin-top: 16px;
 }
 
-.wrapper .inputWrapper:last-child {
-    margin-top: 6px;
-}
-
 .inputWrapper {
     display: flex;
     flex-direction: column;
@@ -25,7 +21,7 @@
 .formTitle {
     color: #343A40;
     font-family: Poppins;
-    font-size: 16px;
+    font-size: 18px;
     font-weight: 600;
     line-height: 18px;
     text-align: center;
@@ -35,7 +31,7 @@
     color: #74788D;
     text-align: center;
     font-family: Poppins;
-    font-size: 7px;
+    font-size: 10px;
     font-weight: 400;
     line-height: 14px;
     margin-top: 12px;
@@ -44,7 +40,7 @@
 .label {
     color: #495057;
     font-family: Poppins;
-    font-size: 8px;
+    font-size: 9px;
     font-weight: 500;
     line-height: 15px;
 }
@@ -62,7 +58,7 @@
 
     color: var(--text-color-70, #74788D);
     font-family: Poppins;
-    font-size: 7px;
+    font-size: 8px;
     font-style: normal;
     font-weight: 400;
     line-height: 14px;
@@ -95,7 +91,7 @@
 
     color: #FFF;
     font-family: Poppins;
-    font-size: 7px;
+    font-size: 8px;
     font-weight: 400;
     line-height: 14px;
     text-transform: capitalize;
@@ -108,17 +104,6 @@
     flex-direction: column;
 }
 
-.downDescription {
-    color: #74788D;
-    font-family: Poppins;
-    font-size: 14px;
-    font-weight: 400;
-    line-height: 15px;
-    text-align: center;
-    display: flex;
-    align-items: center;
-    margin: 0 auto;
-}
 
 .link {
     color: #7F83E8;
@@ -128,16 +113,6 @@
     line-height: 15px;
     margin-top: 8px;
     cursor: pointer;
-}
-
-.madedBy {
-    color: #74788D;
-    font-family: Poppins;
-    font-size: 12px;
-    font-weight: 400;
-    line-height: 14px;
-    text-align: center;
-    margin-top: 8px;
 }
 
 .imgWrapper {
@@ -153,7 +128,7 @@
 .madedBy {
     color: #74788D;
     font-family: Poppins;
-    font-size: 7px;
+    font-size: 8px;
     font-weight: 400;
     line-height: 14px;
     text-align: center;

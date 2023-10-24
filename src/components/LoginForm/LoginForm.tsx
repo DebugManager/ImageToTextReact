@@ -7,7 +7,7 @@ import styles from './LoginForm.module.css';
 import lock from '../../assets/auth/lock.svg';
 import icon from '../../assets/auth/eye-off.svg';
 
-type FormType = 'loginForm' | 'signUpForm' | 'resetPasswordForm';
+type FormType = 'loginForm' | 'signUpForm' | 'forgotPasswordForm';
 
 interface ILogin {
     changeForm: (newForm: FormType) => void;
@@ -91,7 +91,7 @@ const LoginForm = ({ changeForm, onSubmit, control, errors, isLoading }: ILogin)
                 <div className={styles.imgWrapper}>
                     <img alt='lock' src={lock} className={styles.lockedImg} />
                 </div>
-                <span className={styles.link} onClick={() => changeForm('resetPasswordForm')}> Forgot Password?</span>
+                <span className={styles.link} onClick={() => changeForm('forgotPasswordForm')}> Forgot Password?</span>
             </div>
             <p className={styles.downDescriptionText}>Don’t Have an account? <span className={styles.link} onClick={() => changeForm('signUpForm')}> Register.</span></p>
 

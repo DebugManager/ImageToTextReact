@@ -1,21 +1,20 @@
 import React, { useState } from 'react';
 import { Controller } from 'react-hook-form';
+import { CircleLoader } from 'react-spinners';
 
 import styles from './ResetPass.module.css';
 
 import icon from '../../assets/auth/eye-off.svg';
 
-type FormType = 'loginForm' | 'signUpForm' | 'resetPasswordForm';
-
 interface IReset {
-    changeForm: (newForm: FormType) => void;
     onSubmit: (data: any) => void;
     control: any;
     errors: any;
     formOptions?: any;
+    isLoading: boolean,
 }
 
-const ResetPassForm = ({ changeForm, onSubmit, control, errors, formOptions }: IReset) => {
+const ResetPassForm = ({ onSubmit, control, errors, formOptions, isLoading }: IReset) => {
     const [showPassword, setShowPassword] = useState<boolean>(false);
     const [showConfirmPassword, setShowConfirmPassword] = useState<boolean>(false);
 
@@ -28,7 +27,7 @@ const ResetPassForm = ({ changeForm, onSubmit, control, errors, formOptions }: I
                 <form onSubmit={onSubmit}>
                     <div className={styles.inputWrapper}>
                         <Controller
-                            name="newPass"
+                            name="createPassword"
                             control={control}
                             rules={{
                                 required: 'Password is required',
@@ -36,16 +35,16 @@ const ResetPassForm = ({ changeForm, onSubmit, control, errors, formOptions }: I
                             }}
                             render={({ field }) => (
                                 <div className={styles.inputWrapper}>
-                                    <label className={styles.label} htmlFor="newPass">Create New Password</label>
+                                    <label className={styles.label} htmlFor="createPassword">Create New Password</label>
                                     <div className={styles.passInptWrapper}>
                                         <input
                                             className={styles.input}
                                             type={showPassword ? 'text' : 'password'}
                                             placeholder="Enter Password"
-                                            id="newPass"
+                                            id="createPassword"
                                             {...field}
                                         />
-                                        {errors.newPass && <span className={styles.error}>{errors.newPass.message}</span>}
+                                        {errors.createPassword && <span className={styles.error}>{errors.createPassword.message}</span>}
                                         <div className={styles.iconWrapper}>
                                             <img
                                                 alt="icon"
@@ -61,7 +60,7 @@ const ResetPassForm = ({ changeForm, onSubmit, control, errors, formOptions }: I
                     </div>
                     <div className={styles.inputWrapper}>
                         <Controller
-                            name="confirmPass"
+                            name="confirmPassword"
                             control={control}
                             rules={{
                                 required: 'Password is required',
@@ -69,16 +68,16 @@ const ResetPassForm = ({ changeForm, onSubmit, control, errors, formOptions }: I
                             }}
                             render={({ field }) => (
                                 <div className={styles.inputWrapper}>
-                                    <label className={styles.label} htmlFor="confirmPass">Confirm Password</label>
+                                    <label className={styles.label} htmlFor="confirmPassword">Confirm Password</label>
                                     <div className={styles.passInptWrapper}>
                                         <input
-                                            id="confirmPass"
+                                            id="confirmPassword"
                                             className={styles.input}
                                             type={showConfirmPassword ? 'text' : 'password'}
                                             placeholder="Enter Password"
                                             {...field}
                                         />
-                                        {errors.confirmPass && <span className={styles.error}>{errors.confirmPass.message}</span>}
+                                        {errors.confirmPassword && <span className={styles.error}>{errors.confirmPassword.message}</span>}
                                         <div className={styles.iconWrapper}>
                                             <img
                                                 alt="icon"
@@ -92,9 +91,8 @@ const ResetPassForm = ({ changeForm, onSubmit, control, errors, formOptions }: I
                             )}
                         />
                     </div>
-                    <button className={styles.button} type="submit">
-                        Reset
-                    </button>
+                    <button className={styles.button} type="submit">{isLoading ? <CircleLoader loading={isLoading} color={'#FFF'} size={10} /> : 'Reset'}</button>
+
                 </form>
             </div>
 

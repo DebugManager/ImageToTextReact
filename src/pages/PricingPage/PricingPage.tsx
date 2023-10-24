@@ -1,176 +1,106 @@
-import React from 'react';
+import React, { useEffect, useState, useMemo, useCallback } from 'react';
+import { CircleLoader } from 'react-spinners';
+import PlanCard from './PlanCard/PlanCard';
+import { getPricing } from '../../services/pricing.service';
 
 import styles from './PricingPage.module.css';
 
 import arrow from '../../assets/header/arrow.svg';
-import PlanCard from './PlanCard/PlanCard';
-
-type PlanOption = {
-    id: number;
-    name: string;
-    isPresented: boolean;
-};
+import { getUser } from '../../services/locastorage.service';
 
 type Plan = {
     id: number;
-    type: string;
     name: string;
-    price: string;
-    option: PlanOption[];
+    price: number;
+    type: string;
+    option1: string;
+    option2: string;
+    option3: string;
+    option4: string;
+    option5: string;
+    option6: string;
+    option7: string;
+    option8: string;
 };
 
-const PlansArray: Plan[] = [
-    {
-        id: 1,
-        type: 'Free',
-        name: 'Neque quis est',
-        price: '0',
-        option: [
-            {
-                id: 1,
-                name: 'Free Live Support',
-                isPresented: true,
-            },
-            {
-                id: 1,
-                name: 'Unlimited User',
-                isPresented: true,
-            },
-            {
-                id: 1,
-                name: 'No Time Tracking',
-                isPresented: true,
-            },
-            {
-                id: 1,
-                name: ' Free Setup',
-                isPresented: true,
-            },
-        ]
+type PricingTypes = 'Mounthly' | 'Annual';
 
-    },
-    {
-        id: 2,
-        type: 'Starter',
-        name: 'Neque quis est',
-        price: '19',
-        option: [
-            {
-                id: 1,
-                name: 'Free Live Support',
-                isPresented: true,
-            },
-            {
-                id: 1,
-                name: 'Unlimited User',
-                isPresented: true,
-            },
-            {
-                id: 1,
-                name: 'No Time Tracking',
-                isPresented: true,
-            },
-            {
-                id: 1,
-                name: ' Free Setup',
-                isPresented: true,
-            },
-        ]
-
-    },
-    {
-        id: 3,
-        type: 'Professional',
-        name: 'Neque quis est',
-        price: '29',
-        option: [
-            {
-                id: 1,
-                name: 'Free Live Support',
-                isPresented: true,
-            },
-            {
-                id: 1,
-                name: 'Unlimited User',
-                isPresented: true,
-            },
-            {
-                id: 1,
-                name: 'No Time Tracking',
-                isPresented: true,
-            },
-            {
-                id: 1,
-                name: ' Free Setup',
-                isPresented: true,
-            },
-        ]
-
-    },
-    {
-        id: 4,
-        type: 'Unlimited',
-        name: 'Neque quis est',
-        price: '39',
-        option: [
-            {
-                id: 1,
-                name: 'Free Live Support',
-                isPresented: true,
-            },
-            {
-                id: 1,
-                name: 'Unlimited User',
-                isPresented: true,
-            },
-            {
-                id: 1,
-                name: 'No Time Tracking',
-                isPresented: true,
-            },
-            {
-                id: 1,
-                name: ' Free Setup',
-                isPresented: true,
-            },
-        ]
-
-    },
-]
-
-const currentPlanId = 3;
+// const currentPlanId = 3;
 
 const PricingPage = () => {
+    const [typeOfPrice, setTypeOfPrice] = useState<PricingTypes>('Mounthly');
+    const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+    const [plans, setPlans] = useState<Plan[]>([]);
+    const [currentPlanId, setCurrentPlanId] = useState();
 
+    const fetchData = useCallback(async () => {
+        try {
+            const data = await getPricing(typeOfPrice);
+            setPlans(data);
+
+        } catch (error) {
+            console.error(error);
+        }
+    }, [typeOfPrice]);
+
+    useEffect(() => {
+        fetchData();
+    }, [fetchData]);
+
+    useEffect(() => {
+        const user = getUser();
+        if (user?.current_plan) {
+            setCurrentPlanId(user.current_plan);
+        }
+    }, []);
+
+    const filteredPlans = useMemo(() => {
+        return plans.filter((plan) => plan.type === typeOfPrice);
+    }, [plans, typeOfPrice]);
+
+    const toggleDropdown = useCallback(() => {
+        setIsDropdownOpen((prev) => !prev);
+    }, []);
+
+    filteredPlans.sort((a, b) => a.price - b.price);
 
     return (
         <div className={styles.wrapper}>
             <p className={styles.pricingTitle}>PRICING</p>
             <p className={styles.centerTitle}>Choose your Pricing plan</p>
-            <p className={styles.description}>To achieve this, it would be necessary to have uniform grammar, pronunciation and more common words If several languages coalesce</p>
+            <p className={styles.description}>
+                To achieve this, it would be necessary to have uniform grammar, pronunciation and more common words If several languages coalesce
+            </p>
             <div className={styles.filterWrapper}>
                 <p className={styles.option}>View packages</p>
-                <div className={styles.filter}>
-                    <p>Mouthtly</p>
+                <div className={styles.filter} onClick={toggleDropdown}>
+                    <p>{typeOfPrice}</p>
                     <img alt='arrow' src={arrow} className={styles.arrow} />
                 </div>
+                {isDropdownOpen && (
+                    <div className={styles.optionWrapper}>
+                        <div onClick={() => setTypeOfPrice('Mounthly')} className={styles.optionFilter}>
+                            Mounthly
+                        </div>
+                        <div onClick={() => setTypeOfPrice('Annual')} className={styles.optionFilter}>
+                            Annual
+                        </div>
+                    </div>
+                )}
             </div>
-
             <div className={styles.planWrapper}>
-                {
-                    PlansArray.map((plan) => {
-                        return (
-                            // <Link to={`/pricing/${plan.id}`} className={styles.link}>
-                            <PlanCard key={plan.id} plan={plan} currentPlanId={currentPlanId} />
-                            // </Link>
+                {filteredPlans?.map((plan) => (
+                    <PlanCard key={plan.id} plan={plan} currentPlanId={currentPlanId} />
+                ))}
 
-                        )
-                    })
+                {!filteredPlans?.length &&
+                    <div className={styles.loaderWrapper}>
+                        <CircleLoader color={'#556EE6'} size={50} />
+                    </div>
                 }
             </div>
-
         </div>
-    )
-}
+    );
+};
 
-export default PricingPage
+export default PricingPage;

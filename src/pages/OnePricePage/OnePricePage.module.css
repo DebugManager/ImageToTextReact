@@ -2,7 +2,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin: 0 auto;
+    margin: 0 auto 50px auto;
 }
 
 .topTitle {
@@ -40,193 +40,32 @@
     flex-direction: column;
 }
 
-.choosePlanWrapper {
+.confirmButtonWrapper {
+    width: 100%;
     display: flex;
-    width: 322px;
-    padding: 10px;
-    flex-direction: column;
-    gap: 10px;
-    border-radius: 4px;
-    background: var(--text-color-10, #FFF);
+    justify-content: flex-end;
 }
 
-.choosePlanTitle {
-    color: #495057;
-    font-family: Poppins;
-    font-size: 10px;
-    font-style: normal;
-    font-weight: 500;
-    line-height: 16px;
-}
-
-.choosePlanDesc {
-    color: var(--text-color-90, #495057);
-    font-family: Poppins;
-    font-size: 8px;
-    font-style: normal;
-    font-weight: 500;
-    line-height: 15px;
-    text-transform: capitalize;
-}
-
-.radiomainWrapper {
-    display: flex;
-    align-items: center;
-}
-
-.radioWrapper {
-    display: flex;
-    flex-direction: column;
-    border-radius: 4px;
-    border: 1px solid var(--text-color-20, #EFF2F7);
-    background: var(--text-color-10, #FFF);
-    padding: 8px;
-    gap: 4px;
-    flex: 1 0 0;
-}
-
-.radioWrapper:last-child {
-    margin-left: 4px;
-}
-
-
-.radio {
-    accent-color: rgba(85, 110, 230, 1);
-    height: 8px;
-}
-
-.label {
-    color: var(--text-color-90, #495057);
-    font-family: Poppins;
-    font-size: 8px;
-    font-style: normal;
-    font-weight: 500;
-    line-height: 15px;
-    text-transform: capitalize;
-    margin-left: 4px;
-}
-
-.btnWrapper {
-    display: flex;
-    align-items: center;
-}
-
-.radioDescription {
-    color: #74788D;
-    font-family: Poppins;
-    font-size: 7px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: 14px;
-    text-transform: capitalize;
-}
-
-.paymantWrapper {
+.confirmButton {
+    width: 66px;
     margin-top: 12px;
     display: flex;
-    padding: 10px;
-    flex-direction: column;
-    gap: 12px;
-    border-radius: 4px;
-    background: var(--text-color-10, #FFF);
-}
-
-.paymantTitle {
-    color: var(--text-color-90, #495057);
-    font-family: Poppins;
-    font-size: 9px;
-    font-style: normal;
-    font-weight: 500;
-    line-height: 16px;
-    border-bottom: 1px solid var(--text-color-20, #EFF2F7);
-}
-
-.paymentIcons {
-    display: flex;
+    padding: 2px 8px;
+    justify-content: center;
     align-items: center;
-}
+    gap: 4px;
+    border-radius: 4px;
+    background: var(--success-main, #34C38F);
+    border: none;
 
-.paymentImg {
-    max-height: 13px;
-}
-
-.paymentImg:not(:first-child) {
-    margin-left: 4px;
-}
-
-.cardWrapper {
-    display: flex;
-    flex-direction: column;
-    position: relative;
-}
-
-.cardNumberLabel {
-    color: var(--text-color-90, #495057);
-    font-family: Poppins;
-    font-size: 8px;
-    font-style: normal;
-    font-weight: 500;
-    line-height: 15px;
-    text-transform: capitalize;
-}
-
-.cardInput {
-    margin-top: 4px;
-    color: var(--text-color-80, #555B6D);
+    color: var(--text-color-white, #FFF);
+    /* Text 7/Regular */
     font-family: Poppins;
     font-size: 7px;
     font-style: normal;
     font-weight: 400;
     line-height: 14px;
+    /* 200% */
     text-transform: capitalize;
-
-    width: 302px;
-    padding: 5px 10px;
-    align-items: center;
-    border-radius: 4px;
-    border: 1px solid var(--text-color-20, #EFF2F7);
-    background: var(--text-color-10, #FFF);
-}
-
-.cardImg {
-    position: absolute;
-    right: 10px;
-    top: 26px;
-}
-
-.bottomInputsWrapper {
-    display: flex;
-    align-items: center;
-    /* margin-top: 12px; */
-}
-
-.inputLabelWrapper {
-    display: flex;
-    flex-direction: column;
-}
-
-.nameInput {
-    padding: 5px 10px;
-    gap: 500px;
-    align-self: stretch;
-    border-radius: 4px;
-    border: 1px solid var(--text-color-20, #EFF2F7);
-    background: var(--text-color-10, #FFF);
-
-    color: var(--text-color-80, #555B6D);
-    font-family: Poppins;
-    font-size: 7px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: 14px;
-    text-transform: capitalize;
-}
-
-.inputLabelWrapper:not(:first-child) {
-    margin-left: 10px;
-    width: 51px;
-}
-
-.inputLabelWrapper:first-child {
-    width: 180px;
+    cursor: pointer;
 }
