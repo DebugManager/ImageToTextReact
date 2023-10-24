@@ -1,6 +1,6 @@
 import { Route, RouterProvider, createBrowserRouter, createRoutesFromElements } from 'react-router-dom';
 
-import { MainPage, Auth, PricingPage } from './pages';
+import { MainPage, Auth, PricingPage, ResetPassPage } from './pages';
 import { Layout } from './components';
 
 import './App.module.css';
@@ -21,6 +21,7 @@ const router = createBrowserRouter(
         </Route>
       </Route>
       <Route element={<Auth />} path='/auth' />
+      <Route element={<ResetPassPage />} path="/reset-password/:uuid/:token" />
     </>
   )
 )

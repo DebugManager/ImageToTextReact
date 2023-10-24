@@ -7,16 +7,25 @@
 }
 
 
+.wrapper .inputWrapper:first-child {
+    margin-top: 16px;
+}
+
+.wrapper .inputWrapper:last-child {
+    margin-top: 6px;
+}
+
 .inputWrapper {
     display: flex;
     flex-direction: column;
-    margin-top: 6px;
+
+    width: 200px;
 }
 
 .formTitle {
     color: #343A40;
     font-family: Poppins;
-    font-size: 20px;
+    font-size: 18px;
     font-weight: 600;
     line-height: 20px;
     text-align: center;
@@ -32,27 +41,12 @@
     margin-top: 12px;
 }
 
-.nameWrapper {
-    display: flex;
-    align-items: center;
-}
-
-.nameWrapper .inputWrapper:last-child {
-    margin-left: 6px;
-}
-
-.nameWrapper .inputWrapper {
-    width: 100%;
-    margin-top: 6px;
-}
-
 .label {
+    color: #495057;
     font-family: Poppins;
     font-size: 9px;
-    font-style: normal;
     font-weight: 500;
     line-height: 15px;
-    color: rgba(73, 80, 87, 1)
 }
 
 .input {
@@ -87,11 +81,6 @@
     right: 10px;
 }
 
-.eyeIcon {
-    height: 100%;
-    width: 100%;
-}
-
 .button {
     display: flex;
     padding: 4px 8px;
@@ -119,6 +108,36 @@
     flex-direction: column;
 }
 
+.link {
+    color: #7F83E8;
+    font-family: Poppins;
+    font-size: 10px;
+    font-weight: 500;
+    line-height: 15px;
+    margin-top: 8px;
+    cursor: pointer;
+}
+
+.madedBy {
+    color: #74788D;
+    font-family: Poppins;
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 14px;
+    text-align: center;
+    margin-top: 8px;
+}
+
+.imgWrapper {
+    height: 8px;
+    margin-right: 4px;
+}
+
+.lockedImg {
+    height: 100%;
+    width: 100%;
+}
+
 .downDescription {
     color: #74788D;
     font-family: Poppins;
@@ -127,15 +146,15 @@
     line-height: 15px;
     text-align: center;
     margin-top: 8px;
+    align-items: center;
 }
 
-.link {
+.linkBottom {
     color: #7F83E8;
     font-family: Poppins;
     font-size: 10px;
     font-weight: 500;
     line-height: 15px;
-    margin-top: 8px–;
     cursor: pointer;
 }
 

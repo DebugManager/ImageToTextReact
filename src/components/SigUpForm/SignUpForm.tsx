@@ -5,7 +5,7 @@ import styles from './SignUpForm.module.css';
 
 import icon from '../../assets/auth/eye-off.svg';
 
-type FormType = 'loginForm' | 'signUpForm' | 'resetPasswordForm';
+type FormType = 'loginForm' | 'signUpForm' | 'forgotPasswordForm';
 
 interface ISignUp {
     changeForm: (newForm: FormType) => void;

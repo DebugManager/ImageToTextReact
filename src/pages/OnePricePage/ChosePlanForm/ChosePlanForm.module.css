@@ -1,0 +1,80 @@
+.choosePlanWrapper {
+    display: flex;
+    width: 322px;
+    padding: 10px;
+    flex-direction: column;
+    gap: 10px;
+    border-radius: 4px;
+    background: var(--text-color-10, #FFF);
+}
+
+.choosePlanTitle {
+    color: #495057;
+    font-family: Poppins;
+    font-size: 10px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 16px;
+}
+
+.choosePlanDesc {
+    color: var(--text-color-90, #495057);
+    font-family: Poppins;
+    font-size: 8px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 15px;
+    text-transform: capitalize;
+}
+
+.radiomainWrapper {
+    display: flex;
+    align-items: center;
+}
+
+.radioWrapper {
+    display: flex;
+    flex-direction: column;
+    border-radius: 4px;
+    border: 1px solid var(--text-color-20, #EFF2F7);
+    background: var(--text-color-10, #FFF);
+    padding: 8px;
+    gap: 4px;
+    flex: 1 0 0;
+}
+
+.radioWrapper:last-child {
+    margin-left: 4px;
+}
+
+
+.radio {
+    accent-color: rgba(85, 110, 230, 1);
+    height: 8px;
+}
+
+.label {
+    color: var(--text-color-90, #495057);
+    font-family: Poppins;
+    font-size: 8px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 15px;
+    text-transform: capitalize;
+    margin-left: 4px;
+}
+
+.btnWrapper {
+    display: flex;
+    align-items: center;
+}
+
+.radioDescription {
+    color: #74788D;
+    font-family: Poppins;
+    font-size: 7px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 14px;
+    text-transform: capitalize;
+}

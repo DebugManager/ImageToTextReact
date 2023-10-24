@@ -4,24 +4,17 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import * as Yup from 'yup';
 import { Navigate } from "react-router-dom";
 
-import { userRegistration, userLogin } from '../../services/auth.service';
+import { userRegistration, userLogin, userResetPasswordLink } from '../../services/auth.service';
 
-import { LoginForm, SignUpForm, ResetPassForm } from '../../components';
+import { LoginForm, SignUpForm, ForgotPassForm } from '../../components';
 
 import styles from './Auth.module.css';
 import routes from '../../routes';
 
-type FormType = 'loginForm' | 'signUpForm' | 'resetPasswordForm';
+type FormType = 'loginForm' | 'signUpForm' | 'forgotPasswordForm';
 
-
-
-const validationSchema = Yup.object().shape({
-    newPass: Yup.string()
-        .required('Password is required')
-        .min(8, 'Password must be at least 8 characters'),
-    confirmPass: Yup.string()
-        .required('Confirm Password is required')
-        .oneOf([Yup.ref('newPass')], 'Passwords must match'),
+const forgotPassSchema = Yup.object().shape({
+    resetPassEmail: Yup.string().required('Email is required'),
 });
 
 const signInValidationSchema = Yup.object().shape({
@@ -36,7 +29,6 @@ const signInValidationSchema = Yup.object().shape({
         .required('Confirm Password is required')
         .oneOf([Yup.ref('createPassword')], 'Passwords must match'),
 });
-
 
 const loginValidationSchema = Yup.object().shape({
     email: Yup.string().required('Email is required'),
@@ -57,8 +49,8 @@ const Auth: React.FC = () => {
         } else if (formName === 'loginForm') {
             setFormValidationSchema(loginValidationSchema);
         }
-        else if (formName === 'resetPasswordForm') {
-            setFormValidationSchema(validationSchema);
+        else if (formName === 'forgotPasswordForm') {
+            setFormValidationSchema(forgotPassSchema);
         }
     }, [formName]);
 
@@ -82,7 +74,13 @@ const Auth: React.FC = () => {
                 password: data.createPassword,
             };
 
-            userRegistration(userData);
+            const res = await userRegistration(userData);
+            if (res === 'ok') {
+                setIsAuthenticated(true);
+                setIsLoading(false);
+            } else {
+                setIsLoading(false);
+            }
 
         } else if (data?.loginPassword && data?.email) {
             setIsLoading(true);
@@ -95,8 +93,19 @@ const Auth: React.FC = () => {
             if (res === 'ok') {
                 setIsAuthenticated(true);
                 setIsLoading(false);
+            } else {
+                setIsLoading(false);
             }
 
+        } else if (data?.resetPassEmail) {
+            setIsLoading(true);
+            const userData = {
+                email: data.resetPassEmail,
+            };
+            const res = await userResetPasswordLink(userData);
+            if (res === 'ok') {
+                setIsLoading(false);
+            }
         }
 
     };
@@ -127,12 +136,13 @@ const Auth: React.FC = () => {
                     isLoading={isLoading}
                 />
             }
-            {formName === 'resetPasswordForm' &&
-                <ResetPassForm
+            {formName === 'forgotPasswordForm' &&
+                <ForgotPassForm
                     changeForm={handleFormChange}
                     onSubmit={handleSubmit(handleFormSubmit)}
                     control={control}
                     errors={errors}
+                    isLoading={isLoading}
                 />
             }
             {isAuthenticated && <Navigate to={routes.pricing} />}
