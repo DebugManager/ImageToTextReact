@@ -171,6 +171,7 @@ const OnePricePage = () => {
                     const res = await buyPackage(data, userId);
                     if (res === 'ok') {
                         setButtonLoading(false);
+                        window.location.href = '/pricing';
                     } else {
                         setButtonLoading(false);
                     }
@@ -211,6 +212,7 @@ const OnePricePage = () => {
                     const res = await buyPackage(data, userId);
                     if (res === 'ok') {
                         setButtonLoading(false);
+                        window.location.href = '/pricing';
                     } else {
                         setButtonLoading(false);
                     }

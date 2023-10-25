@@ -1,7 +1,6 @@
 .planWrapper {
     display: flex;
     flex-direction: column;
-    /* padding: 10px 12px; */
     background: var(--text-color-10, #FFF);
     border-radius: 4px;
 }
@@ -23,6 +22,10 @@
     font-weight: 400;
     line-height: 14px;
     text-transform: capitalize;
+}
+
+.backgroundOnHold {
+    background: var(--success-main, #34C38F);
 }
 
 .planType {
@@ -166,4 +169,9 @@
     border: none;
     margin: 28px auto 0 auto;
     cursor: pointer;
+}
+
+
+.displayNone {
+    display: none;
 }

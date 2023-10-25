@@ -1,9 +1,29 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Modal, Box } from '@mui/material';
+import { CircleLoader } from 'react-spinners';
+import { buyPackage } from '../../../../services/pricing.service';
 import styles from './ModalStyles.module.css';
 
 
-export const OnHoldModal = ({ open, handleClose }: { open: boolean, handleClose: () => void }) => {
+export const OnHoldModal = ({ open, handleClose, userID, isCancelLoading }: { userID: number | null, open: boolean, isCancelLoading: boolean, handleClose: () => void }) => {
+    const [isLoading, setIsLoading] = useState<boolean>(false);
+
+    const handleSetPacksgeOnHold = async () => {
+        setIsLoading(true);
+        if (userID) {
+            const data = {
+                current_plan: 11,
+            }
+            const res = await buyPackage(data, userID);
+            if (res == 'ok') {
+                setIsLoading(false);
+                window.location.href = '/pricing';
+            } else {
+                setIsLoading(false);
+            }
+        }
+    }
+
     return (
         <Modal
             open={open}
@@ -30,8 +50,8 @@ export const OnHoldModal = ({ open, handleClose }: { open: boolean, handleClose:
                 <p className={styles.firstModaltext}>“You are about to cancel your membership. Once cancelled all posts and profiles you are watching will be deleted. You can put your account on hold for $14.99 a month that will keep all of your settings and watched profiles and posts. When you want to use our platform again, simply purchase a membership. Click here to put your account on hold.”</p>
                 <div className={styles.btnWrapper}>
                     <div className={styles.btnWrapp}>
-                        <button className={styles.cancelPackageBtn} onClick={handleClose}>Cancel Package</button>
-                        <button className={styles.onHold}>Put Account on Hold</button>
+                        <button className={styles.cancelPackageBtn} onClick={handleClose}>{isCancelLoading ? <CircleLoader loading={isCancelLoading} color={'#34C38F'} size={10} /> : 'Cancel Package'}</button>
+                        <button className={styles.onHold} onClick={handleSetPacksgeOnHold}>{isLoading ? <CircleLoader loading={isLoading} color={'#FFF'} size={10} /> : 'Put Account on Hold'}</button>
                     </div>
                 </div>
             </Box>
