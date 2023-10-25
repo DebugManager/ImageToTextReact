@@ -1,0 +1,98 @@
+.firstModaltext {
+    color: #495057;
+    text-align: left;
+    font-family: Poppins;
+    font-size: 7px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 14px;
+    text-transform: capitalize;
+}
+
+.btnWrapper {
+    display: flex;
+    align-items: center;
+    margin-top: 20px;
+    justify-content: flex-end;
+}
+
+.btnWrapp {
+    display: flex;
+    align-items: center;
+}
+
+.cancelPackageBtn {
+    color: #74788D;
+    text-align: center;
+    font-family: Poppins;
+    font-size: 7px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 14px;
+    text-transform: capitalize;
+    border: none;
+    background: transparent;
+    margin-right: 8px;
+    cursor: pointer;
+}
+
+.onHold {
+    display: flex;
+    padding: 2px 8px;
+    justify-content: center;
+    align-items: center;
+    gap: 4px;
+    border-radius: 4px;
+    background: var(--success-main, #34C38F);
+    color: var(--text-color-white, #FFF);
+    font-family: Poppins;
+    font-size: 7px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 14px;
+    text-transform: capitalize;
+    border: none;
+    cursor: pointer;
+}
+
+.inputFeedBack {
+    display: flex;
+    width: 300px;
+    height: 50px;
+    padding: 6px 10px;
+    align-items: flex-start;
+    gap: 10px;
+    border-radius: 4px;
+    border: 1px solid var(--text-color-20, #EFF2F7);
+    background: var(--text-color-10, #FFF);
+
+    color: #495057;
+    text-align: left;
+    font-family: Poppins;
+    font-size: 7px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 14px;
+    text-transform: capitalize;
+}
+
+.subMitBtn {
+    display: flex;
+    padding: 5px 8px;
+    justify-content: center;
+    align-items: center;
+    gap: 4px;
+    border-radius: 4px;
+    background: var(--primary-main, #556EE6);
+
+    color: var(--text-color-10, #FFF);
+    text-align: center;
+    font-family: Inter;
+    font-size: 7px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    text-transform: capitalize;
+    border: none;
+    cursor: pointer;
+}

@@ -1,10 +1,15 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { CircleLoader } from 'react-spinners';
 
 import styles from './PlanCard.module.css';
 
 import line from '../../../assets/planCard/line.svg';
 import checkBox from '../../../assets/planCard/presentedPlan.svg';
+import { OnHoldModal } from './Modals/OnHoldModal';
+import { FeedBackModal } from './Modals/FeedBackModal';
+import { FinalModal } from './Modals/FinalModal';
+import { buyPackage } from '../../../services/pricing.service';
 
 type Plan = {
     id: number;
@@ -24,13 +29,60 @@ type Plan = {
 interface PlanCardProps {
     plan: Plan;
     currentPlanId?: number;
+    userID: number | null;
 }
 
-const PlanCard: React.FC<PlanCardProps> = ({ plan, currentPlanId }) => {
+const PlanCard: React.FC<PlanCardProps> = ({ plan, currentPlanId, userID }) => {
+    const [open, setOpen] = useState<boolean>(false);
+    const [openFeedBackModal, setOpenFeedBackModal] = useState<boolean>(false);
+    const [openFinalModal, setOpenFinalModal] = useState<boolean>(false);
+    const [isLoading, setIsLoading] = useState<boolean>(false);
+
+
+    const handleOpen = () => {
+        setOpen(true);
+    };
+
+    const handleClose = async () => {
+        if (userID) {
+            setIsLoading(true);
+            const data = {
+                current_plan: null
+            }
+            const res = await buyPackage(data, userID);
+            if (res == 'ok') {
+                setIsLoading(false);
+            } else {
+                setIsLoading(false);
+            }
+        }
+        setOpen(false);
+        setOpenFeedBackModal(true);
+    };
+
+    const handleCloseFeedBack = () => {
+        setOpenFeedBackModal(false);
+        window.location.href = '/pricing';
+    }
+
+    const handleSubmitFeedBack = () => {
+        setOpenFeedBackModal(false);
+        setOpenFinalModal(true);
+    }
+
+    const handleCloseAll = () => {
+        setOpenFinalModal(false);
+        window.location.href = '/pricing';
+    }
+
     return (
         <div>
             <div className={styles.planWrapper} style={currentPlanId && currentPlanId === plan.id ? { padding: '0' } : { padding: '10px 12px' }}>
-                {currentPlanId && currentPlanId === plan.id && <div className={styles.curPlan}>Current Plan</div>}
+                {currentPlanId && currentPlanId === plan.id && (
+                    <div className={currentPlanId === 11 ? `${styles.curPlan} ${styles.backgroundOnHold}` : styles.curPlan}>
+                        Current Plan
+                    </div>
+                )}
                 <div style={currentPlanId && currentPlanId === plan.id ? { padding: '10px 12px' } : { padding: '0' }}>
                     <p className={styles.planType}>{plan.type}</p>
                     <p className={styles.planName}>{plan.name}</p>
@@ -98,11 +150,30 @@ const PlanCard: React.FC<PlanCardProps> = ({ plan, currentPlanId }) => {
                     </div>
 
                     {
-                        currentPlanId === plan.id && <button className={styles.cancelBtn}>Cancel</button>
+                        currentPlanId === plan.id && <button className={styles.cancelBtn} onClick={handleOpen}>Cancel</button>
                     }
                 </div>
             </div>
-        </div>
+
+            <OnHoldModal
+                open={open}
+                handleClose={handleClose}
+                userID={userID}
+                isCancelLoading={isLoading}
+            />
+
+            <FeedBackModal
+                openFeedBackModal={openFeedBackModal}
+                handleCloseFeedBack={handleCloseFeedBack}
+                handleSubmitFeedBack={handleSubmitFeedBack}
+            />
+
+            <FinalModal
+                openFinalModal={openFinalModal}
+                handleCloseAll={handleCloseAll}
+            />
+
+        </div >
     );
 }
 

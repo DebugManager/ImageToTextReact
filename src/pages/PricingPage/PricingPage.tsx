@@ -25,13 +25,12 @@ type Plan = {
 
 type PricingTypes = 'Mounthly' | 'Annual';
 
-// const currentPlanId = 3;
-
 const PricingPage = () => {
     const [typeOfPrice, setTypeOfPrice] = useState<PricingTypes>('Mounthly');
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
     const [plans, setPlans] = useState<Plan[]>([]);
     const [currentPlanId, setCurrentPlanId] = useState();
+    const [userID, setUserID] = useState<number | null>(null);
 
     const fetchData = useCallback(async () => {
         try {
@@ -43,13 +42,15 @@ const PricingPage = () => {
         }
     }, [typeOfPrice]);
 
+
     useEffect(() => {
         fetchData();
     }, [fetchData]);
 
     useEffect(() => {
         const user = getUser();
-        if (user?.current_plan) {
+        if (user?.current_plan && user?.id) {
+            setUserID(user?.id);
             setCurrentPlanId(user.current_plan);
         }
     }, []);
@@ -89,8 +90,8 @@ const PricingPage = () => {
                 )}
             </div>
             <div className={styles.planWrapper}>
-                {filteredPlans?.map((plan) => (
-                    <PlanCard key={plan.id} plan={plan} currentPlanId={currentPlanId} />
+                {filteredPlans?.filter((plan) => currentPlanId === 11 || plan.id !== 11).map((plan) => (
+                    <PlanCard key={plan.id} plan={plan} currentPlanId={currentPlanId} userID={userID} />
                 ))}
 
                 {!filteredPlans?.length &&
@@ -98,6 +99,7 @@ const PricingPage = () => {
                         <CircleLoader color={'#556EE6'} size={50} />
                     </div>
                 }
+
             </div>
         </div>
     );

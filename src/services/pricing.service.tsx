@@ -21,11 +21,11 @@ const CustomErrorIcon = () => (
 );
 
 interface IUser {
-    current_plan: string | number;
-    address_line1: string;
-    city: string;
-    zip_code: string | number;
-    country: string | number;
+    current_plan: string | number | null;
+    address_line1?: string;
+    city?: string;
+    zip_code?: string | number;
+    country?: string | number;
 }
 
 const GET_PRICING_PLANS = process.env.REACT_APP_API_URL || 'https://pdf-to-txt-back.onrender.com/v1/plan';
@@ -53,9 +53,9 @@ export const buyPackage = async (userData: IUser, userid: string | number) => {
     try {
         const response = await axios.put(`${BY_PACKAGE}/${userid}`, userData);
 
-        if (response.data.current_plan) {
+        if (response.data) {
             const user = await getUserById(userid);
-            if (user.current_plan) {
+            if (user.id) {
                 removeUser();
                 setUser(user);
             }
@@ -71,6 +71,7 @@ export const buyPackage = async (userData: IUser, userid: string | number) => {
             });
 
             return 'ok';
+
         }
 
 
