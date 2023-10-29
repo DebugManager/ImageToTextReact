@@ -196,12 +196,12 @@ export default function AddUserModal({ openModal, handleAddUser, handleClose, ha
     const initialSelectedType = () => {
         if (user) {
             if (user.is_superuser) {
-                return typeOptions.find(option => option.value === 'Admin');
+                return typeOptions.find(option => option.value === 'admin');
             } else if (user.is_staff) {
-                return typeOptions.find(option => option.value === 'Staff');
+                return typeOptions.find(option => option.value === 'ataff');
             }
         }
-        return typeOptions.find(option => option.value === 'Client');
+        return typeOptions.find(option => option.value === 'client');
     };
 
     const [selectedType, setSelectedType] = useState(initialSelectedType());
