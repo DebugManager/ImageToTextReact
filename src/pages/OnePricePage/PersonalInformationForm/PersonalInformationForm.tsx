@@ -53,7 +53,7 @@ export const PersonalInformationForm = ({ control, errors, onUserDataChange }: I
                 await validationSchema.validate(formData, { abortEarly: false });
             } catch (error: any) {
                 if (Yup.ValidationError.isError(error)) {
-                    error.inner.forEach((e: Yup.ValidationError) => {
+                    error?.inner?.forEach((e: Yup.ValidationError) => {
                         if (e.path) {
                             errors[e.path] = { type: e.type, message: e.message };
                         }

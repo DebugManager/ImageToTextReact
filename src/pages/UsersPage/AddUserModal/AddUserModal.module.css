@@ -1,0 +1,270 @@
+.wrapper {
+    display: flex;
+    padding: 20px;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.descriptionWrapper {
+    display: flex;
+    padding: 10px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+    border-radius: 6px;
+    background: var(--info-color-badge, #EFF2F7);
+}
+
+.descriptionText {
+    color: var(--primary-color-main, #556EE6);
+    font-family: Poppins;
+    font-size: 7px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 14px;
+    text-transform: capitalize;
+    cursor: pointer;
+}
+
+.dropDownWrapper {
+    display: flex;
+    flex-direction: column;
+}
+
+.titleType {
+    color: var(--text-color-90, #495057);
+    font-family: Poppins;
+    font-size: 8px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 15px;
+    text-transform: capitalize;
+}
+
+.inputWrapper {
+    display: flex;
+    flex-direction: column;
+}
+
+.label {
+    color: #495057;
+    font-family: Poppins;
+    font-size: 8px;
+    font-weight: 500;
+    line-height: 15px;
+}
+
+.input {
+    display: flex;
+    padding: 5px 10px;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    align-self: stretch;
+    border-radius: 4px;
+    border: 1px solid var(--text-color-50, #EFF2F7);
+    background: var(--neutral-10, #FFF);
+
+    color: var(--text-color-70, #74788D);
+    font-family: Poppins;
+    font-size: 8px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 14px;
+    width: 100%;
+}
+
+.input:focus,
+.input:focus {
+    outline: none;
+}
+
+.permissionsWrapper {
+    display: flex;
+    padding: 2px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    align-self: stretch;
+    border-radius: 4px;
+    border: 1px solid var(--text-color-50, #EFF2F7);
+}
+
+.permissionTitle {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    padding: 4px 8px;
+    align-items: center;
+    gap: 8px;
+    background: #F9F9F9;
+}
+
+.checkBoxesWrapper {
+    display: flex;
+    align-items: center;
+}
+
+.checkBoxWrapper {
+    display: flex;
+    padding: 5px 8px;
+    align-items: center;
+    gap: 8px;
+    border-radius: 4px;
+    border: 1px solid var(--text-color-50, #EFF2F7);
+    background: var(--text-color-white, #FFF);
+}
+
+.customCheckBox {
+    padding: 0;
+}
+
+
+.inputImg {
+    margin-right: 4px;
+}
+
+
+
+.inputName {
+    color: var(--text-color-90, #495057);
+    font-family: Poppins;
+    font-size: 7px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 14px;
+    text-transform: capitalize;
+}
+
+.countChecked {
+    color: var(--text-color-90, #495057);
+    font-family: Poppins;
+    font-size: 7px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 14px;
+    text-transform: capitalize;
+    margin-left: 8px;
+}
+
+.pagestPermissionWrapper {
+    width: 100%;
+}
+
+.permissionToChoseWrapper {
+    display: flex;
+    height: 41px;
+    padding: 10px;
+    align-items: center;
+    gap: 8px;
+}
+
+.btnWrapper {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.modalBtn {
+    display: inline-flex;
+    padding: 2px 8px;
+    justify-content: center;
+    align-items: center;
+    gap: 4px;
+    border-radius: 4px;
+    background: var(--main-main, #556EE6);
+    color: var(--text-color-white, #FFF);
+    font-family: Poppins;
+    font-size: 7px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 14px;
+    text-transform: capitalize;
+    border: none;
+    cursor: pointer;
+}
+
+.itemsWrapper {
+    height: 205px;
+    overflow: auto;
+}
+
+
+.searchInputWrapper {
+    position: relative;
+    display: flex;
+    padding: 9px 10px;
+    align-items: center;
+    gap: 10px;
+    align-self: stretch;
+    width: 100%;
+    border-radius: 4px;
+    /* border-left: 1px solid var(--text-color-50, #EFF2F7); */
+}
+
+.inputSearch {
+    display: flex;
+    height: 30px;
+    padding: 11px 16px;
+    align-items: center;
+    gap: 7px;
+    flex: 1 0 0;
+    background: var(--text-color-50, #EFF2F7);
+    border: none;
+    color: var(--text-color-80, #555B6D);
+    font-family: Poppins;
+    font-size: 8px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 15px;
+    text-transform: capitalize;
+}
+
+.inputSearch:focus,
+.inputSearch:focus {
+    outline: none;
+}
+
+.searchIcon {
+    position: absolute;
+    left: 16px;
+}
+
+.inputWrapper {
+    position: relative;
+}
+
+.label {
+    color: #495057;
+    font-family: Poppins;
+    font-size: 9px;
+    font-weight: 500;
+    line-height: 15px;
+}
+
+.input {
+    display: flex;
+    padding: 5px 10px;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    align-self: stretch;
+    border-radius: 4px;
+    border: 1px solid var(--text-color-50, #EFF2F7);
+    background: var(--neutral-10, #FFF);
+
+    color: var(--text-color-70, #74788D);
+    font-family: Poppins;
+    font-size: 8px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 14px;
+    width: 100%;
+}
+
+.iconWrapper {
+    position: absolute;
+    position: absolute;
+    top: 17px;
+    right: 10px;
+}

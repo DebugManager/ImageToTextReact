@@ -78,9 +78,13 @@ const customStyles: StylesConfig = {
     option: (styles, state) => ({
         ...styles,
         backgroundColor: state.isSelected ? "#EFF2F7" : "",
+        color: '#495057',
+        fontSize: '7px',
         "&:hover": {
             ...styles,
             backgroundColor: "#EFF2F7",
+            fontSize: '7px',
+            color: '#495057'
         }
     })
 };

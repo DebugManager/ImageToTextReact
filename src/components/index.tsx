@@ -6,5 +6,7 @@ export * from './SigUpForm';
 export * from './ResetPassForm';
 export * from './Footer';
 export * from './ForgotPassForm';
+export * from './TableHeader';
+export * from './Table';
 
 
