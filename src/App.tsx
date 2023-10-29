@@ -1,6 +1,6 @@
 import { Route, RouterProvider, createBrowserRouter, createRoutesFromElements } from 'react-router-dom';
 
-import { MainPage, Auth, PricingPage, ResetPassPage } from './pages';
+import { MainPage, Auth, PricingPage, ResetPassPage, UsersPage } from './pages';
 import { Layout } from './components';
 
 import './App.module.css';
@@ -18,6 +18,7 @@ const router = createBrowserRouter(
           <Route element={<MainPage />} path={routes.index} />
           <Route element={<PricingPage />} path={routes.pricing} />
           <Route element={<OnePricePage />} path={routes.pricingId} />
+          <Route element={<UsersPage />} path={routes.users} />
         </Route>
       </Route>
       <Route element={<Auth />} path='/auth' />

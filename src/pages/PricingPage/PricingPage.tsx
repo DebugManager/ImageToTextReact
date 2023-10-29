@@ -2,11 +2,12 @@ import React, { useEffect, useState, useMemo, useCallback } from 'react';
 import { CircleLoader } from 'react-spinners';
 import PlanCard from './PlanCard/PlanCard';
 import { getPricing } from '../../services/pricing.service';
+import { getUser } from '../../services/locastorage.service';
 
 import styles from './PricingPage.module.css';
 
 import arrow from '../../assets/header/arrow.svg';
-import { getUser } from '../../services/locastorage.service';
+
 
 type Plan = {
     id: number;
