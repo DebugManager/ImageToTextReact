@@ -5,9 +5,9 @@ import { Controller, useForm } from 'react-hook-form';
 import * as Yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { toast } from 'react-toastify';
-import { createNewCompany } from '../../../services/company.service';
+import { createNewFeature } from '../../../services/feature.servise';
 
-import styles from './CompanieModal.module.css';
+import styles from '../../Companies/CompanieModal/CompanieModal.module.css';
 
 const myCustomStyles = {
     background: 'rgba(0, 0, 0, 0.8)',
@@ -26,18 +26,17 @@ const CustomErrorIcon = () => (
     <div style={{ color: 'red' }}>✘</div>
 );
 
-export default CustomErrorIcon;
 
 interface IModal {
     isOpen: boolean;
     handleClose: () => void;
 }
 
-export const CompanieModal = ({ isOpen, handleClose }: IModal) => {
+export const FeaturesModal = ({ isOpen, handleClose }: IModal) => {
     const [isLoading, setIsLoading] = useState<boolean>(false);
     const createValidationSchema = Yup.object().shape({
-        companieName: Yup.string()
-            .required('Company Name is required'),
+        featureName: Yup.string()
+            .required('Feature Name is required'),
     });
 
     const { control, handleSubmit, reset, formState: { errors },
@@ -45,8 +44,8 @@ export const CompanieModal = ({ isOpen, handleClose }: IModal) => {
 
     const onSubmit = async (data: any) => {
         setIsLoading(true);
-        const req = await createNewCompany(data.companieName);
-        if (req.id) {
+        const req = await createNewFeature(data);
+        if (req?.id) {
             setIsLoading(false);
             toast.success('The company has been successfully created', {
                 position: 'top-right',
@@ -93,31 +92,30 @@ export const CompanieModal = ({ isOpen, handleClose }: IModal) => {
                 padding: '18px 10px',
                 flexDirection: 'column',
                 justifyContent: 'center',
-                // alignItems: 'flex-start',
                 borderRadius: '4px',
                 background: 'var(--text-color-10, #FFF)',
                 boxShadow: '1px 4px 15px 4px rgba(0, 0, 0, 0.10)',
             }}>
-                <p className={styles.modalTitle}>NEW COMPANY</p>
+                <p className={styles.modalTitle}>Add new feature</p>
                 <form onSubmit={handleSubmit(onSubmit)}>
                     <div className={styles.inputWrapper} style={{ marginTop: '8px' }}>
-                        <label className={styles.label} htmlFor="companieName">Company name</label>
+                        <label className={styles.label} htmlFor="featureName">Company name</label>
                         <Controller
-                            name="companieName"
+                            name="featureName"
                             control={control}
                             rules={{
-                                required: 'Company name is required',
+                                required: 'Feature name is required',
                             }}
                             render={({ field }) => (
                                 <input
                                     className={styles.input}
                                     type="text"
-                                    placeholder="Enter List name"
+                                    placeholder="Feature"
                                     {...field}
                                 />
                             )}
                         />
-                        {errors.companieName && <span className={styles.error}>{errors.companieName.message}</span>}
+                        {errors.featureName && <span className={styles.error}>{errors.featureName.message}</span>}
                     </div>
                     <div className={styles.btnWrapper}>
                         <button className={styles.cancelBtn} onClick={handleClose}>Cancel</button>
