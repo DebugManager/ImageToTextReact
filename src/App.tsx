@@ -1,6 +1,6 @@
 import { Route, RouterProvider, createBrowserRouter, createRoutesFromElements } from 'react-router-dom';
 
-import { MainPage, Auth, PricingPage, ResetPassPage, UsersPage } from './pages';
+import { MainPage, Auth, PricingPage, ResetPassPage, UsersPage, Companies } from './pages';
 import { Layout } from './components';
 
 import './App.module.css';
@@ -19,6 +19,7 @@ const router = createBrowserRouter(
           <Route element={<PricingPage />} path={routes.pricing} />
           <Route element={<OnePricePage />} path={routes.pricingId} />
           <Route element={<UsersPage />} path={routes.users} />
+          <Route element={<Companies />} path={routes.companies} />
         </Route>
       </Route>
       <Route element={<Auth />} path='/auth' />
