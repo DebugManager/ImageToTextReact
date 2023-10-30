@@ -5,6 +5,7 @@
     pricingId: '/pricing/:id',
     users: '/users',
     companies: '/companies',
+    newFeature: '/feature'
 }
 
 export default routes

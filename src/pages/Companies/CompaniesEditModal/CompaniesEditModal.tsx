@@ -51,7 +51,6 @@ export const CompaniesEditModal = ({ isOpenEditModal, handleCloseEditModal, comp
     useEffect(() => {
         if (companyName) {
             setValue('companieName', companyName);
-            console.log(companyName);
         }
     }, [companyName]);
 
@@ -71,6 +70,7 @@ export const CompaniesEditModal = ({ isOpenEditModal, handleCloseEditModal, comp
                     progressStyle: progressBarStyles,
                     icon: <CustomCheckmark />,
                 });
+                reset();
                 handleCloseEditModal();
             } else {
                 toast.error('Something goes wrong', {
@@ -82,6 +82,7 @@ export const CompaniesEditModal = ({ isOpenEditModal, handleCloseEditModal, comp
                     progressStyle: progressBarStyles,
                     icon: <CustomErrorIcon />,
                 });
+                reset();
                 setIsLoading(false);
                 handleCloseEditModal();
             }
@@ -138,13 +139,8 @@ export const CompaniesEditModal = ({ isOpenEditModal, handleCloseEditModal, comp
                                 {errors.companieName && <span className={styles.error}>{errors.companieName.message}</span>}
                             </div>
                             <div className={styles.btnWrapper}>
-                                {/* <div className={styles.btnWrapp}> */}
-                                {/* <button className={styles.cancelPackageBtn} onClick={handleCloseEditModal}>{isCancelLoading ? <CircleLoader loading={isCancelLoading} color={'#34C38F'} size={10} /> : 'Cancel Package'}</button> */}
-                                {/* <button className={styles.onHold} onClick={handleSetPacksgeOnHold}>{isLoading ? <CircleLoader loading={isLoading} color={'#FFF'} size={10} /> : 'Put Account on Hold'}</button> */}
                                 <button className={styles.cancelBtn} onClick={handleCloseEditModal}>Cancel</button>
                                 <button className={styles.modalBtn} type='submit'>{isLoading ? <CircleLoader loading={isLoading} color={'#FFF'} size={10} /> : 'Save'}</button>
-
-                                {/* </div> */}
                             </div>
                         </form>
                     </>

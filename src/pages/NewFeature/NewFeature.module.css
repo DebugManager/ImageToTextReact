@@ -1,0 +1,218 @@
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    margin: 20px auto;
+}
+
+.tableDescription {
+    display: flex;
+    flex-direction: column;
+    background: var(--text-color-white, #FFF);
+    display: flex;
+    padding: 24px 16px;
+    gap: 10px;
+    align-self: stretch;
+    border-bottom: 1px solid var(--text-color-50, #EFF2F7);
+}
+
+.tableWrapper {
+    margin: 20px auto;
+    width: 352px;
+}
+
+.title {
+    color: var(--text-color-10, #343A40);
+    font-family: Poppins;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 13px;
+}
+
+.desctiptionText {
+    color: var(--text-color-20, #495057);
+    font-family: Poppins;
+    font-size: 7px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 14px;
+}
+
+.addCompanie {
+    display: flex;
+    padding: 2px 8px;
+    justify-content: center;
+    align-items: center;
+    gap: 4px;
+    border-radius: 4px;
+    background: var(--main-main, #556EE6);
+    color: var(--text-color-white, #FFF);
+    font-family: Poppins;
+    font-size: 7px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 14px;
+    text-transform: capitalize;
+    border: none;
+    margin-left: 10px;
+    cursor: pointer;
+}
+
+.searchInputWrapper {
+    padding: 8px 10px;
+    display: flex;
+    flex: 1 0 0;
+    background: var(--text-color-white, #FFF);
+    align-items: center;
+    position: relative;
+    border-left: 1px solid var(--text-color-50, #EFF2F7);
+}
+
+.inputSearch {
+    display: flex;
+    height: 30px;
+    padding: 11px 16px;
+    align-items: center;
+    gap: 7px;
+    flex: 1 0 0;
+    background: var(--text-color-white, #FFF);
+    border: none;
+    color: var(--text-color-80, #555B6D);
+    font-family: Poppins;
+    font-size: 8px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 15px;
+    text-transform: capitalize;
+}
+
+.inputSearch:focus,
+.inputSearch:focus {
+    outline: none;
+}
+
+.searchIcon {
+    position: absolute;
+    left: 11px;
+    top: 18px;
+}
+
+.btnSearch {
+    display: flex;
+    padding: 2px 8px;
+    justify-content: center;
+    align-items: center;
+    gap: 4px;
+    border-radius: 4px;
+    background: var(--main-main, #556EE6);
+    border: none;
+
+    color: var(--text-color-white, #FFF);
+    font-family: Poppins;
+    font-size: 7px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 14px;
+    text-transform: capitalize;
+    cursor: pointer;
+}
+
+.clearIcon {
+    position: absolute;
+    height: 8px;
+    width: 8px;
+    right: 80px;
+}
+
+.btnWrapper {
+    display: flex;
+    align-items: center;
+}
+
+.voteBtn {
+    display: flex;
+    padding: 2px 8px;
+    justify-content: center;
+    align-items: center;
+    gap: 4px;
+    border-radius: 4px;
+    background: var(--text-color-60, #EFF2F7);
+    color: var(--text-color-20, #495057);
+    font-family: Poppins;
+    font-size: 7px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 14px;
+    text-transform: capitalize;
+    cursor: pointer;
+
+}
+
+.votedBtn {
+    display: flex;
+    padding: 2px 8px;
+    justify-content: center;
+    align-items: center;
+    gap: 4px;
+    border-radius: 4px;
+    background: var(--main-main, #556EE6);
+    color: var(--text-color-white, #FFF);
+    font-family: Poppins;
+    font-size: 7px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 14px;
+    text-transform: capitalize;
+    cursor: pointer;
+}
+
+/************* PAGINATION *************/
+
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    list-style: none;
+    padding: 0;
+}
+
+.pagination__prev {
+    display: flex;
+    padding: 2px 8px;
+    justify-content: center;
+    align-items: center;
+    gap: 4px;
+    border-radius: 4px;
+    background: var(--text-color-60, #EFF2F7);
+    color: var(--text-color-20, #495057);
+    font-family: Poppins;
+    font-size: 7px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 14px;
+    text-transform: capitalize;
+    border: none;
+    cursor: pointer;
+}
+
+.pagination a {
+    display: block;
+    padding: 8px 16px;
+    text-decoration: none;
+    border-radius: 4px;
+    cursor: pointer;
+
+    font-family: Poppins;
+    font-size: 7px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 14px;
+    text-transform: capitalize;
+}
+
+.activePage {
+    border-radius: 4px;
+    background-color: #556EE6;
+    color: #fff;
+    font-weight: bold;
+}

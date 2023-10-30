@@ -4,6 +4,9 @@ import { Column } from 'react-table';
 import ReactPaginate from 'react-paginate';
 import { format } from 'date-fns';
 import { toast } from 'react-toastify';
+import { CompanieModal } from './CompanieModal/CompanieModal';
+import { deleteCompany, getAllCompanies, getCompanyById, searchCompanies } from '../../services/company.service';
+import { CompaniesEditModal } from './CompaniesEditModal/CompaniesEditModal';
 
 import styles from './Companies.module.css';
 
@@ -14,9 +17,7 @@ import deleteIcon from '../../assets/users-page/delete.svg';
 import clearIcon from '../../assets/users-page/x-circle.svg';
 import searchIcon from '../../assets/users-page/search.svg';
 import plusIcon from '../../assets/users-page/plus.svg';
-import { CompanieModal } from './CompanieModal/CompanieModal';
-import { deleteCompany, getAllCompanies, getCompanyById, searchCompanies } from '../../services/company.service';
-import { CompaniesEditModal } from './CompaniesEditModal/CompaniesEditModal';
+
 
 const myCustomStyles = {
     background: 'rgba(0, 0, 0, 0.8)',
@@ -115,9 +116,7 @@ const Companies = () => {
     }
 
     const handleDelete = async (id: number) => {
-        console.log(id);
         const res = await deleteCompany(id);
-        console.log(res);
         if (res?.status === 204) {
             toast.success('The company has been successfully created', {
                 position: 'top-right',

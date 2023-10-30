@@ -136,10 +136,6 @@ const UsersPage = () => {
         fetchData(activeSortQuery);
     }
 
-    const handleButtonClick = () => {
-        console.log('click');
-    }
-
     const handleOpenModal = () => {
         setOpenModal(true);
     }
@@ -368,7 +364,6 @@ const UsersPage = () => {
             Header: (
                 <div style={{ display: 'flex', alignItems: 'center' }}>
                     <p>Action</p>
-                    {/* <img src={arrowDownIcon} alt='sort' style={{ marginLeft: '5px' }} /> */}
                 </div>
             ),
             accessor: 'id',
