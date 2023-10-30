@@ -4,6 +4,7 @@
     pricing: '/pricing',
     pricingId: '/pricing/:id',
     users: '/users',
+    companies: '/companies',
 }
 
 export default routes
