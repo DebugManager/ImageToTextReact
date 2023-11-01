@@ -1,14 +1,27 @@
-import { Route, RouterProvider, createBrowserRouter, createRoutesFromElements } from 'react-router-dom';
+import {
+  Route,
+  RouterProvider,
+  createBrowserRouter,
+  createRoutesFromElements,
+} from 'react-router-dom';
 
-import { MainPage, Auth, PricingPage, ResetPassPage, UsersPage, Companies, NewFeature, Ticketpage, ChatPage } from './pages';
+import {
+  MainPage,
+  Auth,
+  PricingPage,
+  ResetPassPage,
+  UsersPage,
+  Companies,
+  NewFeature,
+  Ticketpage,
+  ChatPage,
+} from './pages';
 import { Layout } from './components';
 
 import './App.module.css';
 import routes from './routes';
 import { PrivateRoutes } from './components/PrivatRoytes';
 import { OnePricePage } from './pages/OnePricePage';
-
-
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -26,17 +39,17 @@ const router = createBrowserRouter(
         </Route>
       </Route>
       <Route element={<Auth />} path='/auth' />
-      <Route element={<ResetPassPage />} path="/reset-password/:uuid/:token" />
+      <Route element={<ResetPassPage />} path='/reset-password/:uuid/:token' />
     </>
   )
-)
+);
 
 function App() {
   return (
     <>
       <RouterProvider router={router} />
     </>
-  )
+  );
 }
 
 export default App;
