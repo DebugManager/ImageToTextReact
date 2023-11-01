@@ -1,9 +1,12 @@
 import React, { useCallback, useEffect, useState } from 'react';
-import { TableComponent, TableHeader } from '../../components';
+
 import { Column } from 'react-table';
-import ReactPaginate from 'react-paginate';
 import { toast } from 'react-toastify';
 import { CircleLoader } from 'react-spinners';
+
+import ReactPaginate from 'react-paginate';
+
+import { TableComponent, TableHeader } from '../../components';
 
 import styles from './NewFeature.module.css';
 

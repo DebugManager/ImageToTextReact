@@ -1,6 +1,8 @@
 import axios from 'axios';
 import { toast } from 'react-toastify';
+
 import { removeUser, setUser } from './locastorage.service';
+
 import { getUserById } from './user.service';
 
 const myCustomStyles = {
