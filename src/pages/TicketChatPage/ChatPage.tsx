@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { io, Socket } from 'socket.io-client';
 
-import styles from './ChatPage.module.css';
+import { ChatStatusComponent, MessageComponent } from '../../components';
 
 import arrowLeft from '../../assets/ticket/arrow-sm-left.svg';
-import userIcon from '../../assets/ticket/user.jpeg';
 
+import styles from './ChatPage.module.css';
 // const CHAT_SERVER_URL = 'ws://pdf-to-txt-back.onrender.com/ws/web-socket/';
 
 const ChatPage: React.FC = () => {
@@ -49,18 +49,10 @@ const ChatPage: React.FC = () => {
                     <p className={styles.awgTitle}>AVG.Respone Time</p>
 
                     <div>
-                        <div className={styles.messageWrapper}>
-                            <img src={userIcon} alt='avatar' className={styles.userAvatar} />
-                            <div className={styles.messageData}>
-                                <p className={styles.userName}>Jon Dow</p>
-                                <p className={styles.messageText}>consectetur adipiscing elit duis tristique sollicitudin nibh sit amet commodo nulla facilisi nullam vehicula ipsum a arcu cursus vitae congue</p>
-
-                            </div>
-                            <p className={styles.date}>March 20, 2023 10:06</p>
-                        </div>
+                        <MessageComponent />
 
                         <div className={styles.textAreaWrapper}>
-                            <p className={styles.userName}>Reply to Ticket</p>
+                            <p className={styles.inputTitle}>Reply to Ticket</p>
                             <textarea className={styles.textArea} placeholder='Text Area' />
                             <div className={styles.buttonWrapper}>
                                 <button className={styles.sendButton}>send</button>
@@ -71,12 +63,7 @@ const ChatPage: React.FC = () => {
                     </div>
                 </div>
 
-                <div className={styles.rightWrapper}>
-                    <p className={styles.status}>Status</p>
-                    <p className={styles.statusChips}>In Progress</p>
-                    <p className={styles.reason}>Reason:</p>
-                    <p className={styles.reasonDescription}>amet commodo nulla facilisi nullam vehicula ipsum a arcu cursus vitae congue</p>
-                </div>
+                <ChatStatusComponent />
 
             </div>
             {/* <div>

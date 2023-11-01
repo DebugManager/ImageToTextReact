@@ -54,8 +54,6 @@ type User = {
     is_superuser?: boolean;
     is_staff?: boolean;
 };
-
-
 interface IModal {
     openModal: boolean;
     openEditModal: boolean;
