@@ -5,3 +5,5 @@ export * from './ResetPassPage';
 export * from './UsersPage';
 export * from './Companies';
 export * from './NewFeature';
+export * from './TiketPage';
+export * from './TicketChatPage';
