@@ -155,7 +155,6 @@ const Companies = () => {
         }
     }
 
-
     const handleCloseModal = () => {
         setOpenCompanieModal(false);
         fetchData();

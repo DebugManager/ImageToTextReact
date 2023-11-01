@@ -1,6 +1,6 @@
 import { Route, RouterProvider, createBrowserRouter, createRoutesFromElements } from 'react-router-dom';
 
-import { MainPage, Auth, PricingPage, ResetPassPage, UsersPage, Companies, NewFeature } from './pages';
+import { MainPage, Auth, PricingPage, ResetPassPage, UsersPage, Companies, NewFeature, Ticketpage, ChatPage } from './pages';
 import { Layout } from './components';
 
 import './App.module.css';
@@ -21,6 +21,8 @@ const router = createBrowserRouter(
           <Route element={<UsersPage />} path={routes.users} />
           <Route element={<Companies />} path={routes.companies} />
           <Route element={<NewFeature />} path={routes.newFeature} />
+          <Route element={<Ticketpage />} path={routes.tickets} />
+          <Route element={<ChatPage />} path={routes.ticketId} />
         </Route>
       </Route>
       <Route element={<Auth />} path='/auth' />

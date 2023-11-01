@@ -36,7 +36,10 @@ const TableComponent: React.FC<TableProps> = ({ columns, data, isLoading, result
                             return (
                                 <th
                                     {...column.getHeaderProps({
-                                        style: { minWidth: column.minWidth, width: column.width },
+                                        style: {
+                                            width: column.width, padding: '10px 7px',
+                                            gap: '10px',
+                                        },
                                     })}
                                 >
                                     {column?.render('Header')}
