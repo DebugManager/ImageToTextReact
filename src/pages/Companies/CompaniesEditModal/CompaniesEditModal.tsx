@@ -52,7 +52,7 @@ export const CompaniesEditModal = ({ isOpenEditModal, handleCloseEditModal, comp
         if (companyName) {
             setValue('companieName', companyName);
         }
-    }, [companyName]);
+    }, [companyName, setValue]);
 
 
     const onSubmit = async (data: any) => {

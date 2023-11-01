@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { CircleLoader } from 'react-spinners';
 
 import styles from './PlanCard.module.css';
 
@@ -50,7 +49,7 @@ const PlanCard: React.FC<PlanCardProps> = ({ plan, currentPlanId, userID }) => {
                 current_plan: null
             }
             const res = await buyPackage(data, userID);
-            if (res == 'ok') {
+            if (res === 'ok') {
                 setIsLoading(false);
             } else {
                 setIsLoading(false);

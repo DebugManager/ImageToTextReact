@@ -73,7 +73,7 @@ export const PaymantForm = ({ control, errors, onUserDataChage }: IChoosePlan) =
         validateData();
         onUserDataChage(formData);
 
-    }, [formData, inputTouched, errors]);
+    }, [formData, inputTouched, errors, onUserDataChage]);
 
     const handleFieldChange = (field: keyof ICardInfo, value: string) => {
         setFormData((prevData) => ({

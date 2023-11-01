@@ -104,7 +104,7 @@ const OnePricePage = () => {
                 console.error(error);
             }
         }
-    }, [getPricingById, setPlan]);
+    }, [setPlan]);
 
     useEffect(() => {
         if (choosenPlan?.planId) {
