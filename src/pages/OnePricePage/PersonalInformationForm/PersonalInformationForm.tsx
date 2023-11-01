@@ -65,7 +65,7 @@ export const PersonalInformationForm = ({ control, errors, onUserDataChange }: I
         validateData();
         onUserDataChange(formData);
 
-    }, [formData, inputTouched, errors]);
+    }, [formData, inputTouched, errors, onUserDataChange]);
 
     const handleFieldChange = (field: keyof IPersonalInfoData, value: string) => {
         setFormData((prevData) => ({

@@ -89,14 +89,8 @@ const customStyles: StylesConfig = {
     })
 };
 
-interface IOptionPlan {
-    value: string;
-    label: string;
-}
-
 export const ChosePlanForm = ({ control, plan, onPlanChange, typeOfPrice }: IChoosePlan) => {
     const [selectedRadio, setSelectedRadio] = useState<string | null>(typeOfPrice);
-    const [firstPlan, setFirstPlan] = useState<IOptionPlan | null>(null);
     const [selectedPlan, setSelectedPlan] = useState<Plan | null | undefined>(plan);
     const [plans, setPlans] = useState<Plan[]>([]);
     const [planFromPropsSet, setPlanFromPropsSet] = useState(false);
@@ -136,7 +130,6 @@ export const ChosePlanForm = ({ control, plan, onPlanChange, typeOfPrice }: ICho
 
     useEffect(() => {
         if (plan && !planFromPropsSet) {
-            setFirstPlan({ value: plan.id.toString(), label: plan.name });
             setSelectedPlan(plan);
             setPlanFromPropsSet(true);
         }

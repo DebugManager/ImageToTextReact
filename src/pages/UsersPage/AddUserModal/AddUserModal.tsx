@@ -66,11 +66,6 @@ interface IModal {
     userByIdLoading: boolean;
 }
 
-interface IOption {
-    value: string;
-    label: string;
-}
-
 interface Item {
     id: number;
     label: string;
@@ -153,7 +148,7 @@ const typeOptions = [
     { value: 'client', label: 'Client' },
 ];
 
-export default function AddUserModal({ openModal, handleAddUser, handleClose, handleCloseEditModal, openEditModal, user, userByIdLoading }: IModal) {
+export default function AddUserModal({ openModal, handleClose, handleCloseEditModal, openEditModal, user, userByIdLoading }: IModal) {
 
     const createValidationSchema = Yup.object().shape({
         firstName: Yup.string()
@@ -419,7 +414,7 @@ export default function AddUserModal({ openModal, handleAddUser, handleClose, ha
             if (user?.id) {
                 const data = await editUserById(formattedData, user?.id);
 
-                if (data.message == 'User info and permissions updated.') {
+                if (data.message === 'User info and permissions updated.') {
                     toast.success('The user has been successfully updated', {
                         position: 'top-right',
                         autoClose: 3000,

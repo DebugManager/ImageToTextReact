@@ -15,7 +15,7 @@ export const OnHoldModal = ({ open, handleClose, userID, isCancelLoading }: { us
                 current_plan: 11,
             }
             const res = await buyPackage(data, userID);
-            if (res == 'ok') {
+            if (res === 'ok') {
                 setIsLoading(false);
                 window.location.href = '/pricing';
             } else {
