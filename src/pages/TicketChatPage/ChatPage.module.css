@@ -121,4 +121,5 @@
     font-weight: 400;
     line-height: 14px;
     text-transform: capitalize;
+    cursor: pointer;
 }

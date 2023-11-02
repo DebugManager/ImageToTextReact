@@ -1,73 +1,84 @@
-import React from 'react';
-// import React, { useEffect, useState } from 'react';
-// import { io, Socket } from 'socket.io-client';
+import React, { useEffect, useState } from 'react';
 
 import { ChatStatusComponent, MessageComponent } from '../../components';
 
 import arrowLeft from '../../assets/ticket/arrow-sm-left.svg';
 
 import styles from './ChatPage.module.css';
-// const CHAT_SERVER_URL = 'ws://pdf-to-txt-back.onrender.com/ws/web-socket/';
 
 const ChatPage: React.FC = () => {
-    // const [message, setMessage] = useState('');
-    // const [messages, setMessages] = useState<string[]>([]);
-    // const [socket, setSocket] = useState<Socket | null>(null);
+  const [message, setMessage] = useState('');
+//   const [messages, setMessages] = useState<string[]>([]);
+  const [socket, setSocket] = useState<WebSocket | null>(null);
 
-    // useEffect(() => {
-    //     const newSocket = io(CHAT_SERVER_URL);
-    //     setSocket(newSocket);
+  //   const SOCKET_URL = 'ws://pdf-to-txt-back.onrender.com/ws/chat/new/';
+  const SOCKET_URL = 'ws://3.75.199.184:8000/ws/chat/new/';
 
-    //     newSocket.on('message', (msg: string) => {
-    //         setMessages((prevMessages) => [...prevMessages, msg]);
-    //     });
+  useEffect(() => {
+    const newSocket = new WebSocket(SOCKET_URL);
+    setSocket(newSocket);
 
-    //     newSocket.on('connect', () => {
-    //         console.log('WebSocket connected');
-    //     });
+    newSocket.onopen = () => {
+      console.log('WebSocket connected');
+    };
 
-    //     return () => {
-    //         newSocket.disconnect();
-    //     };
-    // }, []);
+    // newSocket.onmessage = (event) => {
+    //     const receivedMessage = event.data;
+    //     setMessages((prevMessages) => [...prevMessages, receivedMessage]);
+    //   };
 
-    // const sendMessage = () => {
-    //     if (socket) {
-    //         socket.emit('message', message);
-    //         setMessage('');
-    //     }
+    // return () => {
+    //   newSocket.onclose = () => {
+    //     console.log('WebSocket closed');
+    //   };
     // };
-    return (
-        <div className={styles.wrapper}>
-            <div className={styles.btnBack}>
-                <img src={arrowLeft} alt='back' />
-                back
+  }, []);
+
+  const sendMessage = () => {
+    console.log('aaa');
+    // if (socket && socket.readyState === WebSocket.OPEN) {
+      console.log('bbbb');
+      if (message.trim() !== '') {
+        socket?.send(message);
+        setMessage('');
+    //   }
+    }
+  };
+
+  return (
+    <div className={styles.wrapper}>
+      <div className={styles.btnBack}>
+        <img src={arrowLeft} alt='back' />
+        back
+      </div>
+
+      <div className={styles.chatWrapper}>
+        <div className={styles.leftWrapper}>
+          <p className={styles.ticketId}>Request 931123</p>
+          <p className={styles.awgTitle}>AVG.Respone Time</p>
+
+          <div>
+            <MessageComponent />
+
+            <div className={styles.textAreaWrapper}>
+              <p className={styles.inputTitle}>Reply to Ticket</p>
+              <textarea
+                className={styles.textArea}
+                placeholder='Text Area'
+                onChange={(e) => setMessage(e.target.value)}
+              />
+              <div className={styles.buttonWrapper}>
+                <button className={styles.sendButton} onClick={sendMessage}>
+                  send
+                </button>
+              </div>
             </div>
+          </div>
+        </div>
 
-            <div className={styles.chatWrapper}>
-                <div className={styles.leftWrapper}>
-                    <p className={styles.ticketId}>Request 931123</p>
-                    <p className={styles.awgTitle}>AVG.Respone Time</p>
-
-                    <div>
-                        <MessageComponent />
-
-                        <div className={styles.textAreaWrapper}>
-                            <p className={styles.inputTitle}>Reply to Ticket</p>
-                            <textarea className={styles.textArea} placeholder='Text Area' />
-                            <div className={styles.buttonWrapper}>
-                                <button className={styles.sendButton}>send</button>
-                            </div>
-
-                        </div>
-
-                    </div>
-                </div>
-
-                <ChatStatusComponent />
-
-            </div>
-            {/* <div>
+        <ChatStatusComponent />
+      </div>
+      {/* <div>
                 <ul>
                     {messages.map((msg, index) => (
                         <li key={index}>{msg}</li>
@@ -81,8 +92,8 @@ const ChatPage: React.FC = () => {
             onChange={(e) => setMessage(e.target.value)}
             />
             <button onClick={sendMessage}>Send</button> */}
-        </div>
-    )
-}
+    </div>
+  );
+};
 
 export default ChatPage;
