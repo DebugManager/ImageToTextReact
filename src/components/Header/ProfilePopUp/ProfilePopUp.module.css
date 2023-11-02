@@ -35,6 +35,7 @@
     text-transform: capitalize;
     text-align: center;
     padding: 10px 14px 10px 14px;
+    text-decoration: none;
 }
 
 .optionStyles:hover {

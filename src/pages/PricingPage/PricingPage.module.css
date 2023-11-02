@@ -103,6 +103,10 @@
     background: var(--text-color-60, #e5ebf4);
 }
 
+.cardWrapper{
+    height: 330px;
+}
+
 .planWrapper {
     display: flex;
     justify-content: space-between;

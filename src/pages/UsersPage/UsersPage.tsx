@@ -68,7 +68,7 @@ const UsersPage = () => {
         key: string;
         direction: string;
     }[]>([
-        { key: 'role', direction: 'ascending' },
+        { key: 'type', direction: 'ascending' },
         { key: 'company', direction: 'ascending' },
         { key: 'joined', direction: 'ascending' },
         { key: 'last_login', direction: 'ascending' },
@@ -178,10 +178,10 @@ const UsersPage = () => {
             Header: (
                 <div
                     style={{ display: 'flex', alignItems: 'center', cursor: 'pointer' }}
-                    onClick={() => sortData('role')}
+                    onClick={() => sortData('type')}
                 >
                     <p>Type</p>
-                    {sortOptions.find(option => option.key === 'role')?.direction === 'ascending' ? (
+                    {sortOptions.find(option => option.key === 'type')?.direction === 'ascending' ? (
                         <img
                             src={arrowDownIcon}
                             alt='sort'
