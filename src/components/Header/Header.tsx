@@ -48,7 +48,7 @@ const Header = () => {
                         <img src={arrow} alt='moon' className={styles.arrowImage} />
 
                     </div>
-                    <ProfilePopUp isOpen={openPorfile} />
+                    <ProfilePopUp isOpen={openPorfile} handleProfilePopUp={handleProfilePopUp} />
                 </>
             </div>
 

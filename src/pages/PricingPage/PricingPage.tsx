@@ -8,7 +8,6 @@ import styles from './PricingPage.module.css';
 
 import arrow from '../../assets/header/arrow.svg';
 
-
 type Plan = {
     id: number;
     name: string;
@@ -92,7 +91,9 @@ const PricingPage = () => {
             </div>
             <div className={styles.planWrapper}>
                 {filteredPlans?.filter((plan) => currentPlanId === 11 || plan.id !== 11).map((plan) => (
+                    <div className={styles.cardWrapper}>
                     <PlanCard key={plan.id} plan={plan} currentPlanId={currentPlanId} userID={userID} />
+                    </div>
                 ))}
 
                 {!filteredPlans?.length &&
