@@ -56,7 +56,7 @@ const PricingPage = () => {
     }, []);
 
     const filteredPlans = useMemo(() => {
-        return plans.filter((plan) => plan.type === typeOfPrice);
+        return plans?.filter((plan) => plan.type === typeOfPrice);
     }, [plans, typeOfPrice]);
 
     const toggleDropdown = useCallback(() => {
