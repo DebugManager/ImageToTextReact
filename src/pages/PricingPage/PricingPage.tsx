@@ -63,7 +63,7 @@ const PricingPage = () => {
         setIsDropdownOpen((prev) => !prev);
     }, []);
 
-    filteredPlans.sort((a, b) => a.price - b.price);
+    filteredPlans?.sort((a, b) => a.price - b.price);
 
     return (
         <div className={styles.wrapper}>
