@@ -21,10 +21,10 @@ const CustomErrorIcon = () => (
 
 export default CustomErrorIcon;
 
-const USER_REGISTRATION_URL = process.env.REACT_APP_API_URL || 'https://pdf-to-txt-back.onrender.com/v1';
-const USER_LOGIN_URL = process.env.REACT_APP_LOGIN_URL || 'https://pdf-to-txt-back.onrender.com/v1/auth/token/create/';
-const USER_RESET_PASSWORD_LINK = process.env.REACT_APP_RESET_PASSWORD_LINK || 'https://pdf-to-txt-back.onrender.com/v1/auth/users/reset_password/';
-const USER_RESET_PASSWORD = process.env.REACT_USER_RESET_PASSWORD || "https://pdf-to-txt-back.onrender.com/v1/auth/users/reset_password_confirm/";
+const USER_REGISTRATION_URL = process.env.REACT_APP_API_URL || 'http://157.230.50.75:8000/v1';
+const USER_LOGIN_URL = process.env.REACT_APP_LOGIN_URL || 'http://157.230.50.75:8000/v1/auth/token/create/';
+const USER_RESET_PASSWORD_LINK = process.env.REACT_APP_RESET_PASSWORD_LINK || 'http://157.230.50.75:8000/v1/auth/users/reset_password/';
+const USER_RESET_PASSWORD = process.env.REACT_USER_RESET_PASSWORD || "http://157.230.50.75:8000/v1/auth/users/reset_password_confirm/";
 
 interface IUserRegistration {
     first_name: string;

@@ -30,8 +30,8 @@ interface IUser {
     country?: string | number;
 }
 
-const GET_PRICING_PLANS = process.env.REACT_APP_API_URL || 'https://pdf-to-txt-back.onrender.com/v1/plan';
-const BY_PACKAGE = process.env.BY_PACKAGE || 'https://pdf-to-txt-back.onrender.com/v1/choose-plan';
+const GET_PRICING_PLANS = process.env.REACT_APP_API_URL || 'http://157.230.50.75:8000/v1/plan';
+const BY_PACKAGE = process.env.BY_PACKAGE || 'http://157.230.50.75:8000/v1/choose-plan';
 
 export const getPricing = async (type: string) => {
     try {
@@ -53,7 +53,7 @@ export const getPricingById = async (id: string | number) => {
 
 export const buyPackage = async (userData: IUser, userid: string | number) => {
     try {
-        const response = await axios.put(`${BY_PACKAGE}/${userid}`, userData);
+        const response = await axios.put(`${BY_PACKAGE}/${userid}/`, userData);
 
         if (response.data) {
             const user = await getUserById(userid);
