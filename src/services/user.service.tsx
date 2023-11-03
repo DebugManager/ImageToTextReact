@@ -20,10 +20,10 @@ const CustomErrorIcon = () => (
 
 export default CustomErrorIcon;
 
-const GET_USER_BY_ID = process.env.GET_USER_BY_ID || 'https://pdf-to-txt-back.onrender.com/v1/users';
-const CREATE_USER = process.env.CREATE_USER || 'https://pdf-to-txt-back.onrender.com/v1/user-create-with-permissions/';
-const SEARCH_USERS = process.env.SEARCH_USERS || 'https://pdf-to-txt-back.onrender.com/v1/users?search=';
-const SEARCH_USER_WITH_SORTOPTION = process.env.SEARCH_USER_WITH_SORTOPTION || 'https://pdf-to-txt-back.onrender.com/v1/users/?ordering=';
+const GET_USER_BY_ID = process.env.GET_USER_BY_ID || 'http://157.230.50.75:8000/v1/users';
+const CREATE_USER = process.env.CREATE_USER || 'http://157.230.50.75:8000/v1/user-create-with-permissions/';
+const SEARCH_USERS = process.env.SEARCH_USERS || 'http://157.230.50.75:8000/v1/users?search=';
+const SEARCH_USER_WITH_SORTOPTION = process.env.SEARCH_USER_WITH_SORTOPTION || 'http://157.230.50.75:8000/v1/users/?ordering=';
 
 interface ICreateUser {
     first_name: string;

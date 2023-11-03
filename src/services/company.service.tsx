@@ -1,9 +1,9 @@
 
 import axios from "axios";
 
-const GET_ALL_COMPANIES = process.env.GET_ALL_COMPANIES || 'https://pdf-to-txt-back.onrender.com/v1/company/';
-const CREATE_NEW_COMPANY = process.env.CREATE_NEW_COMPANY || 'https://pdf-to-txt-back.onrender.com/v1/company/';
-const EDIT_COMPANY = process.env.EDIT_COMPANY || 'https://pdf-to-txt-back.onrender.com/v1/company/'
+const GET_ALL_COMPANIES = process.env.GET_ALL_COMPANIES || 'http://157.230.50.75:8000/v1/company/';
+const CREATE_NEW_COMPANY = process.env.CREATE_NEW_COMPANY || 'http://157.230.50.75:8000/v1/company/';
+const EDIT_COMPANY = process.env.EDIT_COMPANY || 'http://157.230.50.75:8000/v1/company/'
 
 export const getAllCompanies = async () => {
     try {

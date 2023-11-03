@@ -1,7 +1,7 @@
 
 import axios from "axios";
 
-const GET_ALL_FEATURES = process.env.GET_ALL_FEATURES || 'https://pdf-to-txt-back.onrender.com/v1/features/';
+const GET_ALL_FEATURES = process.env.GET_ALL_FEATURES || 'http://157.230.50.75:8000/v1/features/';
 // const CREATE_NEW_FEATURE = process.env.CREATE_NEW_FEATURE || 'https://pdf-to-txt-back.onrender.com/v1/company/';
 // const EDIT_COMPANY = process.env.EDIT_COMPANY || 'https://pdf-to-txt-back.onrender.com/v1/company/'
 

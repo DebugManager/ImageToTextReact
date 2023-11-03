@@ -32,16 +32,18 @@ const PricingPage = () => {
   const [currentPlanId, setCurrentPlanId] = useState();
   const [userID, setUserID] = useState<number | null>(null);
 
-  const fetchData = async () => {
+  const fetchData = useCallback(async () => {
     try {
       const data = await getPricing(typeOfPrice);
       setPlans(data);
     } catch (error) {
       console.error(error);
     }
-  };
+  }, [typeOfPrice]);
 
-  fetchData();
+  useEffect(() => {
+    fetchData();
+  }, [fetchData]);
 
   useEffect(() => {
     const user = getUser();
