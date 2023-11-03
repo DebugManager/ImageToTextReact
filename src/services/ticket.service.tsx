@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const GET_ALL_TICKETS = process.env.GET_ALL_TICKETS || 'http://157.230.50.75:8000/1/support/tickets/';
+const GET_ALL_TICKETS = process.env.GET_ALL_TICKETS || 'http://157.230.50.75:8000/v1/support/tickets/';
 export const getAllTickets = async (sortOption: string) => {
     try {
         const response = await axios.get(`${GET_ALL_TICKETS}?ordering=${sortOption}`);
