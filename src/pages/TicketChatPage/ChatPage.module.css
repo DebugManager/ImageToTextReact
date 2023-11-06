@@ -1,124 +1,138 @@
 .wrapper {
-    display: flex;
-    flex-direction: column;
-    padding: 20px;
-
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
 }
 
 .btnBack {
-    display: flex;
-    align-items: center;
-    color: var(--text-color-60, #495057);
-    font-family: Poppins;
-    font-size: 7px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: 14px;
-    text-transform: capitalize;
-    cursor: pointer;
+  display: flex;
+  align-items: center;
+  color: var(--text-color-60, #495057);
+  font-family: Poppins;
+  font-size: 7px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 14px;
+  text-transform: capitalize;
+  cursor: pointer;
+  text-decoration: none;
 }
 
 .chatWrapper {
-    display: flex;
-    background: #FFF;
-    padding: 12px;
-    margin-top: 12px;
-
-    justify-content: space-between;
+  display: flex;
+  background: #fff;
+  padding: 12px;
+  margin-top: 12px;
+  width: 768px;
+  height: 436px;
+  justify-content: space-between;
 }
 
-
-
 .leftWrapper {
-    display: flex;
-    flex-direction: column;
-    height: 412px;
-    overflow: auto;
-    position: relative;
+  display: flex;
+  flex-direction: column;
+  height: 412px;
+  overflow: auto;
+  position: relative;
 }
 
 .ticketId {
-    color: var(--text-70, #74788D);
-    font-family: Poppins;
-    font-size: 7px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: 14px;
-    text-transform: capitalize;
+  color: var(--text-70, #74788d);
+  font-family: Poppins;
+  font-size: 7px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 14px;
+  text-transform: capitalize;
 }
 
 .awgTitle {
-    color: var(--text-90, #495057);
-    font-family: Poppins;
-    font-size: 9px;
-    font-style: normal;
-    font-weight: 500;
-    line-height: 15px;
-    margin-top: 4px;
-    border-bottom: 1px solid #EFF2F7;
+  color: var(--text-90, #495057);
+  font-family: Poppins;
+  font-size: 9px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 15px;
+  margin-top: 4px;
+  border-bottom: 1px solid #eff2f7;
+}
+
+.textAreaForm{
+  margin-top: 12px;
 }
 
 .textAreaWrapper {
-    display: flex;
-    flex-direction: column;
-    margin: 0 auto;
-    left: 47px;
-    bottom: 0;
-    position: absolute;
+  margin-top: 12px;
+  width: 100%;
+  background-color: #fff;
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+  bottom: 0;
+  position: absolute;
 }
 
 .inputTitle {
-    color: var(--text-90, #495057);
-    font-family: Poppins;
-    font-size: 9px;
-    font-style: normal;
-    font-weight: 500;
-    line-height: 15px;
+  color: var(--text-90, #495057);
+  font-family: Poppins;
+  font-size: 9px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 15px;
+  margin-left: 47px;
 }
 
 .textArea {
-    width: 410px;
-    display: flex;
-    height: 65px;
-    padding: 10px;
-    align-items: flex-start;
-    gap: 10px;
-    align-self: stretch;
-    border-radius: 4px;
-    border: 1px solid var(--text-color-50, #CED4DA);
-    background: var(--text-color-white, #FFF);
-    color: var(--text-color-70, #74788D);
-    font-family: Poppins;
-    font-size: 7px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: 14px;
-    text-transform: capitalize;
+  width: 410px;
+  display: flex;
+  height: 65px;
+  padding: 10px;
+  align-items: flex-start;
+  gap: 10px;
+  align-self: stretch;
+  border-radius: 4px;
+  border: 1px solid var(--text-color-50, #ced4da);
+  background: var(--text-color-white, #fff);
+  color: var(--text-color-70, #74788d);
+  font-family: Poppins;
+  font-size: 7px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 14px;
+  /* text-transform: capitalize; */
+  margin-left: 47px;
 }
 
 .buttonWrapper {
-    width: 100%;
-    display: flex;
-    justify-content: flex-end;
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
 }
 
 .sendButton {
-    width: 34px;
-    display: flex;
-    padding: 2px 8px;
-    justify-content: center;
-    align-items: center;
-    gap: 4px;
-    margin-top: 10px;
-    border-radius: 4px;
-    background: var(--main-main, #556EE6);
-    border: none;
+  width: 34px;
+  display: flex;
+  padding: 2px 8px;
+  justify-content: center;
+  align-items: center;
+  gap: 4px;
+  margin-top: 10px;
+  border-radius: 4px;
+  background: var(--main-main, #556ee6);
+  border: none;
 
-    color: var(--text-color-white, #FFF);
-    font-family: Poppins;
-    font-size: 7px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: 14px;
-    text-transform: capitalize;
+  color: var(--text-color-white, #fff);
+  font-family: Poppins;
+  font-size: 7px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 14px;
+  text-transform: capitalize;
+}
+
+.msgWarpper {
+  width: 458px;
+  height: 255px;
+  overflow: auto;
+  scroll-behavior: smooth;
 }

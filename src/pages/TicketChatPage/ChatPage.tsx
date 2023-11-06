@@ -1,88 +1,195 @@
-import React from 'react';
-// import React, { useEffect, useState } from 'react';
-// import { io, Socket } from 'socket.io-client';
+import { useCallback, useEffect, useRef, useState } from 'react';
+import { useParams } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+import { CircleLoader } from 'react-spinners';
 
 import { ChatStatusComponent, MessageComponent } from '../../components';
+import { getUser } from '../../services/locastorage.service';
+import {
+  createChat,
+  getChatById,
+  getMessagesFromChat,
+} from '../../services/chat.service';
 
 import arrowLeft from '../../assets/ticket/arrow-sm-left.svg';
 
 import styles from './ChatPage.module.css';
-// const CHAT_SERVER_URL = 'ws://pdf-to-txt-back.onrender.com/ws/web-socket/';
+
+interface IMessages {
+  content: string;
+  id: number;
+  room: number;
+  timestamp: string;
+  user: number;
+}
 
 const ChatPage: React.FC = () => {
-    // const [message, setMessage] = useState('');
-    // const [messages, setMessages] = useState<string[]>([]);
-    // const [socket, setSocket] = useState<Socket | null>(null);
+  const { id } = useParams();
 
-    // useEffect(() => {
-    //     const newSocket = io(CHAT_SERVER_URL);
-    //     setSocket(newSocket);
+  const [chatMessages, setChatMessages] = useState<IMessages[] | []>([]);
+  const [message, setMessage] = useState<string>('');
+  const [socket, setSocket] = useState<WebSocket | null>(null);
+  const [userId, setUserId] = useState<null | number>(null);
+  const [isRoom, setIsRoom] = useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
-    //     newSocket.on('message', (msg: string) => {
-    //         setMessages((prevMessages) => [...prevMessages, msg]);
-    //     });
+  const msgWarpperRef = useRef<HTMLDivElement | null>(null);
 
-    //     newSocket.on('connect', () => {
-    //         console.log('WebSocket connected');
-    //     });
+  const fetchData = useCallback(async (id: number | string) => {
+    setIsLoading(true);
+    try {
+      const data = await getChatById(+id);
+      if (!data) {
+        const room = await createChat(id);
+        room.id ? setIsRoom(true) : setIsRoom(false);
+        setIsLoading(false);
+      } else {
+        setIsRoom(true);
+      }
+    } catch (error) {
+      console.error(error, 'error');
+    }
+  }, []);
 
-    //     return () => {
-    //         newSocket.disconnect();
-    //     };
-    // }, []);
+  const fetchMessages = useCallback(async (id: number | string) => {
+    try {
+      const data = await getMessagesFromChat(+id);
+      if (data.length > 0) {
+        const newMessages = data.map((message: IMessages) => ({
+          id: message.id,
+          content: message.content,
+          user_id: message.user,
+        }));
 
-    // const sendMessage = () => {
-    //     if (socket) {
-    //         socket.emit('message', message);
-    //         setMessage('');
-    //     }
-    // };
-    return (
-        <div className={styles.wrapper}>
-            <div className={styles.btnBack}>
-                <img src={arrowLeft} alt='back' />
-                back
-            </div>
+        setChatMessages(newMessages);
+      }
+    } catch (error) {
+      console.error(error, 'error');
+    }
+  }, []);
 
-            <div className={styles.chatWrapper}>
-                <div className={styles.leftWrapper}>
-                    <p className={styles.ticketId}>Request 931123</p>
-                    <p className={styles.awgTitle}>AVG.Respone Time</p>
+  useEffect(() => {
+    id && fetchData(id);
+    id && fetchMessages(id);
+  }, [fetchData, id]);
 
-                    <div>
-                        <MessageComponent />
+  useEffect(() => {
+    const user = getUser();
+    user?.id && setUserId(user?.id);
+  }, []);
 
-                        <div className={styles.textAreaWrapper}>
-                            <p className={styles.inputTitle}>Reply to Ticket</p>
-                            <textarea className={styles.textArea} placeholder='Text Area' />
-                            <div className={styles.buttonWrapper}>
-                                <button className={styles.sendButton}>send</button>
-                            </div>
+  useEffect(() => {
+    if (isRoom) {
+      const CHAT_SERVER_URL = `ws://157.230.50.75:8000/ws/chat/${id}/`;
 
-                        </div>
+      const newSocket = new WebSocket(CHAT_SERVER_URL);
+      setSocket(newSocket);
 
-                    </div>
+      newSocket.onopen = () => {
+        console.log('WebSocket Client Connected');
+        setIsLoading(false);
+      };
+
+      newSocket.onclose = () => {
+        console.log('WebSocket connection closed');
+      };
+    }
+
+    return () => {
+      if (socket) {
+        socket.close();
+      }
+    };
+  }, [isRoom]);
+
+  const sendMessage = () => {
+    if (socket && socket.readyState === WebSocket.OPEN && userId && id) {
+      const messageToSend = {
+        message: message,
+        user_id: userId,
+      };
+
+      socket.send(JSON.stringify(messageToSend));
+      setMessage('');
+    }
+  };
+
+  useEffect(() => {
+    if (socket) {
+      socket.onmessage = (event: MessageEvent) => {
+        if (id) {
+          const messageData = JSON.parse(event.data);
+          const newMessage: IMessages = {
+            id: chatMessages.length + 1,
+            content: messageData.message,
+            user: messageData.user_id,
+            room: +id,
+            timestamp: new Date().toISOString(),
+          };
+
+          setChatMessages((prevMessages) => [...prevMessages, newMessage]);
+        }
+      };
+    }
+  }, [socket, chatMessages]);
+
+  useEffect(() => {
+    if (msgWarpperRef.current) {
+      msgWarpperRef.current.scrollTop = msgWarpperRef.current.scrollHeight;
+    }
+  }, [chatMessages]);
+
+  return (
+    <div className={styles.wrapper}>
+      <Link
+        className={styles.btnBack}
+        onClick={() => window.history.back()}
+        to='#'
+      >
+        <img src={arrowLeft} alt='back' />
+        back
+      </Link>
+
+      <div className={styles.chatWrapper}>
+        {isLoading ? (
+          <CircleLoader loading={isLoading} color={'#556EE6'} size={20} />
+        ) : (
+          <>
+            <div className={styles.leftWrapper}>
+              <p className={styles.ticketId}>Request 931123</p>
+              <p className={styles.awgTitle}>AVG.Respone Time</p>
+              <div>
+                <div className={styles.msgWarpper} ref={msgWarpperRef}>
+                  {chatMessages.map((msg) => (
+                    <MessageComponent key={msg.id} {...msg} />
+                  ))}
                 </div>
 
-                <ChatStatusComponent />
+                <form onSubmit={sendMessage} className={styles.textAreaForm}>
+                  <p className={styles.inputTitle}>Reply to Ticket</p>
+                  <textarea
+                    className={styles.textArea}
+                    placeholder='Text Area'
+                    value={message}
+                    onChange={(e) => setMessage(e.target.value)}
+                  />
+                  <div className={styles.buttonWrapper}>
+                    <input
+                      type='submit'
+                      value='Send'
+                      className={styles.sendButton}
+                    />
+                  </div>
+                </form>
+              </div>
+            </div>
 
-            </div>
-            {/* <div>
-                <ul>
-                    {messages.map((msg, index) => (
-                        <li key={index}>{msg}</li>
-                    ))}
-                </ul>
-            </div>
-            <input
-                type="text"
-                placeholder="Enter a message"
-            value={message}
-            onChange={(e) => setMessage(e.target.value)}
-            />
-            <button onClick={sendMessage}>Send</button> */}
-        </div>
-    )
-}
+            <ChatStatusComponent />
+          </>
+        )}
+      </div>
+    </div>
+  );
+};
 
 export default ChatPage;
