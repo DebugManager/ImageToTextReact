@@ -57,13 +57,17 @@
   border-bottom: 1px solid #eff2f7;
 }
 
+.textAreaForm{
+  margin-top: 12px;
+}
+
 .textAreaWrapper {
+  margin-top: 12px;
   width: 100%;
   background-color: #fff;
   display: flex;
   flex-direction: column;
   margin: 0 auto;
-  /* left: 47px; */
   bottom: 0;
   position: absolute;
 }

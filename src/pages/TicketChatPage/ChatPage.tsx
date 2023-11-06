@@ -108,7 +108,7 @@ const ChatPage: React.FC = () => {
         message: message,
         user_id: userId,
       };
-  
+
       socket.send(JSON.stringify(messageToSend));
       setMessage('');
     }
@@ -116,7 +116,7 @@ const ChatPage: React.FC = () => {
 
   useEffect(() => {
     if (socket) {
-      socket.onmessage = (event) => {
+      socket.onmessage = (event: MessageEvent) => {
         if (id) {
           const messageData = JSON.parse(event.data);
           const newMessage: IMessages = {
@@ -126,7 +126,7 @@ const ChatPage: React.FC = () => {
             room: +id,
             timestamp: new Date().toISOString(),
           };
-  
+
           setChatMessages((prevMessages) => [...prevMessages, newMessage]);
         }
       };
@@ -165,7 +165,7 @@ const ChatPage: React.FC = () => {
                   ))}
                 </div>
 
-                <div className={styles.textAreaWrapper}>
+                <form onSubmit={sendMessage} className={styles.textAreaForm}>
                   <p className={styles.inputTitle}>Reply to Ticket</p>
                   <textarea
                     className={styles.textArea}
@@ -174,11 +174,13 @@ const ChatPage: React.FC = () => {
                     onChange={(e) => setMessage(e.target.value)}
                   />
                   <div className={styles.buttonWrapper}>
-                    <button onClick={sendMessage} className={styles.sendButton}>
-                      send
-                    </button>
+                    <input
+                      type='submit'
+                      value='Send'
+                      className={styles.sendButton}
+                    />
                   </div>
-                </div>
+                </form>
               </div>
             </div>
 
