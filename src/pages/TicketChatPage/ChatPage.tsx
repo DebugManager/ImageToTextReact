@@ -102,7 +102,8 @@ const ChatPage: React.FC = () => {
     };
   }, [isRoom]);
 
-  const sendMessage = () => {
+  const sendMessage = (e: React.FormEvent) => {
+    e.preventDefault();
     if (socket && socket.readyState === WebSocket.OPEN && userId && id) {
       const messageToSend = {
         message: message,
