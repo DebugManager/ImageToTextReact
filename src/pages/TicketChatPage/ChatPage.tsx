@@ -26,6 +26,7 @@ interface IMessages {
 const ChatPage: React.FC = () => {
   const { id } = useParams();
 
+  const [isButtonLoading, setIsButtonLoading] = useState<boolean>(false);
   const [chatMessages, setChatMessages] = useState<IMessages[] | []>([]);
   const [message, setMessage] = useState<string>('');
   const [socket, setSocket] = useState<WebSocket | null>(null);
@@ -105,6 +106,7 @@ const ChatPage: React.FC = () => {
   const sendMessage = (e: React.FormEvent) => {
     e.preventDefault();
     if (socket && socket.readyState === WebSocket.OPEN && userId && id) {
+      setIsButtonLoading(true);
       const messageToSend = {
         message: message,
         user_id: userId,
@@ -128,11 +130,17 @@ const ChatPage: React.FC = () => {
             timestamp: new Date().toISOString(),
           };
 
+          setIsButtonLoading(false);
+
           setChatMessages((prevMessages) => [...prevMessages, newMessage]);
         }
       };
     }
   }, [socket, chatMessages]);
+
+  useEffect(() => {
+    console.log(isButtonLoading);
+  }, [isButtonLoading]);
 
   useEffect(() => {
     if (msgWarpperRef.current) {
@@ -175,11 +183,20 @@ const ChatPage: React.FC = () => {
                     onChange={(e) => setMessage(e.target.value)}
                   />
                   <div className={styles.buttonWrapper}>
-                    <input
-                      type='submit'
-                      value='Send'
-                      className={styles.sendButton}
-                    />
+                    {isButtonLoading ? (
+                      <CircleLoader
+                        loading={isButtonLoading}
+                        className={styles.sendButtonLoader}
+                        color={'#556EE6'}
+                        size={20}
+                      />
+                    ) : (
+                      <input
+                        type='submit'
+                        value='Send'
+                        className={styles.sendButton}
+                      />
+                    )}
                   </div>
                 </form>
               </div>

@@ -109,6 +109,17 @@
   justify-content: flex-end;
 }
 
+.sendButtonLoader{
+  width: 34px;
+  display: flex;
+  padding: 2px 8px;
+  justify-content: center;
+  align-items: center;
+  gap: 4px;
+  margin-top: 10px;
+  border-radius: 4px;
+}
+
 .sendButton {
   width: 34px;
   display: flex;
