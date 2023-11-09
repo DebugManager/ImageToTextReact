@@ -89,12 +89,6 @@ export const PaymantForm = ({
       : setCheckoutError(null);
   };
 
-//   const handleSubmit = async (event: any) => {
-//     event.preventDefault();
-//     console.log(event);
-//     // our payment process starts here
-//   };
-
   return (
     <div className={styles.paymantWrapper}>
       <p className={styles.paymantTitle}>Payment Metode</p>
