@@ -261,10 +261,7 @@ const OnePricePage = () => {
           country: personalInfo.country,
         };
 
-        console.log(data);
-
         if (userId) {
-          console.log(data, userId);
           const res = await buyPackage(data, userId);
           if (res === 'ok') {
             setButtonLoading(false);
@@ -290,7 +287,6 @@ const OnePricePage = () => {
           country: personalInfo.country,
         };
 
-        console.log(data);
         if (userId) {
           const res = await buyPackage(data, userId);
           if (res === 'ok') {
@@ -328,8 +324,6 @@ const OnePricePage = () => {
       });
 
       const paymentId = paymentMethod?.id;
-
-      console.log(token);
 
       if (token?.id && choosenPlan && paymentId) {
         const instance = await getStripeInstance(

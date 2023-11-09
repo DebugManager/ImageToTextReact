@@ -128,7 +128,6 @@ export const cancelSubscription = async (
     subscription_id: subscription_id,
   };
 
-  console.log(data);
   console.log(JSON.stringify(data));
 
   try {

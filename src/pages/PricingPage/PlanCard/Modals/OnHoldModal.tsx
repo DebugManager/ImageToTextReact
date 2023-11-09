@@ -86,12 +86,6 @@ export const OnHoldModal = ({
 
   const handleSetPacksgeOnHold = async () => {
     setIsLoading(true);
-    console.log(user);
-    console.log(
-      user?.customer_id,
-      user?.payment_method_id,
-      user?.subscription_id
-    );
     if (user) {
       const data = await putAccountOnHold(
         'price_1O9rhLDV4Z1ssWPD7vVu814B',
@@ -99,8 +93,6 @@ export const OnHoldModal = ({
         user.payment_method_id,
         user.subscription_id
       );
-
-      console.log(data);
 
       if (data.success === true) {
         setIsLoading(false);

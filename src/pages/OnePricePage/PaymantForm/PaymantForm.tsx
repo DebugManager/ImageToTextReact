@@ -82,8 +82,6 @@ export const PaymantForm = ({
   const options = useOptions();
 
   const handleCardDetailsChange = (event: any) => {
-    console.log(event);
-
     event.error
       ? setCheckoutError(event.error.message)
       : setCheckoutError(null);
