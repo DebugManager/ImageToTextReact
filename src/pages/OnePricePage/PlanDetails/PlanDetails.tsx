@@ -54,7 +54,6 @@ export const PlanDetails = ({
       {plan?.product?.id ? (
         <>
           <p className={styles.planType}>{plan?.product.name}</p>
-          {/* <p className={styles.planName}>{plan?.product_name}</p> */}
           <div className={styles.priceWrapper}>
             <div className={styles.price}>
               <p className={styles.valute}>$</p>
