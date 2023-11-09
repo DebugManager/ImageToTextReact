@@ -1,18 +1,32 @@
 interface IUser {
-    id: number;
-    last_login: string;
-    email: string;
-    is_superuser: boolean;
-    is_staff: boolean;
-    is_active: boolean;
-    first_name: string;
-    last_name: string;
     address_line1: string;
+    affiliate: boolean;
+    affiliate_code: null | string;
     city: string;
-    zip_code: number;
+    company: any[];
     country: string;
-    current_plan: any;
-}
+    current_plan: string;
+    customer_id: string;
+    email: string;
+    first_name: string;
+    groups: any[];
+    id: number;
+    is_active: boolean;
+    is_staff: boolean;
+    is_superuser: boolean;
+    joined: string;
+    last_login: string;
+    last_name: string;
+    password: string;
+    phone: null | string;
+    status: string;
+    type: string;
+    user_permissions: any[];
+    zip_code: number;
+    payment_method_id: string;
+    subscription_id: string;
+    affiliate_id: string | number;
+  }
 
 const TOKEN_KEY = 'authToken';
 const USER = 'user';

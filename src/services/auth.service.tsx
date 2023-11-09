@@ -51,7 +51,7 @@ interface IUserResetLink {
 
 export const userRegistration = async (userData: IUserRegistration) => {
     try {
-        const response = await axios.post(`${USER_REGISTRATION_URL}/auth/users/`, userData);
+        const response = await axios.post(`${USER_REGISTRATION_URL}/auth/register/`, userData);
 
         if (response.status === 201) {
             toast.success('The user has been successfully registered', {
