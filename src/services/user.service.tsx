@@ -24,6 +24,7 @@ const GET_USER_BY_ID = process.env.GET_USER_BY_ID || 'http://157.230.50.75:8000/
 const CREATE_USER = process.env.CREATE_USER || 'http://157.230.50.75:8000/v1/user-create-with-permissions/';
 const SEARCH_USERS = process.env.SEARCH_USERS || 'http://157.230.50.75:8000/v1/users?search=';
 const SEARCH_USER_WITH_SORTOPTION = process.env.SEARCH_USER_WITH_SORTOPTION || 'http://157.230.50.75:8000/v1/users/?ordering=';
+const GET_USER_SUBSCRIPTION = 'http://157.230.50.75:8000/v1/stripe/subscriptions/'
 
 interface ICreateUser {
     first_name: string;
@@ -38,6 +39,18 @@ interface ICreateUser {
 export const getUserById = async (id: string | number) => {
     try {
         const response = await axios.get(`${GET_USER_BY_ID}/${id}/`);
+        return response.data;
+    } catch (error) {
+        console.error(error);
+    }
+}
+
+export const getUserSubscription = async (id: string | number) => {
+    const data ={
+        customer_id: id
+    }
+    try {
+        const response = await axios.post(`${GET_USER_SUBSCRIPTION}`, data);
         return response.data;
     } catch (error) {
         console.error(error);

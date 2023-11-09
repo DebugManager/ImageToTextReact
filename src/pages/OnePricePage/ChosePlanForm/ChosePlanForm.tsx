@@ -1,37 +1,61 @@
-import React, { useEffect, useState } from 'react';
-import Select, { ActionMeta, StylesConfig } from 'react-select';
+import { useEffect, useState } from 'react';
+import Select, { StylesConfig } from 'react-select';
 import { Controller } from 'react-hook-form';
-import { getPricing } from '../../../services/pricing.service';
+import { getPackages } from '../../../services/pricing.service';
 
 import styles from './ChosePlanForm.module.css';
 
-type Plan = {
-    id: number;
+interface Price {
+    active: boolean;
+    billing_scheme: string;
+    created: number;
+    currency: string;
+    custom_unit_amount: number | null;
+    id: string;
+    livemode: boolean;
+    lookup_key: string | null;
+    metadata: Record<string, any>;
+    nickname: string | null;
+    object: string;
+    product: any;
+    recurring: {
+      aggregate_usage: string | null;
+      interval: string;
+      interval_count: number;
+      trial_period_days: number | null;
+    };
+    aggregate_usage: string | null;
+    interval: string;
+    interval_count: number;
+    trial_period_days: number | null;
+    usage_type: string;
+    tax_behavior: string;
+    tiers_mode: string | null;
+    transform_quantity: string | null;
     type: string;
-    name: string;
-    price: number;
-    option1: string;
-    option2: string;
-    option3: string;
-    option4: string;
-    option5: string;
-    option6: string;
-    option7: string;
-    option8: string;
-};
-
+    unit_amount: number;
+    unit_amount_decimal: string;
+    product_name: string;
+    price: any;
+  }
+  
 interface IChoosePlan {
     onSubmit?: (data: any) => void;
     control: any;
     errors: any;
     formOptions?: any;
-    plan?: Plan | undefined | null;
+    plan?: Price | undefined | null;
     onPlanChange: (data: any) => void;
     typeOfPrice: string;
 }
 
+interface IPlanDate {
+    id: string;
+    value: string;
+}
+
 const customStyles: StylesConfig = {
-    control: (provided, state) => ({
+    control: (provided) => ({
         ...provided,
         height: '24px',
         display: 'flex',
@@ -49,19 +73,19 @@ const customStyles: StylesConfig = {
         }
     }),
 
-    valueContainer: (provided, state) => ({
+    valueContainer: (provided) => ({
         ...provided,
         padding: '0 6px'
     }),
 
-    input: (provided, state) => ({
+    input: (provided) => ({
         ...provided,
         margin: '0px',
     }),
-    indicatorSeparator: state => ({
+    indicatorSeparator: () => ({
         display: 'none',
     }),
-    indicatorsContainer: (provided, state) => ({
+    indicatorsContainer: (provided) => ({
         ...provided,
         height: '8px',
         width: '8px'
@@ -91,19 +115,19 @@ const customStyles: StylesConfig = {
 
 export const ChosePlanForm = ({ control, plan, onPlanChange, typeOfPrice }: IChoosePlan) => {
     const [selectedRadio, setSelectedRadio] = useState<string | null>(typeOfPrice);
-    const [selectedPlan, setSelectedPlan] = useState<Plan | null | undefined>(plan);
-    const [plans, setPlans] = useState<Plan[]>([]);
+    const [selectedPlan, setSelectedPlan] = useState<IPlanDate | null>({id: plan?.price.id, value: plan?.product.name});
+    const [plans, setPlans] = useState<Price[]>([]);
     const [planFromPropsSet, setPlanFromPropsSet] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
 
     useEffect(() => {
         if (!selectedRadio) {
             const fetchData = async () => {
-
                 setIsLoading(true);
                 try {
-                    const data = await getPricing(typeOfPrice);
-                    setPlans(data);
+                    const data = await getPackages(typeOfPrice);
+                    const filtereData = data.prices.filter((plan: Price) => plan.product_name !== 'On hold')
+                    setPlans(filtereData);
                     data && setIsLoading(false);
                 } catch (error) {
                     console.error(error);
@@ -113,11 +137,11 @@ export const ChosePlanForm = ({ control, plan, onPlanChange, typeOfPrice }: ICho
         }
         else {
             const fetchData = async () => {
-
                 setIsLoading(true);
                 try {
-                    const data = await getPricing(selectedRadio);
-                    setPlans(data);
+                    const data = await getPackages(selectedRadio);
+                    const filtereData = data.prices.filter((plan: Price) => plan.product_name !== 'On hold')
+                    setPlans(filtereData);
                     data && setIsLoading(false);
                 } catch (error) {
                     console.error(error);
@@ -130,28 +154,23 @@ export const ChosePlanForm = ({ control, plan, onPlanChange, typeOfPrice }: ICho
 
     useEffect(() => {
         if (plan && !planFromPropsSet) {
-            setSelectedPlan(plan);
+            setSelectedPlan({id: plan.price.id, value: plan?.product.name});
             setPlanFromPropsSet(true);
         }
     }, [plan, planFromPropsSet]);
 
     const handleRadioChange = (newValue: string) => {
         setSelectedRadio(newValue);
+        setSelectedPlan({id: '', value: ''});
         onPlanChange({ type: newValue, planId: null });
-
-        if (newValue === "Mounthly" || newValue === "Annual") {
-            const newSelectedPlan = plans.find((plan) => plan.type === newValue);
-            if (newSelectedPlan) {
-                setSelectedPlan(newSelectedPlan);
-                onPlanChange({ type: newValue, planId: newSelectedPlan.id });
-            }
-        }
     };
 
-    const handleChangePackage = (selectedOption: { value: string, label: string }, actionMeta: ActionMeta<{ value: string, label: string }>) => {
-        const selectedPackage = plans.find((pkg: Plan) => pkg.id.toString() === selectedOption.value);
-        setSelectedPlan(selectedPackage);
-        onPlanChange({ type: selectedRadio, planId: selectedPackage ? selectedPackage.id : null });
+    const handleChangePackage = (selectedOption: { value: string, label: string }) => {
+        const selectedPackage = plans.find((pkg: Price) => pkg.id.toString() === selectedOption.value);
+        if (selectedPackage) {
+            setSelectedPlan({id: selectedPackage.id, value: selectedPackage.product_name});
+            onPlanChange({ type: selectedRadio, planId: selectedPackage.id });
+        }
     };
 
     return (
@@ -165,15 +184,15 @@ export const ChosePlanForm = ({ control, plan, onPlanChange, typeOfPrice }: ICho
                 render={({ field }) => (
                     <Select
                         {...field}
-                        options={plans.map((plan) => ({ value: plan.id.toString(), label: plan.name }))}
+                        options={plans.map((plan) => ({ value: plan.id, label: plan.product_name }))}
                         styles={customStyles}
                         value={
                             isLoading
                                 ? { value: 'wait', label: 'Wait' }
                                 : selectedPlan
-                                    ? { value: selectedPlan.id.toString(), label: selectedPlan.name }
+                                    ? { value: selectedPlan.id, label: selectedPlan.value }
                                     : plan
-                                        ? { value: plan.id.toString(), label: plan.name }
+                                        ? { value: plan.id, label: plan.product_name }
                                         : null
                         }
                         onChange={handleChangePackage as any}
@@ -193,9 +212,9 @@ export const ChosePlanForm = ({ control, plan, onPlanChange, typeOfPrice }: ICho
                                         id="monthlyRadioBtn"
                                         className={styles.radio}
                                         {...field}
-                                        value="Mounthly"
-                                        onChange={() => handleRadioChange("Mounthly")}
-                                        checked={selectedRadio === "Mounthly" || (selectedRadio === null && typeOfPrice === 'Mounthly')}
+                                        value="month"
+                                        onChange={() => handleRadioChange("month")}
+                                        checked={selectedRadio === "month" || (selectedRadio === null && typeOfPrice === 'month')}
                                     />
                                     <label htmlFor="monthlyRadioBtn" className={styles.label}>
                                         Mounthly
@@ -218,9 +237,9 @@ export const ChosePlanForm = ({ control, plan, onPlanChange, typeOfPrice }: ICho
                                         id="annualRadioBtn"
                                         className={styles.radio}
                                         {...field}
-                                        value="Annual"
-                                        checked={selectedRadio === "Annual" || (selectedRadio === null && typeOfPrice === 'Annual')}
-                                        onChange={() => handleRadioChange("Annual")}
+                                        value="year"
+                                        checked={selectedRadio === "year" || (selectedRadio === null && typeOfPrice === 'year')}
+                                        onChange={() => handleRadioChange("year")}
                                     />
                                     <label htmlFor="annualRadioBtn" className={styles.label}>
                                         Annual

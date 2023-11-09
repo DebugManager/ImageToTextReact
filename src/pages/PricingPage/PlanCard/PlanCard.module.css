@@ -35,6 +35,7 @@
     font-style: normal;
     font-weight: 500;
     line-height: 16px;
+    text-transform: capitalize;
 }
 
 .planName {
@@ -123,7 +124,7 @@
 
     position: absolute;
     top: 5px;
-    left: 57px;
+    left: 62px;
     cursor: pointer;
     text-decoration: none;
 }
