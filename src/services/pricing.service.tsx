@@ -39,6 +39,31 @@ const GET_PACKAGE_ON_HOLD =
   'http://157.230.50.75:8000/v1/stripe/process-onhold/';
 const CANCEL_SUBSCRIPTION =
   'http://157.230.50.75:8000/v1/stripe/cancel-subscription/';
+const GET_ALL_INVOCES =
+  'http://157.230.50.75:8000/v1/stripe/get-invoices/?sort=';
+const GET_INVOICE_DETAIL =
+  'http://157.230.50.75:8000/v1/stripe/get-invoice-detail/?invoice_id=';
+
+export const getAllInvoces = async (sortOption: string, customerId: string) => {
+  const data = {
+    customer_id: customerId,
+  };
+  try {
+    const response = await axios.post(`${GET_ALL_INVOCES}${sortOption}`, data);
+    return response.data;
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+export const getInvoiceDetails = async (invoiceId: string) => {
+  try {
+    const response = await axios.get(`${GET_INVOICE_DETAIL}${invoiceId}`);
+    return response.data;
+  } catch (error) {
+    console.error(error);
+  }
+};
 
 export const getPackages = async (type: string) => {
   try {
@@ -83,7 +108,6 @@ export const getStripeInstance = async (
     payment_method_id: paymentMethodId,
     old_subscription_id: current_plan ? current_plan : null,
   };
-
   try {
     const response = await axios.post(
       `${GET_STRAPI_INSTANCE}`,
@@ -128,8 +152,6 @@ export const cancelSubscription = async (
     subscription_id: subscription_id,
   };
 
-  console.log(JSON.stringify(data));
-
   try {
     const response = await axios.post(`${CANCEL_SUBSCRIPTION}`, data);
     return response.data;
@@ -139,7 +161,6 @@ export const cancelSubscription = async (
 };
 
 export const buyPackage = async (userData: IUser, userid: string | number) => {
-  console.log(userData);
   try {
     const response = await axios.put(`${BY_PACKAGE}/${userid}/`, userData);
 
