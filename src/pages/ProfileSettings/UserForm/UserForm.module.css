@@ -1,0 +1,92 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  gap: 12px;
+  border-radius: 4px;
+  background: var(--text-color-10, #fff);
+  margin-top: 8px;
+}
+
+.avatarWrapper {
+  width: 50px;
+  height: 50px;
+  flex-shrink: 0;
+  border-radius: 50px;
+  position: relative;
+}
+
+.userAvatar {
+  width: 50px;
+  height: 50px;
+  flex-shrink: 0;
+  border-radius: 50px;
+}
+
+.cameraWrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 13.173px;
+  height: 13.173px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  background-color: var(--info-color-main, #50a5f1);
+
+  position: absolute;
+  right: 0;
+  bottom: 0;
+}
+
+.cameraImg {
+  width: 7.804px;
+  height: 7.804px;
+  margin: 0 auto;
+}
+
+.nameWrapper {
+    display: flex;
+    align-items: center;
+}
+
+.inputWrapper{
+    width: 302px;
+}
+
+.nameWrapper .inputWrapper:last-child {
+    margin-left: 14px;
+}
+
+.nameWrapper .inputWrapper {
+    width: 100%;
+    margin-top: 12px;
+}
+
+.label {
+    font-family: Poppins;
+    font-size: 9px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 15px;
+    color: rgba(73, 80, 87, 1)
+}
+
+.input {
+    display: flex;
+    padding: 5px 10px;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    align-self: stretch;
+    border-radius: 4px;
+    border: 1px solid var(--text-color-50, #EFF2F7);
+    background: var(--neutral-10, #FFF);
+
+    color: var(--text-color-70, #74788D);
+    font-family: Poppins;
+    font-size: 8px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 14px;
+    width: 100%;
+}

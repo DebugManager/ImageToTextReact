@@ -15,6 +15,9 @@ import {
   NewFeature,
   Ticketpage,
   ChatPage,
+  ProfileSettings,
+  InvoicesTable,
+  InvoicePage,
 } from './pages';
 import { Layout } from './components';
 
@@ -36,6 +39,9 @@ const router = createBrowserRouter(
           <Route element={<NewFeature />} path={routes.newFeature} />
           <Route element={<Ticketpage />} path={routes.tickets} />
           <Route element={<ChatPage />} path={routes.ticketId} />
+          <Route element={<ProfileSettings />} path={routes.userSetting} />
+          <Route element={<InvoicesTable />} path={routes.allInvoces} />
+          <Route element={<InvoicePage />} path={routes.invoceDetails} />
         </Route>
       </Route>
       <Route element={<Auth />} path='/auth' />

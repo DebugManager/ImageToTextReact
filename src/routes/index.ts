@@ -7,7 +7,10 @@
     companies: '/companies',
     newFeature: '/feature',
     tickets: '/tickets',
-    ticketId: '/tickets/:id'
+    ticketId: '/tickets/:id',
+    userSetting: '/profile-setting/:id',
+    invoceDetails: '/invoce-details/:id',
+    allInvoces: '/invoices/:id',
 }
 
 export default routes

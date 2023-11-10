@@ -7,3 +7,6 @@ export * from './Companies';
 export * from './NewFeature';
 export * from './TiketPage';
 export * from './TicketChatPage';
+export * from './ProfileSettings';
+export * from './InvocesTable';
+export * from './InvocePage';
