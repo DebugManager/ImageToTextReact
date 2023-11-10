@@ -25,7 +25,7 @@ const SignUpForm = ({ changeForm, onSubmit, control, errors, isLoading }: ISignU
                 <p className={styles.formTitle}>SKOTE</p>
                 <p className={styles.formDescription}>Create your account, and start to using SKOTE now!</p>
 
-                <form onSubmit={onSubmit}>
+                <form onSubmit={onSubmit} className={styles.fromWrapper}>
 
                     <div className={styles.nameWrapper}>
                         <div className={styles.inputWrapper}>

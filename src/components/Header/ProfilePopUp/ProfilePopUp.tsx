@@ -39,6 +39,13 @@ const ProfilePopUp = ({
   return (
     <div className={style}>
       <Link
+        to={routes.affiliate}
+        className={styles.optionStyles}
+        onClick={handleClose}
+      >
+        Affiliate
+      </Link>
+      <Link
         to={`/profile-setting/${userId}`}
         className={styles.optionStyles}
         onClick={handleClose}
@@ -81,7 +88,6 @@ const ProfilePopUp = ({
       >
         Companies
       </Link>
-      <p className={styles.optionStyles}>Affiliates</p>
       <p className={styles.optionStyles}>Guide</p>
       <p className={styles.optionStyles}>Support</p>
     </div>

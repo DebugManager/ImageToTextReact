@@ -18,6 +18,7 @@ import {
   ProfileSettings,
   InvoicesTable,
   InvoicePage,
+  Affiliate,
 } from './pages';
 import { Layout } from './components';
 
@@ -42,6 +43,7 @@ const router = createBrowserRouter(
           <Route element={<ProfileSettings />} path={routes.userSetting} />
           <Route element={<InvoicesTable />} path={routes.allInvoces} />
           <Route element={<InvoicePage />} path={routes.invoceDetails} />
+          <Route element={<Affiliate />} path={routes.affiliate} />
         </Route>
       </Route>
       <Route element={<Auth />} path='/auth' />
