@@ -10,3 +10,4 @@ export * from './TicketChatPage';
 export * from './ProfileSettings';
 export * from './InvocesTable';
 export * from './InvocePage';
+export * from './Affiliate';

@@ -1,0 +1,132 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  width: 352px;
+}
+
+.title {
+  color: #495057;
+  font-family: Poppins;
+  font-size: 11px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 17px;
+}
+
+.description {
+  color: #74788d;
+  margin-top: 4px;
+  font-family: Poppins;
+  font-size: 7px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 14px;
+  text-transform: capitalize;
+}
+
+.fromWrapper {
+  display: flex;
+  margin-top: 12px;
+  padding: 10px;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 12px;
+  border-radius: 4px;
+  background: var(--text-color-10, #fff);
+}
+
+.smallWrapper {
+  width: 100%;
+  align-items: flex-start;
+}
+
+.smallWrapper .inputWrapper {
+  width: 139px;
+}
+
+.nameWrapper {
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.inputWrapper {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.nameWrapper .inputWrapper:last-child {
+  margin-left: 14px;
+}
+
+.nameWrapper .inputWrapper {
+  width: 100%;
+}
+
+.label {
+  font-family: Poppins;
+  font-size: 9px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 15px;
+  color: rgba(73, 80, 87, 1);
+}
+
+.input {
+  display: flex;
+  padding: 5px 10px;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  align-self: stretch;
+  border-radius: 4px;
+  border: 1px solid var(--text-color-50, #eff2f7);
+  background: var(--neutral-10, #fff);
+
+  color: var(--text-color-70, #74788d);
+  font-family: Poppins;
+  font-size: 8px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 14px;
+  width: 100%;
+}
+
+.passInptWrapper {
+  position: relative;
+  width: 100%;
+}
+
+.iconWrapper {
+  position: absolute;
+  position: absolute;
+  top: 3px;
+  right: 10px;
+}
+
+.eyeIcon {
+  height: 100%;
+  width: 100%;
+}
+
+.submitBtn {
+  display: flex;
+  padding: 5px 8px;
+  justify-content: center;
+  align-items: center;
+  gap: 4px;
+  border-radius: 4px;
+  background: var(--primary-main, #556ee6);
+  color: var(--text-color-10, #fff);
+  text-align: center;
+  font-family: Inter;
+  font-size: 7px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  text-transform: capitalize;
+  border: none;
+  cursor: pointer;
+}

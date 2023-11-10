@@ -11,6 +11,7 @@
     userSetting: '/profile-setting/:id',
     invoceDetails: '/invoce-details/:id',
     allInvoces: '/invoices/:id',
+    affiliate: '/affiliate',
 }
 
 export default routes
