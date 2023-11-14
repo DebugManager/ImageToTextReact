@@ -31,6 +31,7 @@ interface IUserRegistration {
     last_name: string;
     email: string;
     password: string;
+    unique_link?: string; 
 }
 
 interface IUserLogin {

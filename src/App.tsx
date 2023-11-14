@@ -46,6 +46,7 @@ const router = createBrowserRouter(
           <Route element={<Affiliate />} path={routes.affiliate} />
         </Route>
       </Route>
+      <Route element={<Auth />} path='/auth/:id' />
       <Route element={<Auth />} path='/auth' />
       <Route element={<ResetPassPage />} path='/reset-password/:uuid/:token' />
     </>

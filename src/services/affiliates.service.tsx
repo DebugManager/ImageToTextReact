@@ -23,7 +23,7 @@ export const createAffiliate = async (data: IAffiliate, user_id: number) => {
     user_id: user_id,
   };
   try {
-    const response = await axios.post(`${EDIT_AFFILIATE}`, JSON.stringify(newData));
+    const response = await axios.post(`${EDIT_AFFILIATE}`, newData);
     return response.data;
   } catch (error) {
     console.error(error);

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as Yup from 'yup';
-import { Navigate } from "react-router-dom";
+import { Navigate, useParams } from "react-router-dom";
 
 import { userRegistration, userLogin, userResetPasswordLink } from '../../services/auth.service';
 
@@ -38,6 +38,7 @@ const loginValidationSchema = Yup.object().shape({
 });
 
 const Auth: React.FC = () => {
+    const { id } = useParams<{ id: string }>();
     const [formName, setFormName] = useState<FormType>('signUpForm');
     const [formValidationSchema, setFormValidationSchema] = useState<Yup.AnyObjectSchema | null>(null);
     const [isAuthenticated, setIsAuthenticated] = useState<boolean>();
@@ -60,55 +61,77 @@ const Auth: React.FC = () => {
 
     const handleFormSubmit = async (data: any) => {
         if (
-            data?.confirmPassword &&
-            data?.createPassword &&
-            data?.email &&
-            data?.firstName &&
-            data?.lastName
+          id &&
+          data?.confirmPassword &&
+          data?.createPassword &&
+          data?.email &&
+          data?.firstName &&
+          data?.lastName
         ) {
-            setIsLoading(true);
-            const userData = {
-                first_name: data.firstName,
-                last_name: data.lastName,
-                email: data.email,
-                password: data.createPassword,
-            };
-
-            const res = await userRegistration(userData);
-            if (res === 'ok') {
-                setIsAuthenticated(true);
-                setIsLoading(false);
-            } else {
-                setIsLoading(false);
-            }
-
+          setIsLoading(true);
+          const userData = {
+            first_name: data.firstName,
+            last_name: data.lastName,
+            email: data.email,
+            password: data.createPassword,
+            unique_link: id
+          };
+    
+          const res = await userRegistration(userData);
+          if (res === "ok") {
+            setIsAuthenticated(true);
+            setIsLoading(false);
+          } else {
+            setIsLoading(false);
+          }
+        } else if (
+          !id &&
+          data?.confirmPassword &&
+          data?.createPassword &&
+          data?.email &&
+          data?.firstName &&
+          data?.lastName
+        ) {
+          setIsLoading(true);
+          const userData = {
+            first_name: data.firstName,
+            last_name: data.lastName,
+            email: data.email,
+            password: data.createPassword,
+          };
+    
+          const res = await userRegistration(userData);
+          if (res === "ok") {
+            setIsAuthenticated(true);
+            setIsLoading(false);
+          } else {
+            setIsLoading(false);
+          }
         } else if (data?.loginPassword && data?.email) {
-            setIsLoading(true);
-            const userData = {
-                email: data.email,
-                password: data.loginPassword,
-            };
-
-            const res = await userLogin(userData);
-            if (res === 'ok') {
-                setIsAuthenticated(true);
-                setIsLoading(false);
-            } else {
-                setIsLoading(false);
-            }
-
+          setIsLoading(true);
+          const userData = {
+            email: data.email,
+            password: data.loginPassword,
+          };
+    
+          const res = await userLogin(userData);
+          if (res === "ok") {
+            setIsAuthenticated(true);
+            setIsLoading(false);
+          } else {
+            setIsLoading(false);
+          }
         } else if (data?.resetPassEmail) {
-            setIsLoading(true);
-            const userData = {
-                email: data.resetPassEmail,
-            };
-            const res = await userResetPasswordLink(userData);
-            if (res === 'ok') {
-                setIsLoading(false);
-            }
+          setIsLoading(true);
+          const userData = {
+            email: data.resetPassEmail,
+          };
+          const res = await userResetPasswordLink(userData);
+          if (res === "ok") {
+            setIsLoading(false);
+          }
         }
-
-    };
+      };
 
     const handleFormChange = (newForm: FormType) => {
         setFormName(newForm);

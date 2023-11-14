@@ -3,6 +3,7 @@ import { useForm, SubmitHandler, Controller } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { CircleLoader } from 'react-spinners';
 import * as Yup from 'yup';
+import { toast } from 'react-toastify';
 
 import { createAffiliate } from '../../services/affiliates.service';
 import { getUser } from '../../services/locastorage.service';
@@ -10,6 +11,26 @@ import { getUser } from '../../services/locastorage.service';
 import styles from './Affiliate.module.css';
 
 import icon from '../../assets/auth/eye-off.svg';
+
+
+const myCustomStyles = {
+    background: 'rgba(0, 0, 0, 0.8)',
+    color: '#fff',
+};
+
+const progressBarStyles = {
+    background: '#556EE6',
+};
+
+const CustomCheckmark = () => (
+    <div style={{ color: '#556EE6' }}>✔</div>
+);
+
+const CustomErrorIcon = () => (
+    <div style={{ color: 'red' }}>✘</div>
+);
+
+// export default CustomErrorIcon;
 
 const validationSchema = Yup.object().shape({
   first_name: Yup.string().required('First Name is required'),
@@ -66,8 +87,17 @@ const Affiliate: React.FC = () => {
     if (userId) {
       try {
         const response = await createAffiliate(data, userId);
-        console.log(response);
-        if (response.status === 200) {
+        // console.log(response);
+        if (response) {
+            toast.success('Your application was succesfully sended', {
+                position: 'top-right',
+                autoClose: 3000,
+                className: 'my-custom-toast',
+                style: myCustomStyles,
+                progressClassName: 'my-custom-progress-bar',
+                progressStyle: progressBarStyles,
+                icon: <CustomCheckmark />,
+            });
           setButtonLoading(false);
           reset();
         }
@@ -75,6 +105,15 @@ const Affiliate: React.FC = () => {
         console.error(error);
         setButtonLoading(false);
         reset();
+        toast.error('Somethink goes wrong', {
+            position: 'top-right',
+            autoClose: 3000,
+            className: 'my-custom-toast-error',
+            style: myCustomStyles,
+            progressClassName: 'my-custom-progress-bar',
+            progressStyle: progressBarStyles,
+            icon: <CustomErrorIcon />,
+        });
       }
     }
   };
