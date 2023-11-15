@@ -76,7 +76,6 @@ const Header = () => {
   const updateNotifications = () => {
     setNotificationIsLoading(true);
     const user = getUser();
-    console.log(user);
     if (user?.id) {
       setSettedUser(user);
       setNotificationIsLoading(false);
@@ -94,7 +93,6 @@ const Header = () => {
 
   useEffect(() => {
     const user = getUser();
-    console.log(user);
     if (user?.id) {
       setSettedUser(user);
     }

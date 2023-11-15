@@ -87,7 +87,6 @@ const Affiliate: React.FC = () => {
     if (userId) {
       try {
         const response = await createAffiliate(data, userId);
-        // console.log(response);
         if (response) {
             toast.success('Your application was succesfully sended', {
                 position: 'top-right',
