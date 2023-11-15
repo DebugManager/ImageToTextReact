@@ -3,8 +3,9 @@ import {
   RouterProvider,
   createBrowserRouter,
   createRoutesFromElements,
-  useLocation,
 } from 'react-router-dom';
+import { useEffect } from 'react';
+import ReactGA from 'react-ga';
 
 import routes from './routes';
 import { PrivateRoutes } from './components/PrivatRoytes';
@@ -28,6 +29,8 @@ import {
 import { Layout } from './components';
 
 import './App.module.css';
+
+ReactGA.initialize('G-898SHVFZE2');
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -56,6 +59,9 @@ const router = createBrowserRouter(
 );
 
 function App() {
+  useEffect(() => {
+    ReactGA.pageview(window.location.pathname + window.location.search);
+  }, []);
   return (
     <>
       <RouterProvider router={router} />
