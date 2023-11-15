@@ -10,6 +10,15 @@ import { loadStripe } from '@stripe/stripe-js';
 import 'react-toastify/dist/ReactToastify.css';
 import './index.css';
 
+import ReactGA from 'react-ga';
+
+function initializeReactGA() {
+  ReactGA.initialize('G-898SHVFZE2');
+  ReactGA.pageview(window.location.pathname + window.location.search);
+}
+
+initializeReactGA();
+
 const stripePromise = loadStripe(
   'pk_test_51O7yDQDV4Z1ssWPD2djwQ2hHTHlW123md4BuJayXc4U57yFX5fWGyV8v3u8jN0otD88oExiqRjcbKlSmLTB1LerY000I4uwmVV'
 );
