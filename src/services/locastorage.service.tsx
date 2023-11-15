@@ -1,4 +1,5 @@
 interface IUser {
+    readed_notification: null | number[];
     address_line1: string;
     affiliate: boolean;
     affiliate_code: null | string;
