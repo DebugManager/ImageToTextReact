@@ -5,7 +5,6 @@ import {
   createRoutesFromElements,
   useLocation,
 } from 'react-router-dom';
-import ReactGa from 'react-ga';
 
 import routes from './routes';
 import { PrivateRoutes } from './components/PrivatRoytes';
@@ -29,9 +28,6 @@ import {
 import { Layout } from './components';
 
 import './App.module.css';
-import { useEffect } from 'react';
-
-ReactGa.initialize('G-898SHVFZE2');
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -60,11 +56,6 @@ const router = createBrowserRouter(
 );
 
 function App() {
-  const location = useLocation();
-
-  useEffect(() => {
-    ReactGa.pageview(window.location.pathname + window.location.search);
-  }, [location]);
   return (
     <>
       <RouterProvider router={router} />
