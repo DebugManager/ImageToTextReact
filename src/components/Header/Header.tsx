@@ -83,7 +83,7 @@ const Header = () => {
   };
 
   useEffect(() => {
-    if (settedUser?.readed_notification?.length && notifications?.length) {
+    if (settedUser?.readed_notification && notifications?.length) {
       const hasUnreadNotification = notifications?.some(
         ({ id }) => !settedUser?.readed_notification?.includes(id)
       );
