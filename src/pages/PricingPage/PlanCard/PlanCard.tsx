@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { OnHoldModal } from './Modals/OnHoldModal';
 import { FeedBackModal } from './Modals/FeedBackModal';
 import { FinalModal } from './Modals/FinalModal';
+import { useLanguage } from '../../../context/LanguageContext';
 
 import styles from './PlanCard.module.css';
 
@@ -84,6 +85,8 @@ interface PlanCardProps {
   userID: number | null;
   id: number | string;
   user: IUser | null;
+  currency: number | null;
+  currencyName: string | null;
 }
 
 const OnHoldId = 'price_1O9rhLDV4Z1ssWPD7vVu814B';
@@ -92,12 +95,13 @@ const PlanCard: React.FC<PlanCardProps> = ({
   plan,
   currentPlanId,
   userID,
-  user,
+  currency,
+  currencyName,
 }) => {
+  const { t } = useLanguage();
   const [open, setOpen] = useState<boolean>(false);
   const [openFeedBackModal, setOpenFeedBackModal] = useState<boolean>(false);
   const [openFinalModal, setOpenFinalModal] = useState<boolean>(false);
-//   const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const handleOpen = () => {
     setOpen(true);
@@ -123,6 +127,13 @@ const PlanCard: React.FC<PlanCardProps> = ({
     window.location.href = '/pricing';
   };
 
+  const convertToSelectedCurrency = (amount: string | number) => {
+    if (currency) {
+      return (+amount * +currency).toFixed(2);
+    }
+    return amount;
+  };
+
   return (
     <div>
       <div
@@ -141,7 +152,7 @@ const PlanCard: React.FC<PlanCardProps> = ({
                 : styles.curPlan
             }
           >
-            Current Plan
+            {t('Current_Plan')}
           </div>
         )}
         <div
@@ -155,16 +166,20 @@ const PlanCard: React.FC<PlanCardProps> = ({
           <p className={styles.planName}>{plan.product_name}</p>
           <div className={styles.priceWrapper}>
             <div className={styles.price}>
-              <p className={styles.valute}>$</p>
-              <p className={styles.priceData}>{plan.unit_amount / 100}/</p>
+              <p className={styles.valute}>
+                {!currencyName || currencyName === 'USD' ? '$' : ''}
+              </p>
+              <p className={styles.priceData}>
+                {convertToSelectedCurrency(plan.unit_amount / 100)}/
+              </p>
             </div>
-            <p className={styles.payFor}>Per month</p>
+            <p className={styles.payFor}>{t('Per_month')}</p>
           </div>
 
           <div className={styles.line}>
             <img alt='line' src={line} className={styles.lineImg} />
             <Link to={`/pricing/${plan.id}`} className={styles.btnSelect}>
-              Select Plan
+              {t('Select_Plan')}
             </Link>
           </div>
 
@@ -179,7 +194,7 @@ const PlanCard: React.FC<PlanCardProps> = ({
 
           {currentPlanId === plan.id && (
             <button className={styles.cancelBtn} onClick={handleOpen}>
-              Cancel
+              {t('cancel')}
             </button>
           )}
         </div>

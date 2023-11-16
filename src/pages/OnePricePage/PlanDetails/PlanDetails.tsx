@@ -1,5 +1,8 @@
 import React from 'react';
 import { CircleLoader } from 'react-spinners';
+
+import { useLanguage } from '../../../context/LanguageContext';
+
 import styles from './PlanDetails.module.css';
 
 import checkBox from '../../../assets/planCard/presentedPlan.svg';
@@ -49,6 +52,7 @@ export const PlanDetails = ({
   plan?: Price | null | undefined;
   isLoading: boolean;
 }) => {
+  const { t } = useLanguage();
   return (
     <div className={styles.wrapper}>
       {plan?.product?.id ? (
@@ -61,7 +65,7 @@ export const PlanDetails = ({
                 {plan?.price.unit_amount / 100}/
               </p>
             </div>
-            <p className={styles.payFor}>Per month</p>
+            <p className={styles.payFor}>{t('Per_month')}</p>
           </div>
 
           <div className={styles.optionWrapper}>
@@ -82,7 +86,7 @@ export const PlanDetails = ({
           )}
           {!isLoading && (
             <div className={styles.messageWrapper}>
-              <p className={styles.message}>Please choose the plan</p>
+              <p className={styles.message}>{t('Please_choose_the_plan')}</p>
             </div>
           )}
         </>

@@ -22,6 +22,7 @@ import { ChosePlanForm } from './ChosePlanForm/ChosePlanForm';
 import { PersonalInformationForm } from './PersonalInformationForm/PersonalInformationForm';
 import { PlanDetails } from './PlanDetails/PlanDetails';
 import { getUserById } from '../../services/user.service';
+import { useLanguage } from '../../context/LanguageContext';
 
 import AE from '../../assets/planCard/AmericanExpress.svg';
 import mc from '../../assets/planCard/mastercard.svg';
@@ -133,6 +134,7 @@ const OnePricePage = () => {
 
   const elements = useElements();
   const stripe = useStripe();
+  const { t } = useLanguage();
 
   const fetchData = useCallback(async () => {
     if (id) {
@@ -345,11 +347,8 @@ const OnePricePage = () => {
 
   return (
     <div className={styles.wrapper}>
-      <p className={styles.topTitle}>Choose your Pricing plan</p>
-      <p className={styles.topDescription}>
-        To achieve this, it would be necessary to have uniform grammar,
-        pronunciation and more common words If several languages coalesce
-      </p>
+      <p className={styles.topTitle}>{t('pricingTitle')}</p>
+      <p className={styles.topDescription}>{t('pricingDescription')}</p>
 
       <div className={styles.infoWrapper}>
         <div className={styles.leftWrapper}>
@@ -370,7 +369,7 @@ const OnePricePage = () => {
           />
 
           <div className={styles.paymantWrapper}>
-            <p className={styles.paymantTitle}>Payment Metode</p>
+            <p className={styles.paymantTitle}>{t('Payment_Metode')}</p>
             <div className={styles.paymentIcons}>
               <img
                 alt='payment'
@@ -384,7 +383,7 @@ const OnePricePage = () => {
             </div>
             <form onSubmit={handlePaymantSubmit}>
               <div className={styles.cardWrapper}>
-                <label className={styles.cardNumberLabel}>Card Number</label>
+                <label className={styles.cardNumberLabel}>{t('Card_Number')}</label>
                 <CardNumberElement
                   className={styles.nameInput}
                   options={options}
@@ -393,7 +392,7 @@ const OnePricePage = () => {
 
               <div className={styles.bottomInputsWrapper}>
                 <div className={styles.inputLabelWrapper}>
-                  <label className={styles.cardNumberLabel}>Expiry Date</label>
+                  <label className={styles.cardNumberLabel}>{t('Expiry_Date')}</label>
                   <CardExpiryElement
                     className={styles.nameInput}
                     options={options}
@@ -401,7 +400,7 @@ const OnePricePage = () => {
                 </div>
 
                 <div className={styles.inputLabelWrapper}>
-                  <label className={styles.cardNumberLabel}>CVV Code</label>
+                  <label className={styles.cardNumberLabel}>{t('CVV_Code')}</label>
                   <CardCvcElement
                     className={styles.nameInput}
                     options={options}

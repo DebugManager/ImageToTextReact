@@ -3,6 +3,9 @@ import { format } from 'date-fns';
 import { Column } from 'react-table';
 import ReactPaginate from 'react-paginate';
 import { toast } from 'react-toastify';
+import { CircleLoader } from 'react-spinners';
+import { Link } from 'react-router-dom';
+
 import { TableComponent, TableHeader } from '../../components';
 import {
   closeTicket,
@@ -11,8 +14,8 @@ import {
 } from '../../services/ticket.service';
 import { TicketModal } from './TicketModal/TicketModal';
 import { getUser } from '../../services/locastorage.service';
-import { CircleLoader } from 'react-spinners';
-import { Link } from 'react-router-dom';
+import { useLanguage } from '../../context/LanguageContext';
+
 
 import styles from './TicketPage.module.css';
 
@@ -63,6 +66,7 @@ const CustomErrorIcon = () => <div style={{ color: 'red' }}>✘</div>;
 const ticketsPerPage = 5;
 
 const Ticketpage = () => {
+  const { t } = useLanguage();
   const [currentPage, setCurrentPage] = useState(0);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [resultsFound, setResultsFound] = useState(true);
@@ -94,7 +98,7 @@ const Ticketpage = () => {
 
   useEffect(() => {
     const user = getUser();
-    if (user?.current_plan && user?.id) {
+    if (user?.id) {
       setCurrentUser(user?.id);
     }
   }, []);
@@ -199,7 +203,7 @@ const Ticketpage = () => {
           style={{ display: 'flex', alignItems: 'center' }}
           onClick={() => sortData('id')}
         >
-          <p>ID</p>
+          <p>{t('ID')}</p>
           {sortOptions.find((option) => option.key === 'id')?.direction ===
           'ascending' ? (
             <img
@@ -233,7 +237,7 @@ const Ticketpage = () => {
           style={{ display: 'flex', alignItems: 'center' }}
           onClick={() => sortData('subject')}
         >
-          <p>Subject</p>
+          <p>{t('subject')}</p>
           {sortOptions.find((option) => option.key === 'subject')?.direction ===
           'ascending' ? (
             <img
@@ -267,7 +271,7 @@ const Ticketpage = () => {
           style={{ display: 'flex', alignItems: 'center' }}
           onClick={() => sortData('created')}
         >
-          <p>Created</p>
+          <p>{t('created')}</p>
           {sortOptions.find((option) => option.key === 'created')?.direction ===
           'ascending' ? (
             <img
@@ -304,7 +308,7 @@ const Ticketpage = () => {
           style={{ display: 'flex', alignItems: 'center' }}
           onClick={() => sortData('lastActive')}
         >
-          <p>Last Active</p>
+          <p>{t('lastActive')}</p>
           {sortOptions.find((option) => option.key === 'lastActive')
             ?.direction === 'ascending' ? (
             <img
@@ -338,7 +342,7 @@ const Ticketpage = () => {
           style={{ display: 'flex', alignItems: 'center' }}
           onClick={() => sortData('status')}
         >
-          <p>Status</p>
+          <p>{t('status')}</p>
           {sortOptions.find((option) => option.key === 'status')?.direction ===
           'ascending' ? (
             <img
@@ -378,7 +382,7 @@ const Ticketpage = () => {
         <div
           style={{ display: 'flex', alignItems: 'center', cursor: 'pointer' }}
         >
-          <p>Action</p>
+          <p>{t('Action')}</p>
         </div>
       ),
       accessor: 'currentid',
@@ -391,7 +395,7 @@ const Ticketpage = () => {
               className={styles.btnReply}
             >
               <img alt='reply' src={reply} />
-              Reply
+              {t('Reply')}
             </Link>
 
             {loadingStates[row.original.id] ? (
@@ -405,7 +409,7 @@ const Ticketpage = () => {
                 className={styles.closeTicket}
                 onClick={() => handleCloseTicket(row.original.id)}
               >
-                Close ticket
+                {t('Close_ticket')}
               </div>
             )}
           </div>
@@ -424,7 +428,7 @@ const Ticketpage = () => {
           onClick={() => setOpenRequestModal(true)}
         >
           <img src={plusIcon} alt='add new companie' />
-          Request New features list
+          {t('requestNewFeaturesList')}
         </button>
       ),
     },
@@ -435,7 +439,7 @@ const Ticketpage = () => {
         <div className={styles.searchInputWrapper}>
           <input
             type='text'
-            placeholder='Search'
+            placeholder={t('search')}
             className={styles.inputSearch}
             value={searchValue}
             onChange={(e) => setSearchValue(e.target.value)}
@@ -467,7 +471,7 @@ const Ticketpage = () => {
               ''
             )}
             <button className={styles.btnSearch} onClick={handleSearch}>
-              Search
+              {t('search')}
             </button>
           </div>
         </div>

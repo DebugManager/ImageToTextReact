@@ -5,6 +5,8 @@ import { Controller, useForm } from 'react-hook-form';
 import * as Yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { toast } from 'react-toastify';
+
+import { useLanguage } from '../../../context/LanguageContext';
 import { createNewTickets } from '../../../services/ticket.service';
 
 import styles from './TicketModal.module.css';
@@ -47,6 +49,7 @@ const initialState: FileState = {
 };
 
 export const TicketModal = ({ isOpen, handleClose, currentUser }: IModal) => {
+    const { t } = useLanguage();
     const [isLoading, setIsLoading] = useState<boolean>(false);
     const [fileState, setFileState] = useState<FileState>(initialState);
     const createValidationSchema = Yup.object().shape({
@@ -60,8 +63,6 @@ export const TicketModal = ({ isOpen, handleClose, currentUser }: IModal) => {
     } = useForm({ resolver: yupResolver(createValidationSchema) });
 
     const onSubmit = async (data: any) => {
-        setIsLoading(true);
-
         if (currentUser) {
             const formData = new FormData();
             data.description && formData.append('description', data.description);
@@ -167,11 +168,11 @@ export const TicketModal = ({ isOpen, handleClose, currentUser }: IModal) => {
                 background: 'var(--text-color-10, #FFF)',
                 boxShadow: '1px 4px 15px 4px rgba(0, 0, 0, 0.10)',
             }}>
-                <p className={styles.modalTitle}>Add new ticket</p>
-                <p className={styles.description}>Share the most important info with us. After you open a request, you can add updates via My support requests.</p>
+                <p className={styles.modalTitle}>{t('addNewTicket')}</p>
+                <p className={styles.description}>{t('ticketDescription')}</p>
                 <form onSubmit={handleSubmit(onSubmit)}>
                     <div className={styles.inputWrapper} style={{ marginTop: '8px' }}>
-                        <label className={styles.label} htmlFor="subject">Subject</label>
+                        <label className={styles.label} htmlFor="subject">{t('subject')}</label>
                         <Controller
                             name="subject"
                             control={control}
@@ -191,7 +192,7 @@ export const TicketModal = ({ isOpen, handleClose, currentUser }: IModal) => {
                     </div>
 
                     <div className={styles.inputWrapper} style={{ marginTop: '8px' }}>
-                        <label className={styles.label} htmlFor="description">Description</label>
+                        <label className={styles.label} htmlFor="description">{t('description')}</label>
                         <Controller
                             name="description"
                             control={control}

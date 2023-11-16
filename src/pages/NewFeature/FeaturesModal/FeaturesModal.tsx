@@ -5,6 +5,8 @@ import { Controller, useForm } from 'react-hook-form';
 import * as Yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { toast } from 'react-toastify';
+
+import { useLanguage } from '../../../context/LanguageContext';
 import { createNewFeature } from '../../../services/feature.servise';
 
 import styles from '../../Companies/CompanieModal/CompanieModal.module.css';
@@ -33,6 +35,7 @@ interface IModal {
 }
 
 export const FeaturesModal = ({ isOpen, handleClose }: IModal) => {
+    const { t } = useLanguage();
     const [isLoading, setIsLoading] = useState<boolean>(false);
     const createValidationSchema = Yup.object().shape({
         featureName: Yup.string()
@@ -96,10 +99,10 @@ export const FeaturesModal = ({ isOpen, handleClose }: IModal) => {
                 background: 'var(--text-color-10, #FFF)',
                 boxShadow: '1px 4px 15px 4px rgba(0, 0, 0, 0.10)',
             }}>
-                <p className={styles.modalTitle}>Add new feature</p>
+                <p className={styles.modalTitle}>{t('Add_new_feature')}</p>
                 <form onSubmit={handleSubmit(onSubmit)}>
                     <div className={styles.inputWrapper} style={{ marginTop: '8px' }}>
-                        <label className={styles.label} htmlFor="featureName">Company name</label>
+                        <label className={styles.label} htmlFor="featureName">{t('Feature_name')}</label>
                         <Controller
                             name="featureName"
                             control={control}
@@ -118,7 +121,7 @@ export const FeaturesModal = ({ isOpen, handleClose }: IModal) => {
                         {errors.featureName && <span className={styles.error}>{errors.featureName.message}</span>}
                     </div>
                     <div className={styles.btnWrapper}>
-                        <button className={styles.cancelBtn} onClick={handleClose}>Cancel</button>
+                        <button className={styles.cancelBtn} onClick={handleClose}>{t('cancel')}</button>
                         <button className={styles.modalBtn} type='submit'>{isLoading ? <CircleLoader loading={isLoading} color={'#FFF'} size={10} /> : 'Save'}</button>
                     </div>
                 </form>

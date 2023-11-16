@@ -1,123 +1,155 @@
 .wrapper {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    padding: 20px 30px 20px 30px;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding: 20px 30px 20px 30px;
 }
 
 .pricingTitle {
-    color: var(--text-color-90, #495057);
-    font-family: Poppins;
-    font-size: 9px;
-    font-style: normal;
-    font-weight: 500;
-    line-height: 16px;
+  color: var(--text-color-90, #495057);
+  font-family: Poppins;
+  font-size: 9px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 16px;
 }
 
 .centerTitle {
-    color: #495057;
-    text-align: center;
-    font-family: Poppins;
-    font-size: 8px;
-    font-style: normal;
-    font-weight: 500;
-    line-height: 15px;
-    text-transform: capitalize;
-    margin-top: 12px;
+  color: #495057;
+  text-align: center;
+  font-family: Poppins;
+  font-size: 8px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 15px;
+  text-transform: capitalize;
+  margin-top: 12px;
 }
 
 .description {
-    color: #74788D;
-    text-align: center;
-    font-family: Poppins;
-    font-size: 7px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: 14px;
-    text-transform: capitalize;
-    width: 275px;
-    margin: 4px auto 0 auto;
+  color: #74788d;
+  text-align: center;
+  font-family: Poppins;
+  font-size: 7px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 14px;
+  text-transform: capitalize;
+  width: 275px;
+  margin: 4px auto 0 auto;
 }
 
 .filterWrapper {
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
-    position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  position: relative;
 }
 
 .option {
-    color: #495057;
-    font-family: Poppins;
-    font-size: 7px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: 14px;
-    text-transform: capitalize;
+  color: #495057;
+  font-family: Poppins;
+  font-size: 7px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 14px;
+  text-transform: capitalize;
 }
 
 .filter {
-    display: flex;
-    padding: 2px 8px;
-    justify-content: center;
-    gap: 4px;
-    border-radius: 4px;
-    background: var(--text-color-60, #EFF2F7);
+  display: flex;
+  padding: 2px 8px;
+  justify-content: center;
+  gap: 4px;
+  border-radius: 4px;
+  background: var(--text-color-60, #eff2f7);
 
-    color: var(--text-color-20, #495057);
-    font-family: Poppins;
-    font-size: 7px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: 14px;
-    text-transform: capitalize;
-    cursor: pointer;
-    margin-left: 4px;
+  color: var(--text-color-20, #495057);
+  font-family: Poppins;
+  font-size: 7px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 14px;
+  text-transform: capitalize;
+  cursor: pointer;
+  margin-left: 4px;
 }
 
 .optionWrapper {
-    position: absolute;
-    display: flex;
-    flex-direction: column;
-    top: 20px;
-    border-radius: 4px;
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  top: 20px;
+  border-radius: 4px;
 
-    font-family: Poppins;
-    font-size: 7px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: 14px;
-    width: 52px;
-    text-transform: capitalize;
-    background: var(--text-color-60, #EFF2F7);
+  font-family: Poppins;
+  font-size: 7px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 14px;
+  width: 52px;
+  text-transform: capitalize;
+  background: var(--text-color-60, #eff2f7);
+}
+
+.optionCurrencyWrapper {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  top: 20px;
+  border-radius: 4px;
+
+  font-family: Poppins;
+  font-size: 7px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 14px;
+  width: 52px;
+  text-transform: capitalize;
+  background: var(--text-color-60, #eff2f7);
+  height: 150px;
+  overflow: auto;
+  padding: 10px;
 }
 
 .optionFilter {
-    margin-top: 4px;
-    cursor: pointer;
-    padding: 2px 8px;
-    border-radius: 4px;
+  margin-top: 4px;
+  cursor: pointer;
+  padding: 2px 8px;
+  border-radius: 4px;
 }
 
 .optionFilter:hover {
-    background: var(--text-color-60, #e5ebf4);
+  background: var(--text-color-60, #e5ebf4);
 }
 
-.cardWrapper{
-    height: 330px;
+.cardWrapper {
+  height: 330px;
 }
 
 .planWrapper {
-    display: flex;
-    justify-content: space-between;
-    margin-top: 42px;
-    margin-bottom: 20px;
+  display: flex;
+  justify-content: space-between;
+  margin-top: 42px;
+  margin-bottom: 20px;
 }
 
 .link {
-    text-decoration: none;
+  text-decoration: none;
 }
 
 .loaderWrapper {
-    margin: 150px auto;
+  margin: 150px auto;
+}
+
+.dropDownWrapper {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  justify-content: flex-end;
+  margin-top: 12px;
+}
+
+.dropDownWrapper .filterWrapper:first-child {
+  margin-right: 8px;
 }

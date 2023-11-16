@@ -6,8 +6,10 @@ import { toast } from 'react-toastify';
 import { CircleLoader } from 'react-spinners';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { UserPermission } from '../../../enums/PermissionEnums';
-import { createUser, editUserById } from '../../../services/user.service';
 import * as Yup from 'yup';
+
+import { createUser, editUserById } from '../../../services/user.service';
+import { useLanguage } from '../../../context/LanguageContext';
 
 import styles from './AddUserModal.module.css';
 
@@ -180,6 +182,8 @@ export default function AddUserModal({ openModal, handleClose, handleCloseEditMo
                 .required('Confirm Password is required')
                 .oneOf([Yup.ref('createPassword')], 'Passwords must match'),
     });
+
+    const { t } = useLanguage();
 
     const [showPassword, setShowPassword] = useState<boolean>(false);
     const [showConfirmPassword, setShowConfirmPassword] = useState<boolean>(false);
@@ -471,13 +475,13 @@ export default function AddUserModal({ openModal, handleClose, handleCloseEditMo
                         <form onSubmit={handleSubmit(onSubmit)}>
 
                             <div className={styles.descriptionWrapper} style={{ marginTop: '8px' }}>
-                                <p className={styles.descriptionText}>1. Admin Users have full rights over the platform.</p>
-                                <p className={styles.descriptionText}>2. Staff Users have full rights over the platform by default, but rights can be restricted by the Admin Users.</p>
-                                <p className={styles.descriptionText}>3. Clients have no rights over the platform by default, but rights can be assigned by Admin and Staff Users for each company.</p>
+                                <p className={styles.descriptionText}>{t('1_Admin_Users_Have_Full_Rights_Over_The_Platform')}</p>
+                                <p className={styles.descriptionText}>{t('2_Staff_Users_Have_Full_Rights_Over_The_Platform')}</p>
+                                <p className={styles.descriptionText}>{t('3_Clients_Have_No_Rights_Over_The_Platform_By')}</p>
                             </div>
 
                             <div className={styles.dropDownWrapper} style={{ marginTop: '8px' }}>
-                                <p className={styles.titleType}>Type</p>
+                                <p className={styles.titleType}>{t('Type')}</p>
                                 <Controller
                                     name="selectedType"
                                     control={control}
@@ -499,7 +503,7 @@ export default function AddUserModal({ openModal, handleClose, handleCloseEditMo
                             </div>
 
                             <div className={styles.inputWrapper} style={{ marginTop: '8px' }}>
-                                <label className={styles.label} htmlFor="firstName">First Name</label>
+                                <label className={styles.label} htmlFor="firstName">{t('firstName')}</label>
                                 <Controller
                                     name="firstName"
                                     control={control}
@@ -519,7 +523,7 @@ export default function AddUserModal({ openModal, handleClose, handleCloseEditMo
                             </div>
 
                             <div className={styles.inputWrapper} style={{ marginTop: '8px' }}>
-                                <label className={styles.label} htmlFor="email">Email</label>
+                                <label className={styles.label} htmlFor="email">{t('email')}</label>
                                 <Controller
                                     name="email"
                                     control={control}
@@ -548,7 +552,7 @@ export default function AddUserModal({ openModal, handleClose, handleCloseEditMo
                                     }}
                                     render={({ field }) => (
                                         <div className={styles.inputWrapper}>
-                                            <label className={styles.label} htmlFor="createPassword">Create New Password</label>
+                                            <label className={styles.label} htmlFor="createPassword">{t('Create_New_Password')}</label>
                                             <div className={styles.passInptWrapper}>
                                                 <input
                                                     className={styles.input}
@@ -582,7 +586,7 @@ export default function AddUserModal({ openModal, handleClose, handleCloseEditMo
                                     }}
                                     render={({ field }) => (
                                         <div className={styles.inputWrapper}>
-                                            <label className={styles.label} htmlFor="confirmPassword">Confirm Password</label>
+                                            <label className={styles.label} htmlFor="confirmPassword">{t('Confirm_Password')}</label>
                                             <div className={styles.passInptWrapper}>
                                                 <input
                                                     id="confirmPassword"
@@ -608,7 +612,7 @@ export default function AddUserModal({ openModal, handleClose, handleCloseEditMo
 
                             <div className={styles.permissionsWrapper} style={{ marginTop: '8px' }}>
                                 <div className={styles.permissionTitle}>
-                                    <p className={styles.label}>Permission</p>
+                                    <p className={styles.label}>{t('Permission')}</p>
                                     <div className={styles.checkBoxesWrapper}>
                                         <Controller
                                             name="view"
@@ -638,7 +642,7 @@ export default function AddUserModal({ openModal, handleClose, handleCloseEditMo
                                                     label={
                                                         <div style={{ display: 'flex', alignItems: 'center' }}>
                                                             <img alt='view' src={eye} className={styles.inputImg} />
-                                                            <p className={styles.inputName}>View</p>
+                                                            <p className={styles.inputName}>{t('View')}</p>
                                                         </div>
                                                     }
                                                 />
@@ -674,7 +678,7 @@ export default function AddUserModal({ openModal, handleClose, handleCloseEditMo
                                                     label={
                                                         <div style={{ display: 'flex', alignItems: 'center' }}>
                                                             <img alt='view' src={edit} className={styles.inputImg} />
-                                                            <p className={styles.inputName}>Edit</p>
+                                                            <p className={styles.inputName}>{t('Edit')}</p>
                                                         </div>
                                                     }
                                                 />
@@ -710,7 +714,7 @@ export default function AddUserModal({ openModal, handleClose, handleCloseEditMo
                                                     label={
                                                         <div style={{ display: 'flex', alignItems: 'center' }}>
                                                             <img alt='view' src={comment} className={styles.inputImg} />
-                                                            <p className={styles.inputName}>Comment</p>
+                                                            <p className={styles.inputName}>{t('Comment')}</p>
                                                         </div>
                                                     }
                                                 />
@@ -747,7 +751,7 @@ export default function AddUserModal({ openModal, handleClose, handleCloseEditMo
                                                     label={
                                                         <div style={{ display: 'flex', alignItems: 'center' }}>
                                                             <img alt='view' src={plus} className={styles.inputImg} />
-                                                            <p className={styles.inputName}>Create New</p>
+                                                            <p className={styles.inputName}>{t('Create_New')}</p>
                                                         </div>
                                                     }
                                                 />
@@ -759,7 +763,7 @@ export default function AddUserModal({ openModal, handleClose, handleCloseEditMo
                                 <div className={styles.searchInputWrapper}>
                                     <input
                                         type="text"
-                                        placeholder="Search"
+                                        placeholder={t('search')}
                                         className={styles.inputSearch}
                                         value={searchValue}
                                         onChange={handleSearchChange}
@@ -811,7 +815,7 @@ export default function AddUserModal({ openModal, handleClose, handleCloseEditMo
                             </div>
 
                             <div className={styles.btnWrapper} style={{ marginTop: '8px' }}>
-                                <button className={styles.modalBtn} onClick={handleCloseModal}>Cancel</button>
+                                <button className={styles.modalBtn} onClick={handleCloseModal}>{t('cancel')}</button>
                                 <button className={styles.modalBtn} type='submit'>{isLoading ? <CircleLoader loading={isLoading} color={'#FFF'} size={10} /> : 'Save'}</button>
                             </div>
                         </form>

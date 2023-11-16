@@ -7,30 +7,24 @@ import { toast } from 'react-toastify';
 
 import { createAffiliate } from '../../services/affiliates.service';
 import { getUser } from '../../services/locastorage.service';
+import { useLanguage } from '../../context/LanguageContext';
 
 import styles from './Affiliate.module.css';
 
 import icon from '../../assets/auth/eye-off.svg';
 
-
 const myCustomStyles = {
-    background: 'rgba(0, 0, 0, 0.8)',
-    color: '#fff',
+  background: 'rgba(0, 0, 0, 0.8)',
+  color: '#fff',
 };
 
 const progressBarStyles = {
-    background: '#556EE6',
+  background: '#556EE6',
 };
 
-const CustomCheckmark = () => (
-    <div style={{ color: '#556EE6' }}>✔</div>
-);
+const CustomCheckmark = () => <div style={{ color: '#556EE6' }}>✔</div>;
 
-const CustomErrorIcon = () => (
-    <div style={{ color: 'red' }}>✘</div>
-);
-
-// export default CustomErrorIcon;
+const CustomErrorIcon = () => <div style={{ color: 'red' }}>✘</div>;
 
 const validationSchema = Yup.object().shape({
   first_name: Yup.string().required('First Name is required'),
@@ -66,6 +60,7 @@ const Affiliate: React.FC = () => {
   const [showPassword, setShowPassword] = useState<boolean>(false);
   const [userId, setUserId] = useState<number | null>(null);
   const [buttonLoading, setButtonLoading] = useState<boolean>(false);
+  const { t } = useLanguage();
   const {
     control,
     handleSubmit,
@@ -88,15 +83,15 @@ const Affiliate: React.FC = () => {
       try {
         const response = await createAffiliate(data, userId);
         if (response) {
-            toast.success('Your application was succesfully sended', {
-                position: 'top-right',
-                autoClose: 3000,
-                className: 'my-custom-toast',
-                style: myCustomStyles,
-                progressClassName: 'my-custom-progress-bar',
-                progressStyle: progressBarStyles,
-                icon: <CustomCheckmark />,
-            });
+          toast.success('Your application was succesfully sended', {
+            position: 'top-right',
+            autoClose: 3000,
+            className: 'my-custom-toast',
+            style: myCustomStyles,
+            progressClassName: 'my-custom-progress-bar',
+            progressStyle: progressBarStyles,
+            icon: <CustomCheckmark />,
+          });
           setButtonLoading(false);
           reset();
         }
@@ -105,13 +100,13 @@ const Affiliate: React.FC = () => {
         setButtonLoading(false);
         reset();
         toast.error('Somethink goes wrong', {
-            position: 'top-right',
-            autoClose: 3000,
-            className: 'my-custom-toast-error',
-            style: myCustomStyles,
-            progressClassName: 'my-custom-progress-bar',
-            progressStyle: progressBarStyles,
-            icon: <CustomErrorIcon />,
+          position: 'top-right',
+          autoClose: 3000,
+          className: 'my-custom-toast-error',
+          style: myCustomStyles,
+          progressClassName: 'my-custom-progress-bar',
+          progressStyle: progressBarStyles,
+          icon: <CustomErrorIcon />,
         });
       }
     }
@@ -119,19 +114,15 @@ const Affiliate: React.FC = () => {
 
   return (
     <div className={styles.wrapper}>
-      <p className={styles.title}>
-        Apply to become an affiliate and earn from every sale
-      </p>
+      <p className={styles.title}>{t('affiliateTitle')}</p>
       <p className={styles.description}>
-        Please fill out the form to apply to become an affiliate. If you are
-        successful we will email your unique tracking URL within the next 5
-        working days.
+        {t('affiliateDescription')}
       </p>
       <form className={styles.fromWrapper} onSubmit={handleSubmit(onSubmit)}>
         <div className={styles.nameWrapper}>
           <div className={styles.inputWrapper}>
             <label className={styles.label} htmlFor='first_name'>
-              First Name
+              {t('firstName')}
             </label>
             <Controller
               name='first_name'
@@ -156,7 +147,7 @@ const Affiliate: React.FC = () => {
 
           <div className={styles.inputWrapper}>
             <label className={styles.label} htmlFor='last_name'>
-              Last Name
+              {t('lastName')}
             </label>
             <Controller
               name='last_name'
@@ -183,7 +174,7 @@ const Affiliate: React.FC = () => {
         <div className={styles.nameWrapper}>
           <div className={styles.inputWrapper}>
             <label className={styles.label} htmlFor='email'>
-              Email
+              {t('email')}
             </label>
             <Controller
               name='email'
@@ -208,7 +199,7 @@ const Affiliate: React.FC = () => {
 
           <div className={styles.inputWrapper}>
             <label className={styles.label} htmlFor='password'>
-              Password
+              {t('password')}
             </label>
             <Controller
               name='password'
@@ -249,7 +240,7 @@ const Affiliate: React.FC = () => {
 
         <div className={styles.inputWrapper}>
           <label className={styles.label} htmlFor='promotion_plan'>
-            How will you promote our company?
+            {t('how_will_you_promote_our_company')}
           </label>
           <Controller
             name='promotion_plan'
@@ -277,7 +268,7 @@ const Affiliate: React.FC = () => {
         <div className={styles.nameWrapper}>
           <div className={styles.inputWrapper}>
             <label className={styles.label} htmlFor='twitter'>
-              Your Twitter
+              {t('your_Twitter')}
             </label>
             <Controller
               name='twitter'
@@ -302,7 +293,7 @@ const Affiliate: React.FC = () => {
 
           <div className={styles.inputWrapper}>
             <label className={styles.label} htmlFor='instagram'>
-              Your Instagram
+              {t('your_Instagram')}
             </label>
             <Controller
               name='instagram'
@@ -329,7 +320,7 @@ const Affiliate: React.FC = () => {
         <div className={styles.nameWrapper}>
           <div className={styles.inputWrapper}>
             <label className={styles.label} htmlFor='tiktok'>
-              Your tikTok
+              {t('Your_tikTok')}
             </label>
             <Controller
               name='tiktok'
@@ -354,7 +345,7 @@ const Affiliate: React.FC = () => {
 
           <div className={styles.inputWrapper}>
             <label className={styles.label} htmlFor='linkedin'>
-              Your LinkedIn
+              {t('Your_LinkedIn')}
             </label>
             <Controller
               name='linkedin'
@@ -381,7 +372,7 @@ const Affiliate: React.FC = () => {
         <div className={styles.smallWrapper}>
           <div className={styles.inputWrapper}>
             <label className={styles.label} htmlFor='facebook'>
-              Your Facebook
+              {t('Your_Facebook')}
             </label>
             <Controller
               name='facebook'
@@ -408,7 +399,7 @@ const Affiliate: React.FC = () => {
         <div className={styles.nameWrapper}>
           <div className={styles.inputWrapper}>
             <label className={styles.label} htmlFor='paypal_payment_email'>
-              PayPal Payment email
+              {t('PayPal_Payment_email')}
             </label>
             <Controller
               name='paypal_email'
@@ -435,13 +426,13 @@ const Affiliate: React.FC = () => {
 
           <div className={styles.inputWrapper}>
             <label className={styles.label} htmlFor='btc_payment_address'>
-              BTC Payment address
+              {t('BTC_Payment_address')}
             </label>
             <Controller
               name='btc_adress'
               control={control}
               rules={{
-                required: 'lBTC Payment address is required',
+                required: 'BTC Payment address is required',
               }}
               render={({ field }) => (
                 <input
@@ -463,7 +454,7 @@ const Affiliate: React.FC = () => {
           {buttonLoading ? (
             <CircleLoader loading={buttonLoading} color={'#FFF'} size={10} />
           ) : (
-            'Submit'
+            t('submit')
           )}
         </button>
       </form>

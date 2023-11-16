@@ -12,6 +12,7 @@ import { CircleLoader } from 'react-spinners';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as Yup from 'yup';
 
+import { useLanguage } from '../../context/LanguageContext';
 import UserForm from './UserForm/UserForm';
 import { getUser, setUser } from '../../services/locastorage.service';
 import { updateUsers } from '../../services/user.service';
@@ -81,6 +82,8 @@ const ProfileSettings: React.FC = () => {
   } = useForm({
     resolver: yupResolver(validationSchema),
   });
+
+  const { t } = useLanguage();
 
   const [user, setCurrentUser] = useState<IUser | null>(null);
   const [personalInfo, setPersonalInfo] = useState<IPersonalInfo>({
@@ -217,7 +220,7 @@ const ProfileSettings: React.FC = () => {
   return (
     <div className={styles.wrapper}>
       <div className={styles.headerWrapper}>
-        <p className={styles.headerTitle}>Setting</p>
+        <p className={styles.headerTitle}>{t('setting')}</p>
         <div className={styles.invoceTitleWrapper}>
           <img alt='invoce' src={invoce} />
           <Link to={`/invoices/${user?.id}`} className={styles.invoceText}>
@@ -234,7 +237,7 @@ const ProfileSettings: React.FC = () => {
       />
 
       <div className={styles.paymantWrapper}>
-        <p className={styles.paymantTitle}>Payment Metode</p>
+        <p className={styles.paymantTitle}>{t('paymentMethod')}</p>
         <div className={styles.paymentIcons}>
           <img alt='payment' src={stripeIMG} className={styles.paymentImg} />
           <img alt='payment' src={mc} className={styles.paymentImg} />
@@ -244,13 +247,13 @@ const ProfileSettings: React.FC = () => {
         </div>
         <form onSubmit={handlePaymantSubmit}>
           <div className={styles.cardWrapper}>
-            <label className={styles.cardNumberLabel}>Card Number</label>
+            <label className={styles.cardNumberLabel}>{t('cardNumber')}</label>
             <CardNumberElement className={styles.nameInput} options={options} />
           </div>
 
           <div className={styles.bottomInputsWrapper}>
             <div className={styles.inputLabelWrapper}>
-              <label className={styles.cardNumberLabel}>Expiry Date</label>
+              <label className={styles.cardNumberLabel}>{t('expiryDate')}</label>
               <CardExpiryElement
                 className={styles.nameInput}
                 options={options}
@@ -258,7 +261,7 @@ const ProfileSettings: React.FC = () => {
             </div>
 
             <div className={styles.inputLabelWrapper}>
-              <label className={styles.cardNumberLabel}>CVV Code</label>
+              <label className={styles.cardNumberLabel}>{t('CVV_Code')}</label>
               <CardCvcElement className={styles.nameInput} options={options} />
             </div>
           </div>
@@ -271,7 +274,7 @@ const ProfileSettings: React.FC = () => {
                   size={10}
                 />
               ) : (
-                'Save'
+                t('save')
               )}
             </button>
           </div>

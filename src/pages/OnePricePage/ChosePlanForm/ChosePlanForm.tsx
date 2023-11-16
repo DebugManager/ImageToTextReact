@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react';
 import Select, { StylesConfig } from 'react-select';
 import { Controller } from 'react-hook-form';
+
+import { useLanguage } from '../../../context/LanguageContext';
 import { getPackages } from '../../../services/pricing.service';
 
 import styles from './ChosePlanForm.module.css';
@@ -114,6 +116,7 @@ const customStyles: StylesConfig = {
 };
 
 export const ChosePlanForm = ({ control, plan, onPlanChange, typeOfPrice }: IChoosePlan) => {
+    const { t } = useLanguage();
     const [selectedRadio, setSelectedRadio] = useState<string | null>(typeOfPrice);
     const [selectedPlan, setSelectedPlan] = useState<IPlanDate | null>({id: plan?.price.id, value: plan?.product.name});
     const [plans, setPlans] = useState<Price[]>([]);
@@ -176,8 +179,8 @@ export const ChosePlanForm = ({ control, plan, onPlanChange, typeOfPrice }: ICho
     return (
         <div className={styles.choosePlanWrapper}>
 
-            <p className={styles.choosePlanTitle}>1. Choose your plan</p>
-            <p className={styles.choosePlanDesc}>Subscription Plan</p>
+            <p className={styles.choosePlanTitle}>{t('1_Choose_your_plan')}</p>
+            <p className={styles.choosePlanDesc}>{t('Subscription_Plan')}</p>
             <Controller
                 name="type"
                 control={control}
@@ -217,13 +220,13 @@ export const ChosePlanForm = ({ control, plan, onPlanChange, typeOfPrice }: ICho
                                         checked={selectedRadio === "month" || (selectedRadio === null && typeOfPrice === 'month')}
                                     />
                                     <label htmlFor="monthlyRadioBtn" className={styles.label}>
-                                        Mounthly
+                                        {t('Mounthly')}
                                     </label>
                                 </>
                             )}
                         />
                     </div>
-                    <p className={styles.radioDescription}>To achieve this, it would be necessary to have uniform grammar</p>
+                    <p className={styles.radioDescription}>{t('To_Achieve_This_It_Would_Be_Necessary_To_Have_Uniform_Grammar')}</p>
                 </div>
                 <div className={styles.radioWrapper}>
                     <div className={styles.btnWrapper}>
@@ -242,13 +245,13 @@ export const ChosePlanForm = ({ control, plan, onPlanChange, typeOfPrice }: ICho
                                         onChange={() => handleRadioChange("year")}
                                     />
                                     <label htmlFor="annualRadioBtn" className={styles.label}>
-                                        Annual
+                                        {t('Annual')}
                                     </label>
                                 </>
                             )}
                         />
                     </div>
-                    <p className={styles.radioDescription}>To achieve this, it would be necessary to have uniform grammar</p>
+                    <p className={styles.radioDescription}>{t('To_Achieve_This_It_Would_Be_Necessary_To_Have_Uniform_Grammar')}</p>
                 </div>
 
             </div>

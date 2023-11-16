@@ -8,9 +8,9 @@ interface IMarkAsReader {
   notification_id: string | number;
 }
 
-export const getNotification = async () => {
+export const getNotification = async (language: string) => {
   try {
-    const response = await axios.get(`${CREATE_NOTIFICATION}`);
+    const response = await axios.get(`${CREATE_NOTIFICATION}?language=${language}`);
     return response.data;
   } catch (error) {
     console.error(error);
