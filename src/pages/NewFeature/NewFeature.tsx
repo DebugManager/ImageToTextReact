@@ -7,6 +7,10 @@ import { CircleLoader } from 'react-spinners';
 import ReactPaginate from 'react-paginate';
 
 import { TableComponent, TableHeader } from '../../components';
+import { getAllFeatures, searchFeatures, setUnVote, setVote } from '../../services/feature.servise';
+import { FeaturesModal } from './FeaturesModal/FeaturesModal';
+import { getUser } from '../../services/locastorage.service';
+import { useLanguage } from '../../context/LanguageContext';
 
 import styles from './NewFeature.module.css';
 
@@ -18,9 +22,6 @@ import plusIcon from '../../assets/users-page/plus.svg';
 import arrowDownIcon from '../../assets/users-page/errowDown.svg';
 import like from '../../assets/features/like.svg';
 import voted from '../../assets/features/voted.svg';
-import { getAllFeatures, searchFeatures, setUnVote, setVote } from '../../services/feature.servise';
-import { FeaturesModal } from './FeaturesModal/FeaturesModal';
-import { getUser } from '../../services/locastorage.service';
 
 const myCustomStyles = {
     background: 'rgba(0, 0, 0, 0.8)',
@@ -63,6 +64,7 @@ interface IFeatures {
 const companiesPerPage = 5;
 
 const NewFeature = () => {
+    const { t } = useLanguage();
     const [currentPage, setCurrentPage] = useState(0);
     const [isLoading, setIsLoading] = useState<boolean>(false);
     const [resultsFound, setResultsFound] = useState(true);
@@ -193,7 +195,6 @@ const NewFeature = () => {
         }
     }
 
-
     const handleCloseModal = () => {
         setOpenFeaturesModal(false);
         fetchData(activeSortQuery);
@@ -228,7 +229,7 @@ const NewFeature = () => {
                     style={{ display: 'flex', alignItems: 'center' }}
                     onClick={() => sortData('name')}
                 >
-                    <p>Features</p>
+                    <p>{t('Features')}</p>
                     {sortOptions.find(option => option.key === 'name')?.direction === 'ascending' ? (
                         <img
                             src={arrowDownIcon}
@@ -261,7 +262,7 @@ const NewFeature = () => {
                     style={{ display: 'flex', alignItems: 'center', cursor: 'pointer' }}
                     onClick={() => sortData('votes')}
                 >
-                    <p>Vote</p>
+                    <p>{t('Vote')}</p>
                     {sortOptions.find(option => option.key === 'votes')?.direction === 'ascending' ? (
                         <img
                             src={arrowDownIcon}
@@ -300,7 +301,7 @@ const NewFeature = () => {
         {
             Header: (
                 <div style={{ display: 'flex', alignItems: 'center', cursor: 'pointer' }}>
-                    <p>Action</p>
+                    <p>{t('Action')}</p>
                 </div>
             ),
             accessor: 'id',
@@ -322,11 +323,11 @@ const NewFeature = () => {
                         ) : isUserVoted ? (
                             <div className={styles.votedBtn} onClick={() => handleVote(row.original.id)}>
                                 <img alt='voted' src={voted} />
-                                Vote
+                                {t('Vote')}
                             </div>
                         ) : (
                             <div className={styles.voteBtn} onClick={() => handleVote(row.original.id)}>
-                                Vote
+                                {t('Vote')}
                             </div>
                         )}
                     </div>
@@ -343,7 +344,7 @@ const NewFeature = () => {
             customHeader: (
                 <button className={styles.addCompanie} onClick={() => setOpenFeaturesModal(true)}>
                     <img src={plusIcon} alt='add new companie' />
-                    Request New features list
+                    {t('request_New_Features_List')}
                 </button>
             ),
         },
@@ -354,7 +355,7 @@ const NewFeature = () => {
                 <div className={styles.searchInputWrapper}>
                     <input
                         type="text"
-                        placeholder="Search"
+                        placeholder={t('search')}
                         className={styles.inputSearch}
                         value={searchValue}
                         onChange={(e) => setSearchValue(e.target.value)}
@@ -370,7 +371,7 @@ const NewFeature = () => {
                     }}>
                         <img src={searchIcon} alt="Search Icon" className={styles.searchIcon} />
                         {searchValue.length ? <img src={clearIcon} alt='clear' className={styles.clearIcon} onClick={handleClearSearch} /> : ''}
-                        <button className={styles.btnSearch} onClick={handleSearch}>Search</button>
+                        <button className={styles.btnSearch} onClick={handleSearch}>{t('search')}</button>
                     </div>
                 </div>
             ),
@@ -389,8 +390,8 @@ const NewFeature = () => {
         <div className={styles.wrapper}>
             <div className={styles.tableWrapper}>
                 <div className={styles.tableDescription}>
-                    <p className={styles.title}>NEW FEATURE</p>
-                    <p className={styles.desctiptionText}>Below you can request a new feature and the community can vote on each. </p>
+                    <p className={styles.title}>{t('NEW_FEATURE')}</p>
+                    <p className={styles.desctiptionText}>{t('new_features_description')}</p>
                 </div>
                 <TableHeader columns={columnsHeader} />
                 <TableComponent
@@ -411,8 +412,8 @@ const NewFeature = () => {
                 initialPage={currentPage}
                 containerClassName={styles.pagination}
                 activeClassName={styles.activePage}
-                previousLabel={<button className={styles.pagination__prev}><img alt='prev' src={left} />Prev</button>}
-                nextLabel={<button className={styles.pagination__prev}>Next<img alt='next' src={right} /></button>}
+                previousLabel={<button className={styles.pagination__prev}><img alt='prev' src={left} />{t('prev')}</button>}
+                nextLabel={<button className={styles.pagination__prev}>{t('next')}<img alt='next' src={right} /></button>}
             />
 
 

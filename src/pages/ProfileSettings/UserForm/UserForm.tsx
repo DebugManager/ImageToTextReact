@@ -2,6 +2,8 @@ import { useEffect, useState } from 'react';
 import { CircleLoader } from 'react-spinners';
 import { Controller } from 'react-hook-form';
 
+import { useLanguage } from '../../../context/LanguageContext';
+
 import styles from './UserForm.module.css';
 
 import camera from '../../../assets/profileSettings/camera.svg';
@@ -61,6 +63,8 @@ const UserForm: React.FC<UserFormProps> = ({
   errors,
   onUserDataChange,
 }) => {
+  const { t } = useLanguage();
+
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [formData, setFormData] = useState<IPersonalInfo>({
     firstName: user?.first_name || '',
@@ -106,7 +110,7 @@ const UserForm: React.FC<UserFormProps> = ({
           <div className={styles.nameWrapper}>
             <div className={styles.inputWrapper}>
               <label className={styles.label} htmlFor='firstName'>
-                First Name
+                {t('firstName')}
               </label>
               <Controller
                 name='firstName'
@@ -133,7 +137,7 @@ const UserForm: React.FC<UserFormProps> = ({
 
             <div className={styles.inputWrapper}>
               <label className={styles.label} htmlFor='lastName'>
-                Last Name
+                {t('lastName')}
               </label>
               <Controller
                 name='lastName'
@@ -161,7 +165,7 @@ const UserForm: React.FC<UserFormProps> = ({
 
           <div className={styles.inputWrapper}>
             <label className={styles.label} htmlFor='description'>
-              Description
+              {t('description')}
             </label>
             <Controller
               name='description'
@@ -188,7 +192,7 @@ const UserForm: React.FC<UserFormProps> = ({
           <div className={styles.nameWrapper}>
             <div className={styles.inputWrapper}>
               <label className={styles.label} htmlFor='support'>
-                Support
+                {t('support')}
               </label>
               <Controller
                 name='support'
@@ -214,7 +218,7 @@ const UserForm: React.FC<UserFormProps> = ({
 
             <div className={styles.inputWrapper}>
               <label className={styles.label} htmlFor='email'>
-                Email
+                {t('email')}
               </label>
               <Controller
                 name='email'
@@ -253,7 +257,7 @@ const UserForm: React.FC<UserFormProps> = ({
               render={({ field }) => (
                 <div className={styles.inputWrapper}>
                   <label className={styles.label} htmlFor='changePassword'>
-                    Change Password
+                    {t('changePassword')}
                   </label>
                   <div className={styles.passInptWrapper}>
                     <input

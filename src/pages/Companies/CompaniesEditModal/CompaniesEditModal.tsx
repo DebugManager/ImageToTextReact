@@ -5,9 +5,12 @@ import { Controller, useForm } from 'react-hook-form';
 import * as Yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { toast } from 'react-toastify';
+
+import { useLanguage } from '../../../context/LanguageContext';
 import { editCompany } from '../../../services/company.service';
 
 import styles from '../CompanieModal/CompanieModal.module.css';
+
 
 
 const myCustomStyles = {
@@ -39,6 +42,7 @@ interface IModal {
 
 
 export const CompaniesEditModal = ({ isOpenEditModal, handleCloseEditModal, companyName, companyId, isEditLoading }: IModal) => {
+    const { t } = useLanguage();
     const [isLoading, setIsLoading] = useState<boolean>(false);
     const createValidationSchema = Yup.object().shape({
         companieName: Yup.string()
@@ -116,10 +120,10 @@ export const CompaniesEditModal = ({ isOpenEditModal, handleCloseEditModal, comp
                 {isEditLoading ?
                     <p>Loading...</p> :
                     <>
-                        <p className={styles.modalTitle}>NEW COMPANY</p>
+                        <p className={styles.modalTitle}>{t('editCompany')}</p>
                         <form onSubmit={handleSubmit(onSubmit)}>
                             <div className={styles.inputWrapper} style={{ marginTop: '8px' }}>
-                                <label className={styles.label} htmlFor="companieName">Company name</label>
+                                <label className={styles.label} htmlFor="companieName">{t('companName')}</label>
                                 <Controller
                                     name="companieName"
                                     control={control}
@@ -139,7 +143,7 @@ export const CompaniesEditModal = ({ isOpenEditModal, handleCloseEditModal, comp
                                 {errors.companieName && <span className={styles.error}>{errors.companieName.message}</span>}
                             </div>
                             <div className={styles.btnWrapper}>
-                                <button className={styles.cancelBtn} onClick={handleCloseEditModal}>Cancel</button>
+                                <button className={styles.cancelBtn} onClick={handleCloseEditModal}>{t('cancel')}</button>
                                 <button className={styles.modalBtn} type='submit'>{isLoading ? <CircleLoader loading={isLoading} color={'#FFF'} size={10} /> : 'Save'}</button>
                             </div>
                         </form>

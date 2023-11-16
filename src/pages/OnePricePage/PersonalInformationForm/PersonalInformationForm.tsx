@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { Controller } from 'react-hook-form';
 import * as Yup from 'yup';
 
+import { useLanguage } from '../../../context/LanguageContext';
+
 import styles from './PersonalInformationForm.module.css';
 
 interface IPersonalInfoData {
@@ -38,6 +40,7 @@ export const PersonalInformationForm = ({
   errors,
   onUserDataChange,
 }: IPersonalInfo) => {
+  const { t } = useLanguage();
   const [formData, setFormData] = useState<IPersonalInfoData>({
     address: '',
     city: '',
@@ -96,11 +99,11 @@ export const PersonalInformationForm = ({
 
   return (
     <div className={styles.wrapper}>
-      <p className={styles.choosePlanTitle}>2. Personal Informations</p>
-      <p className={styles.choosePlanDesc}>Subscription Plan</p>
+      <p className={styles.choosePlanTitle}>{t('2_Personal_Informations')}</p>
+      <p className={styles.choosePlanDesc}>{t('Subscription_Plan')}</p>
       <div className={styles.inputWrapper}>
         <div className={styles.cardWrapper}>
-          <label className={styles.cardNumberLabel}>Address Line 1</label>
+          <label className={styles.cardNumberLabel}>{t('Address_Line_1')}</label>
           <Controller
             name='address'
             control={control}
@@ -132,7 +135,7 @@ export const PersonalInformationForm = ({
         </div>
 
         <div className={styles.cardWrapper}>
-          <label className={styles.cardNumberLabel}>City</label>
+          <label className={styles.cardNumberLabel}>{t('City')}</label>
           <Controller
             name='city'
             control={control}
@@ -166,7 +169,7 @@ export const PersonalInformationForm = ({
 
       <div className={styles.inputWrapper}>
         <div className={styles.cardWrapper}>
-          <label className={styles.cardNumberLabel}>Post / Zip code</label>
+          <label className={styles.cardNumberLabel}>{t('Post/Zip_Code')}</label>
           <Controller
             name='postCode'
             control={control}
@@ -198,7 +201,7 @@ export const PersonalInformationForm = ({
         </div>
 
         <div className={styles.cardWrapper}>
-          <label className={styles.cardNumberLabel}>Country</label>
+          <label className={styles.cardNumberLabel}>{t('Country')}</label>
           <Controller
             name='country'
             control={control}

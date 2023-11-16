@@ -6,6 +6,9 @@ import AuthProvider from './context/Auth';
 import { ToastContainer } from 'react-toastify';
 import { Elements } from '@stripe/react-stripe-js';
 import { loadStripe } from '@stripe/stripe-js';
+import './18n';
+import LanguageProvider from './context/LanguageContext';
+import { ExchangeRateProvider } from './context/ExchangeContext';
 
 import 'react-toastify/dist/ReactToastify.css';
 import './index.css';
@@ -29,20 +32,24 @@ const root = ReactDOM.createRoot(
 root.render(
   <React.StrictMode>
     <Elements stripe={stripePromise}>
-      <AuthProvider>
-        <App />
-        <ToastContainer />
-      </AuthProvider>
+      <ExchangeRateProvider>
+        <LanguageProvider>
+          <AuthProvider>
+            <App />
+            <ToastContainer />
+          </AuthProvider>
+        </LanguageProvider>
+      </ExchangeRateProvider>
     </Elements>
   </React.StrictMode>
 );
 
-const SendAnalytics = ()=> {
+const SendAnalytics = () => {
   ReactGA.send({
-    hitType: "pageview",
+    hitType: 'pageview',
     page: window.location.pathname,
   });
-}
+};
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))

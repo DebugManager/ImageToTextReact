@@ -6,6 +6,7 @@ import ReactPaginate from 'react-paginate';
 import { deleteUserById, getAllUsersWithSort, getUserById, searchUsers } from '../../services/user.service';
 import { TableComponent, TableHeader } from '../../components';
 import AddUserModal from './AddUserModal/AddUserModal';
+import { useLanguage } from '../../context/LanguageContext';
 
 import styles from './UsersPage.module.css';
 
@@ -51,6 +52,8 @@ type ColumnWithCustomHeader = Column<Row> & {
 };
 
 const UsersPage = () => {
+    const { t } = useLanguage();
+
     const [openModal, setOpenModal] = useState<boolean>(false);
     const [openEditModal, setOpenEditModal] = useState<boolean>(false);
     const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -180,7 +183,7 @@ const UsersPage = () => {
                     style={{ display: 'flex', alignItems: 'center', cursor: 'pointer' }}
                     onClick={() => sortData('type')}
                 >
-                    <p>Type</p>
+                    <p>{t('Type')}</p>
                     {sortOptions.find(option => option.key === 'type')?.direction === 'ascending' ? (
                         <img
                             src={arrowDownIcon}
@@ -213,7 +216,7 @@ const UsersPage = () => {
                     style={{ display: 'flex', alignItems: 'center', cursor: 'pointer' }}
                     onClick={() => sortData('last_login')}
                 >
-                    <p>Last Login</p>
+                    <p>{t('Last_Login')}</p>
                     {sortOptions.find(option => option.key === 'last_login')?.direction === 'ascending' ? (
                         <img
                             src={arrowDownIcon}
@@ -251,7 +254,7 @@ const UsersPage = () => {
                     style={{ display: 'flex', alignItems: 'center', cursor: 'pointer' }}
                     onClick={() => sortData('first_name')}
                 >
-                    <p>Name</p>
+                    <p>{t('Name')}</p>
                     {sortOptions.find(option => option.key === 'first_name')?.direction === 'ascending' ? (
                         <img
                             src={arrowDownIcon}
@@ -284,7 +287,7 @@ const UsersPage = () => {
                     style={{ display: 'flex', alignItems: 'center', cursor: 'pointer' }}
                     onClick={() => sortData('joined')}
                 >
-                    <p>Joined</p>
+                    <p>{t('Joined')}</p>
                     {sortOptions.find(option => option.key === 'joined')?.direction === 'ascending' ? (
                         <img
                             src={arrowDownIcon}
@@ -321,7 +324,7 @@ const UsersPage = () => {
                 <div
                     style={{ display: 'flex', alignItems: 'center', cursor: 'pointer' }}
                 >
-                    <p>Last Active</p>
+                    <p>{t('Last_Active')}</p>
                 </div>
             ),
             accessor: 'LastActive',
@@ -333,7 +336,7 @@ const UsersPage = () => {
                     style={{ display: 'flex', alignItems: 'center', cursor: 'pointer' }}
                     onClick={() => sortData('company')}
                 >
-                    <p>Company</p>
+                    <p>{t('Company')}</p>
                     {sortOptions.find(option => option.key === 'company')?.direction === 'ascending' ? (
                         <img
                             src={arrowDownIcon}
@@ -363,7 +366,7 @@ const UsersPage = () => {
         {
             Header: (
                 <div style={{ display: 'flex', alignItems: 'center' }}>
-                    <p>Action</p>
+                    <p>{t('Action')}</p>
                 </div>
             ),
             accessor: 'id',
@@ -391,11 +394,11 @@ const UsersPage = () => {
                 <div className={styles.filterWrapper}>
                     <div className={styles.filterBtnWrapper}>
                         <img src={userIcon} alt='type' />
-                        <p>Type</p>
+                        <p>{t('Type')}</p>
                     </div>
                     <div className={styles.filterBtnWrapper}>
                         <img src={officeIcon} alt='Company' />
-                        <p>Company</p>
+                        <p>{t('Company')}</p>
                     </div>
                 </div>
             ),
@@ -407,7 +410,7 @@ const UsersPage = () => {
                 <div className={styles.searchInputWrapper}>
                     <input
                         type="text"
-                        placeholder="Search"
+                        placeholder={t('search')}
                         className={styles.inputSearch}
                         value={searchValue}
                         onChange={(e) => setSearchValue(e.target.value)}
@@ -423,7 +426,7 @@ const UsersPage = () => {
                     }}>
                         <img src={searchIcon} alt="Search Icon" className={styles.searchIcon} />
                         {searchValue.length ? <img src={clearIcon} alt='clear' className={styles.clearIcon} onClick={handleClearSearch} /> : ''}
-                        <button className={styles.btnSearch} onClick={handleSearch}>Search</button>
+                        <button className={styles.btnSearch} onClick={handleSearch}>{t('search')}</button>
                     </div>
                 </div>
             ),
@@ -437,10 +440,10 @@ const UsersPage = () => {
     return (
         <div className={styles.wrapper}>
             <div className={styles.headerWrapper}>
-                <p className={styles.pricingTitle}>User</p>
+                <p className={styles.pricingTitle}>{t('User')}</p>
                 <button className={styles.addUserBtn} onClick={handleOpenModal}>
                     <img src={plusIcon} alt="add user" />
-                    <p>add user</p>
+                    <p>{t('Add_User')}</p>
                 </button>
             </div>
             <div className={styles.tableWrapper}>
@@ -456,8 +459,8 @@ const UsersPage = () => {
                 initialPage={currentPage}
                 containerClassName={styles.pagination}
                 activeClassName={styles.activePage}
-                previousLabel={<button className={styles.pagination__prev}><img alt='prev' src={left} />Prev</button>} // Стилізуйте кнопку "Prev"
-                nextLabel={<button className={styles.pagination__prev}>Next<img alt='next' src={right} /></button>}
+                previousLabel={<button className={styles.pagination__prev}><img alt='prev' src={left} />{t('prev')}</button>} // Стилізуйте кнопку "Prev"
+                nextLabel={<button className={styles.pagination__prev}>{t('next')}<img alt='next' src={right} /></button>}
             />
 
             <AddUserModal openModal={openModal} handleClose={handleClose} handleCloseEditModal={handleCloseEditModal} user={userById} openEditModal={openEditModal} userByIdLoading={userByIdLoading} />

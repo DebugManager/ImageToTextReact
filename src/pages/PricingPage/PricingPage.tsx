@@ -1,13 +1,16 @@
 import React, { useEffect, useState, useMemo, useCallback } from 'react';
 import { CircleLoader } from 'react-spinners';
+
 import PlanCard from './PlanCard/PlanCard';
+import { getUserById } from '../../services/user.service';
+import { useLanguage } from '../../context/LanguageContext';
 import { getPackages } from '../../services/pricing.service';
 import { getUser, setUser } from '../../services/locastorage.service';
+import { useExchangeRate } from '../../context/ExchangeContext';
 
 import styles from './PricingPage.module.css';
 
 import arrow from '../../assets/header/arrow.svg';
-import { getUserById } from '../../services/user.service';
 
 interface Options {
   name: string;
@@ -82,12 +85,19 @@ type PricingTypes = 'year' | 'month';
 const OnHoldId = 'price_1O9rhLDV4Z1ssWPD7vVu814B';
 
 const PricingPage = () => {
+  const { t } = useLanguage();
+
+  const exchangeRateData = useExchangeRate();
+
   const [typeOfPrice, setTypeOfPrice] = useState<PricingTypes>('month');
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [isCurrencyDropdownOpen, setIsCurrencyDropdownOpen] = useState(false);
   const [plans, setPlans] = useState<Price[]>([]);
   const [currentPlan, setCurrentPlan] = useState<string | null>(null);
   const [userID, setUserID] = useState<number | null>(null);
   const [user, setStateUser] = useState<IUser | null>(null);
+  const [currency, setCurrency] = useState<number | null>(null);
+  const [currencyName, setCurrencyName] = useState<string | null>(null);
 
   const fetchData = useCallback(async () => {
     try {
@@ -98,19 +108,16 @@ const PricingPage = () => {
     }
   }, [typeOfPrice]);
 
-  const fetchUpdatedUserData = useCallback(
-    async (userID: number) => {
-      try {
-        const data = await getUserById(userID);
-        setUser(data);
-        setStateUser((u) => ({ ...u, ...data }));
-        setCurrentPlan(data.current_plan);
-      } catch (error) {
-        console.error(error);
-      }
-    },
-    []
-  );
+  const fetchUpdatedUserData = useCallback(async (userID: number) => {
+    try {
+      const data = await getUserById(userID);
+      setUser(data);
+      setStateUser((u) => ({ ...u, ...data }));
+      setCurrentPlan(data.current_plan);
+    } catch (error) {
+      console.error(error);
+    }
+  }, []);
 
   useEffect(() => {
     fetchData();
@@ -138,38 +145,73 @@ const PricingPage = () => {
     setIsDropdownOpen((prev) => !prev);
   }, []);
 
+  const toggleCurencyDropdown = useCallback(() => {
+    setIsCurrencyDropdownOpen((prev) => !prev);
+  }, []);
+
+  const handleCurrencyClick = (currency: number, currencyName: string) => {
+    setCurrency(currency);
+    setCurrencyName(currencyName);
+  };
+
   filteredPlans?.sort((a, b) => a.unit_amount - b.unit_amount);
 
   return (
     <div className={styles.wrapper}>
-      <p className={styles.pricingTitle}>PRICING</p>
-      <p className={styles.centerTitle}>Choose your Pricing plan</p>
-      <p className={styles.description}>
-        To achieve this, it would be necessary to have uniform grammar,
-        pronunciation and more common words If several languages coalesce
-      </p>
-      <div className={styles.filterWrapper}>
-        <p className={styles.option}>View packages</p>
-        <div className={styles.filter} onClick={toggleDropdown}>
-          <p>{typeOfPrice}</p>
-          <img alt='arrow' src={arrow} className={styles.arrow} />
-        </div>
-        {isDropdownOpen && (
-          <div className={styles.optionWrapper}>
-            <div
-              onClick={() => setTypeOfPrice('month')}
-              className={styles.optionFilter}
-            >
-              Mounthly
-            </div>
-            <div
-              onClick={() => setTypeOfPrice('year')}
-              className={styles.optionFilter}
-            >
-              Annual
-            </div>
+      <p className={styles.pricingTitle}>{t('PRICING')}</p>
+      <p className={styles.centerTitle}>{t('pricingTitle')}</p>
+      <p className={styles.description}>{t('pricingDescription')}</p>
+
+      <div className={styles.dropDownWrapper}>
+        <div className={styles.filterWrapper}>
+          <p className={styles.option}>{t('viewPackages')}</p>
+          <div className={styles.filter} onClick={toggleDropdown}>
+            <p>{typeOfPrice}</p>
+            <img alt='arrow' src={arrow} className={styles.arrow} />
           </div>
-        )}
+          {isDropdownOpen && (
+            <div className={styles.optionWrapper}>
+              <div
+                onClick={() => setTypeOfPrice('month')}
+                className={styles.optionFilter}
+              >
+                {t('Mounthly')}
+              </div>
+              <div
+                onClick={() => setTypeOfPrice('year')}
+                className={styles.optionFilter}
+              >
+                {t('Annual')}
+              </div>
+            </div>
+          )}
+        </div>
+
+        <div className={styles.filterWrapper}>
+          <p className={styles.option}>View currency</p>
+          <div className={styles.filter} onClick={toggleCurencyDropdown}>
+            <p>{!currencyName ? 'USD' : currencyName}</p>
+            <img alt='arrow' src={arrow} className={styles.arrow} />
+          </div>
+          {isCurrencyDropdownOpen && (
+            <div className={styles.optionCurrencyWrapper}>
+              {Object.keys(exchangeRateData?.rates || {}).map((currency) => (
+                <div
+                  key={currency}
+                  className={styles.optionFilter}
+                  onClick={() =>
+                    handleCurrencyClick(
+                      exchangeRateData?.rates[currency] || 0,
+                      currency
+                    )
+                  }
+                >
+                  {currency}
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
       </div>
       <div className={styles.planWrapper}>
         {!filteredPlans?.length ? (
@@ -182,6 +224,8 @@ const PricingPage = () => {
             .map((plan) => (
               <div className={styles.cardWrapper}>
                 <PlanCard
+                  currencyName={currencyName}
+                  currency={currency}
                   key={plan.id}
                   id={plan.id}
                   plan={plan}

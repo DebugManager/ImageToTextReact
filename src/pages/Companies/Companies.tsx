@@ -1,12 +1,14 @@
 import React, { useCallback, useEffect, useState } from 'react';
-import { TableComponent, TableHeader } from '../../components';
 import { Column } from 'react-table';
 import ReactPaginate from 'react-paginate';
 import { format } from 'date-fns';
 import { toast } from 'react-toastify';
+
+import { useLanguage } from '../../context/LanguageContext';
 import { CompanieModal } from './CompanieModal/CompanieModal';
 import { deleteCompany, getAllCompanies, getCompanyById, searchCompanies } from '../../services/company.service';
 import { CompaniesEditModal } from './CompaniesEditModal/CompaniesEditModal';
+import { TableComponent, TableHeader } from '../../components';
 
 import styles from './Companies.module.css';
 
@@ -75,6 +77,8 @@ for (let i = 1; i <= 10; i++) {
 const companiesPerPage = 5;
 
 const Companies = () => {
+    const { t } = useLanguage();
+
     const [currentPage, setCurrentPage] = useState(0);
     const [isLoading, setIsLoading] = useState<boolean>(false);
     const [isEditLoading, setIsEditLoading] = useState<boolean>(false);
@@ -176,7 +180,7 @@ const Companies = () => {
                 <div
                     style={{ display: 'flex', alignItems: 'center' }}
                 >
-                    <p>Name</p>
+                    <p>{t('name')}</p>
                 </div>
             ),
             accessor: 'name',
@@ -187,7 +191,7 @@ const Companies = () => {
                 <div
                     style={{ display: 'flex', alignItems: 'center' }}
                 >
-                    <p>Create</p>
+                    <p>{t('create')}</p>
                 </div>
             ),
             accessor: 'created',
@@ -201,7 +205,7 @@ const Companies = () => {
         {
             Header: (
                 <div style={{ display: 'flex', alignItems: 'center' }}>
-                    <p>Action</p>
+                    <p>{t('action')}</p>
                 </div>
             ),
             accessor: 'id',
@@ -227,7 +231,7 @@ const Companies = () => {
             customHeader: (
                 <button className={styles.addCompanie} onClick={() => setOpenCompanieModal(true)}>
                     <img src={plusIcon} alt='add new companie' />
-                    New Company
+                    {t('newCompany')}
                 </button>
             ),
         },
@@ -238,7 +242,7 @@ const Companies = () => {
                 <div className={styles.searchInputWrapper}>
                     <input
                         type="text"
-                        placeholder="Search"
+                        placeholder={t('search')}
                         className={styles.inputSearch}
                         value={searchValue}
                         onChange={(e) => setSearchValue(e.target.value)}
@@ -254,7 +258,7 @@ const Companies = () => {
                     }}>
                         <img src={searchIcon} alt="Search Icon" className={styles.searchIcon} />
                         {searchValue.length ? <img src={clearIcon} alt='clear' className={styles.clearIcon} onClick={handleClearSearch} /> : ''}
-                        <button className={styles.btnSearch} onClick={handleSearch}>Search</button>
+                        <button className={styles.btnSearch} onClick={handleSearch}>{t('search')}</button>
                     </div>
                 </div>
             ),
@@ -273,8 +277,8 @@ const Companies = () => {
         <div className={styles.wrapper}>
             <div className={styles.tableWrapper}>
                 <div className={styles.tableDescription}>
-                    <p className={styles.title}>COMPANIES</p>
-                    <p className={styles.desctiptionText}>If you work with multiple Companies, you can add Companies here that can be used for reference when creating new conversions.</p>
+                    <p className={styles.title}>{t('companies')}</p>
+                    <p className={styles.desctiptionText}>{t('companies_description')}</p>
                 </div>
                 <TableHeader columns={columnsHeader} />
                 <TableComponent
@@ -295,8 +299,8 @@ const Companies = () => {
                 initialPage={currentPage}
                 containerClassName={styles.pagination}
                 activeClassName={styles.activePage}
-                previousLabel={<button className={styles.pagination__prev}><img alt='prev' src={left} />Prev</button>}
-                nextLabel={<button className={styles.pagination__prev}>Next<img alt='next' src={right} /></button>}
+                previousLabel={<button className={styles.pagination__prev}><img alt='prev' src={left} />{t('prev')}</button>}
+                nextLabel={<button className={styles.pagination__prev}>{t('next')}<img alt='next' src={right} /></button>}
             />
 
             <CompanieModal isOpen={openCompanieModal} handleClose={handleCloseModal} />
