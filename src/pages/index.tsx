@@ -11,3 +11,5 @@ export * from './ProfileSettings';
 export * from './InvocesTable';
 export * from './InvocePage';
 export * from './Affiliate';
+export * from './SupportPage';
+export * from './SupportPostPage';

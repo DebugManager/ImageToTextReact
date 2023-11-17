@@ -39,7 +39,7 @@ const ProfilePopUp = ({
   const handleLogOut = () => {
     localStorage.clear();
     window.location.reload();
-  }
+  };
 
   return (
     <div className={style}>
@@ -93,8 +93,16 @@ const ProfilePopUp = ({
       >
         Companies
       </Link>
-      <p className={styles.optionStyles}>Guide</p>
-      <button className={styles.optionStyles} onClick={handleLogOut}>Log out</button>
+      <Link
+        to={routes.support}
+        className={styles.optionStyles}
+        onClick={handleClose}
+      >
+        Support
+      </Link>
+      <button className={styles.optionStyles} onClick={handleLogOut}>
+        Log out
+      </button>
     </div>
   );
 };
