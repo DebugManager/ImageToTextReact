@@ -48,7 +48,7 @@ const ForgotPassForm = ({ changeForm, onSubmit, control, errors, formOptions, is
                 </form>
             </div>
 
-            <p className={styles.downDescription}>Have an account?<span className={styles.linkBottom} onClick={() => changeForm('loginForm')}>  Login</span>.</p>
+            <p className={styles.downDescription}>Have an account?<span className={styles.linkBottom} onClick={() => changeForm('loginForm')}>  Reset password</span>.</p>
 
             <p className={styles.madedBy}>
                 © 2023 crafted by <span className={styles.heart}></span> Outreach
