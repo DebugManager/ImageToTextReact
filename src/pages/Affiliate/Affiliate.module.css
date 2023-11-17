@@ -130,3 +130,12 @@
   border: none;
   cursor: pointer;
 }
+
+.error {
+  color: red;
+  font-family: Poppins;
+  font-size: 7px;
+  font-weight: 400;
+  line-height: 14px;
+  margin-top: 8px;
+}

@@ -36,6 +36,7 @@
     text-align: center;
     padding: 10px 14px 10px 14px;
     text-decoration: none;
+    border: none;
 }
 
 .optionStyles:hover {

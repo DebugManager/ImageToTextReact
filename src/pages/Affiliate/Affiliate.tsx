@@ -232,9 +232,6 @@ const Affiliate: React.FC = () => {
                 </div>
               )}
             />
-            {errors.email && (
-              <span className={styles.error}>{errors.email.message}</span>
-            )}
           </div>
         </div>
 

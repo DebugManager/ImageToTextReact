@@ -2,9 +2,9 @@ import { useState, useEffect } from 'react';
 
 import { Link } from 'react-router-dom';
 import routes from '../../../routes';
+import { getUser } from '../../../services/locastorage.service';
 
 import styles from './ProfilePopUp.module.css';
-import { getUser } from '../../../services/locastorage.service';
 
 const ProfilePopUp = ({
   isOpen,
@@ -35,6 +35,11 @@ const ProfilePopUp = ({
     setStyle(styles.profileWrapper);
     handleProfilePopUp();
   };
+
+  const handleLogOut = () => {
+    localStorage.clear();
+    window.location.reload();
+  }
 
   return (
     <div className={style}>
@@ -89,7 +94,7 @@ const ProfilePopUp = ({
         Companies
       </Link>
       <p className={styles.optionStyles}>Guide</p>
-      <p className={styles.optionStyles}>Support</p>
+      <button className={styles.optionStyles} onClick={handleLogOut}>Log out</button>
     </div>
   );
 };
