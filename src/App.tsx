@@ -30,7 +30,14 @@ import { Layout } from './components';
 
 import './App.module.css';
 
-ReactGA.initialize('G-898SHVFZE2');
+export const initGA = () => {
+  ReactGA.initialize('UA-XXXXXXXXX-X');
+};
+
+export const logPageView = () => {
+  ReactGA.set({ page: window.location.pathname });
+  ReactGA.pageview(window.location.pathname);
+};
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -60,7 +67,8 @@ const router = createBrowserRouter(
 
 function App() {
   useEffect(() => {
-    ReactGA.pageview(window.location.pathname + window.location.search);
+    initGA();
+    logPageView();
   }, []);
   return (
     <>
