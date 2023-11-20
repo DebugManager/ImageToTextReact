@@ -14,11 +14,88 @@
   display: flex;
   align-items: center;
   padding: 8px 10px;
+  position: relative;
 }
 
-.linkId{
-    text-decoration: underline;
-    color: var(--text-color-60, #495057);
+.optionWrapper {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  top: 29px;
+  border-radius: 4px;
+  font-family: Poppins;
+  font-size: 7px;
+  font-style: normal;
+  font-weight: 400;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 4px;
+  padding-right: 4px;
+  line-height: 14px;
+  width: 57px;
+  text-transform: capitalize;
+  z-index: 3;
+  background: var(--text-color-60, #eff2f7);
+}
+
+.optionPackageWrapper {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  top: 29px;
+  left: 70px;
+  border-radius: 4px;
+  font-family: Poppins;
+  font-size: 7px;
+  font-style: normal;
+  font-weight: 400;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 4px;
+  padding-right: 4px;
+  line-height: 14px;
+  width: 63px;
+  text-transform: capitalize;
+  z-index: 3;
+  background: var(--text-color-60, #eff2f7);
+}
+
+.optionStatusWrapper {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  top: 29px;
+  left: 134px;
+  border-radius: 4px;
+  font-family: Poppins;
+  font-size: 7px;
+  font-style: normal;
+  font-weight: 400;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 4px;
+  padding-right: 4px;
+  line-height: 14px;
+  width: 63px;
+  text-transform: capitalize;
+  z-index: 3;
+  background: var(--text-color-60, #eff2f7);
+}
+
+.optionFilter {
+  margin-top: 4px;
+  cursor: pointer;
+  padding: 2px 8px;
+  border-radius: 4px;
+}
+
+.optionFilter:hover {
+  background: var(--text-color-60, #e5ebf4);
+}
+
+.linkId {
+  text-decoration: underline;
+  color: var(--text-color-60, #495057);
 }
 
 .filterBtnWrapper {
@@ -112,4 +189,9 @@
   background-color: #556ee6;
   color: #fff;
   font-weight: bold;
+}
+
+.chipsWrapper{
+  height: 30px;
+  font-size: 7px;
 }

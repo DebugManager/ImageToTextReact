@@ -39,17 +39,41 @@ const GET_PACKAGE_ON_HOLD =
   'http://157.230.50.75:8000/v1/stripe/process-onhold/';
 const CANCEL_SUBSCRIPTION =
   'http://157.230.50.75:8000/v1/stripe/cancel-subscription/';
-const GET_ALL_INVOCES =
-  'http://157.230.50.75:8000/v1/stripe/get-invoices/?sort=';
+const GET_ALL_INVOCES = 'http://157.230.50.75:8000/v1/stripe/get-invoices/';
 const GET_INVOICE_DETAIL =
   'http://157.230.50.75:8000/v1/stripe/get-invoice-detail/?invoice_id=';
 
-export const getAllInvoces = async (sortOption: string, customerId: string) => {
+export const getAllInvoces = async (
+  sortOption: string | undefined,
+  customerId: string,
+  sortPackage?: string,
+  status?: string,
+  method?: string
+) => {
   const data = {
     customer_id: customerId,
   };
+
+  console.log(sortPackage);
+
+  let queryString = `?sort=${sortOption}`;
+
+  if (sortPackage) {
+    queryString += `&package=${sortPackage}`;
+  }
+
+  if (status) {
+    queryString += `&status=${status}`;
+  }
+
+  if (method) {
+    queryString += `&method=${method}`;
+  }
+
+  const url = `${GET_ALL_INVOCES}${queryString}`;
+
   try {
-    const response = await axios.post(`${GET_ALL_INVOCES}${sortOption}`, data);
+    const response = await axios.post(url, data);
     return response.data;
   } catch (error) {
     console.error(error);

@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 
 import NotificationPopUp from './NotificationPopUp/NotificationPopUp';
 import ProfilePopUp from './ProfilePopUp/ProfilePopUp';
@@ -79,6 +79,10 @@ const LanguagesList = [
 ];
 
 const Header = () => {
+  const notificationPopUpRef = useRef<HTMLImageElement | null>(null);
+  const profilePopUpRef = useRef<HTMLDivElement | null>(null);
+  const languagesListRef = useRef<HTMLImageElement | null>(null);
+
   const [style, setStyle] = useState(styles.languageWrapper);
   const [openLanguage, setOpenLanguage] = useState<boolean>(false);
   const [openNotification, setOpenNotification] = useState<boolean>(false);
@@ -154,7 +158,8 @@ const Header = () => {
     setOpenProfile(false);
   };
 
-  const handleOpenlanguage = () => {
+  const handleOpenlanguage = (event: React.MouseEvent<HTMLImageElement>) => {
+    event.stopPropagation();
     setOpenLanguage(!openLanguage);
     setOpenNotification(false);
     setOpenProfile(false);
@@ -209,6 +214,58 @@ const Header = () => {
     }
   };
 
+  const handleClickOutside = (event: MouseEvent) => {
+    if (
+      profilePopUpRef.current &&
+      !profilePopUpRef.current.contains(event.target as Node)
+    ) {
+      setOpenProfile(false);
+    }
+  };
+
+  const handleClickOutsideNotification = (event: MouseEvent) => {
+    if (
+      notificationPopUpRef.current &&
+      !notificationPopUpRef.current.contains(event.target as Node)
+    ) {
+      setOpenNotification(false);
+    }
+  };
+
+  const handleClickOutsideLanguages = (event: MouseEvent) => {
+    if (
+      languagesListRef.current &&
+      !languagesListRef.current.contains(event.target as Node)
+    ) {
+      setOpenLanguage(false);
+      setStyle(styles.languageWrapper);
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener('click', handleClickOutsideLanguages);
+
+    return () => {
+      document.removeEventListener('click', handleClickOutsideLanguages);
+    };
+  }, []);
+
+  useEffect(() => {
+    document.addEventListener('click', handleClickOutsideNotification);
+
+    return () => {
+      document.removeEventListener('click', handleClickOutsideNotification);
+    };
+  }, []);
+
+  useEffect(() => {
+    document.addEventListener('click', handleClickOutside);
+
+    return () => {
+      document.removeEventListener('click', handleClickOutside);
+    };
+  }, []);
+
   return (
     <div className={styles.wrapper}>
       <p className={styles.title}>SKOTE</p>
@@ -232,7 +289,7 @@ const Header = () => {
             onClick={handleOpenlanguage}
           />
 
-          <div className={style}>
+          <div className={style} ref={languagesListRef}>
             <div>
               {LanguagesList.map(({ id, value }) => (
                 <div
@@ -254,6 +311,7 @@ const Header = () => {
             src={bell}
             alt='moon'
             className={styles.bellImage}
+            ref={notificationPopUpRef}
             onClick={handleOpenNotification}
           />
           {isNotification && <div className={styles.notification} />}
@@ -268,7 +326,11 @@ const Header = () => {
         </div>
 
         <>
-          <div className={styles.userData} onClick={handleProfilePopUp}>
+          <div
+            className={styles.userData}
+            onClick={handleProfilePopUp}
+            ref={profilePopUpRef}
+          >
             <p className={styles.userName}>{settedUser?.first_name}</p>
             <img src={arrow} alt='moon' className={styles.arrowImage} />
           </div>

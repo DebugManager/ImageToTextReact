@@ -5,7 +5,7 @@ import {
   createRoutesFromElements,
 } from 'react-router-dom';
 import { useEffect } from 'react';
-import ReactGA from 'react-ga';
+import ReactGA from 'react-ga4';
 
 import routes from './routes';
 import { PrivateRoutes } from './components/PrivatRoytes';
@@ -32,14 +32,7 @@ import { Layout } from './components';
 
 import './App.module.css';
 
-export const initGA = () => {
-  ReactGA.initialize('UA-XXXXXXXXX-X');
-};
-
-export const logPageView = () => {
-  ReactGA.set({ page: window.location.pathname });
-  ReactGA.pageview(window.location.pathname);
-};
+ReactGA.initialize('G-898SHVFZE2');
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -70,10 +63,6 @@ const router = createBrowserRouter(
 );
 
 function App() {
-  useEffect(() => {
-    initGA();
-    logPageView();
-  }, []);
   return (
     <>
       <RouterProvider router={router} />

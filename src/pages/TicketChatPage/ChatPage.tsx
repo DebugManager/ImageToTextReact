@@ -72,7 +72,7 @@ const ChatPage: React.FC = () => {
   useEffect(() => {
     id && fetchData(id);
     id && fetchMessages(id);
-  }, [fetchData, id]);
+  }, [fetchData, id, fetchMessages]);
 
   useEffect(() => {
     const user = getUser();

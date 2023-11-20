@@ -106,5 +106,6 @@
     "cardNumber": "Card Number",
     "expiryDate": "Expiry Date",
     "submit": "submit",
-    "Please_choose_the_plan": "Please choose the plan"
+    "Please_choose_the_plan": "Please choose the plan",
+    "View_Currency": "View Currency"
 }

@@ -1,8 +1,9 @@
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { Column } from 'react-table';
 import { format } from 'date-fns';
 import ReactPaginate from 'react-paginate';
 import { Link } from 'react-router-dom';
+import Chip from '@mui/material/Chip';
 
 import { TableComponent, TableHeader } from '../../components';
 import { getUser } from '../../services/locastorage.service';
@@ -17,7 +18,6 @@ import view from '../../assets/invoceTable/view-grid.svg';
 import download from '../../assets/invoceTable/download.svg';
 import left from '../../assets/users-page/left.svg';
 import right from '../../assets/users-page/right.svg';
-
 
 type Row = {
   Type: string;
@@ -47,6 +47,19 @@ type ColumnWithCustomHeader = Column<Row> & {
 const invocesPerPage = 5;
 
 const InvoicesTable: React.FC = () => {
+  const methotPopUpRef = useRef<HTMLDivElement | null>(null);
+  const packagePopUpRef = useRef<HTMLDivElement | null>(null);
+  const statusPopUpRef = useRef<HTMLDivElement | null>(null);
+
+  const [uniqueMethods, setUniqueMethods] = useState<string[]>([]);
+  const [uniquePackages, setUniquePackages] = useState<string[]>([]);
+  const [uniqueStatuses, setUniqueStatuses] = useState<string[]>([]);
+  const [typeOfStatus, setTypeOfStatus] = useState<string | null>(null);
+  const [typeOfMethod, setTypeOfMethod] = useState<string | null>(null);
+  const [typeOfPackage, setTypeOfPackage] = useState<string | null>(null);
+  const [isStatusDropdownOpen, setIsStatusDropdownOpen] = useState(false);
+  const [isPackageDropdownOpen, setIsPackageDropdownOpen] = useState(false);
+  const [isMethodDropdownOpen, setIsMethodDropdownOpen] = useState(false);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [resultsFound, setResultsFound] = useState(true);
   const [invoces, setInvoces] = useState<IInvoce[]>([]);
@@ -86,16 +99,30 @@ const InvoicesTable: React.FC = () => {
       key,
       sortDirection,
       customerId,
+      sortPackage,
+      status,
+      method,
     }: {
-      key: string;
+      key?: string;
       sortDirection?: string;
-      customerId: string;
+      customerId?: string;
+      sortPackage?: string | null | undefined;
+      status?: string | null | undefined;
+      method?: string | null | undefined;
     }) => {
+      // console.log(sortPackage, status, method);
       setIsLoading(true);
       if (customerId) {
         try {
+          console.log(sortPackage, status, method);
           const sortParam = sortDirection === 'descending' ? `-${key}` : key;
-          const data = await getAllInvoces(sortParam, customerId);
+          const data = await getAllInvoces(
+            sortParam,
+            customerId,
+            sortPackage ?? undefined,
+            status ?? undefined,
+            method ?? undefined
+          );
           setInvoces(data.data);
           setIsLoading(false);
           setResultsFound(true);
@@ -107,6 +134,18 @@ const InvoicesTable: React.FC = () => {
     },
     []
   );
+
+  useEffect(() => {
+    if (customerId) {
+      fetchData({
+        key: activeSortQuery.key,
+        sortPackage: typeOfPackage,
+        method: typeOfMethod,
+        status: typeOfStatus,
+        customerId: customerId,
+      });
+    }
+  }, [typeOfStatus, typeOfMethod, typeOfPackage, customerId, activeSortQuery, fetchData]);
 
   useEffect(() => {
     if (customerId) {
@@ -145,6 +184,83 @@ const InvoicesTable: React.FC = () => {
     setCurrentPage(selected);
   };
 
+  const toggleDropdown = useCallback(() => {
+    setIsMethodDropdownOpen((prev) => !prev);
+  }, []);
+
+  const packageDropdown = useCallback(() => {
+    setIsPackageDropdownOpen((prev) => !prev);
+  }, []);
+
+  const statusDropdown = useCallback(() => {
+    setIsStatusDropdownOpen((prev) => !prev);
+  }, []);
+
+  useEffect(() => {
+    const methods = invoces.map((invoice) => invoice.method);
+    const uniqueMethods = [...new Set(methods)];
+    setUniqueMethods(uniqueMethods);
+
+    const packages = invoces.map((invoice) => invoice.name);
+    const uniquePackages = [...new Set(packages)];
+    setUniquePackages(uniquePackages);
+
+    const statuses = invoces.map((invoice) => invoice.status);
+    const uniqueStatuses = [...new Set(statuses)];
+    setUniqueStatuses(uniqueStatuses);
+  }, [invoces]);
+
+  const handleClickOutsideMethods = (event: MouseEvent) => {
+    if (
+      methotPopUpRef.current &&
+      !methotPopUpRef.current.contains(event.target as Node)
+    ) {
+      setIsMethodDropdownOpen(false);
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener('click', handleClickOutsideMethods);
+
+    return () => {
+      document.removeEventListener('click', handleClickOutsideMethods);
+    };
+  }, []);
+
+  const handleClickOutsidePackages = (event: MouseEvent) => {
+    if (
+      packagePopUpRef.current &&
+      !packagePopUpRef.current.contains(event.target as Node)
+    ) {
+      setIsPackageDropdownOpen(false);
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener('click', handleClickOutsidePackages);
+
+    return () => {
+      document.removeEventListener('click', handleClickOutsidePackages);
+    };
+  }, []);
+
+  const handleClickOutsideStatuses = (event: MouseEvent) => {
+    if (
+      statusPopUpRef.current &&
+      !statusPopUpRef.current.contains(event.target as Node)
+    ) {
+      setIsStatusDropdownOpen(false);
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener('click', handleClickOutsideStatuses);
+
+    return () => {
+      document.removeEventListener('click', handleClickOutsideStatuses);
+    };
+  }, []);
+
   const columns = [
     {
       Header: (
@@ -180,7 +296,12 @@ const InvoicesTable: React.FC = () => {
       accessor: 'id',
       width: 80,
       Cell: ({ value, row }: { value: string; row: any }) => (
-        <Link className={styles.linkId} to={`/invoce-details/${row.original.id}`}>{value.slice(0, 7)}...</Link>
+        <Link
+          className={styles.linkId}
+          to={`/invoce-details/${row.original.id}`}
+        >
+          {value.slice(0, 7)}...
+        </Link>
       ),
     },
     {
@@ -420,18 +541,124 @@ const InvoicesTable: React.FC = () => {
       width: 332,
       customHeader: (
         <div className={styles.filterWrapper}>
-          <div className={styles.filterBtnWrapper}>
+          <div
+            className={styles.filterBtnWrapper}
+            onClick={toggleDropdown}
+            ref={methotPopUpRef}
+          >
             <img src={hashtag} alt='Method' />
             <p>Method</p>
           </div>
-          <div className={styles.filterBtnWrapper}>
+          {isMethodDropdownOpen && (
+            <div className={styles.optionWrapper}>
+              {uniqueMethods.map((method) => (
+                <div
+                  key={method}
+                  onClick={() => {
+                    setTypeOfMethod(method);
+                  }}
+                  className={styles.optionFilter}
+                >
+                  {method}
+                </div>
+              ))}
+            </div>
+          )}
+          <div
+            className={styles.filterBtnWrapper}
+            onClick={packageDropdown}
+            ref={packagePopUpRef}
+          >
             <img src={view} alt='Package' />
             <p>Package</p>
           </div>
-          <div className={styles.filterBtnWrapper}>
+          {isPackageDropdownOpen && (
+            <div className={styles.optionPackageWrapper}>
+              {uniquePackages.map((method) => (
+                <div
+                  key={method}
+                  onClick={() => {
+                    setTypeOfPackage(method);
+                  }}
+                  className={styles.optionFilter}
+                >
+                  {method}
+                </div>
+              ))}
+            </div>
+          )}
+          <div
+            className={styles.filterBtnWrapper}
+            onClick={statusDropdown}
+            ref={statusPopUpRef}
+          >
             <img src={status} alt='Status' />
             <p>Status</p>
           </div>
+          {isStatusDropdownOpen && (
+            <div className={styles.optionStatusWrapper}>
+              {uniqueStatuses.map((method) => (
+                <div
+                  key={method}
+                  onClick={() => {
+                    setTypeOfStatus(method);
+                  }}
+                  className={styles.optionFilter}
+                >
+                  {method}
+                </div>
+              ))}
+            </div>
+          )}
+
+          {typeOfStatus && (
+              <Chip
+                 sx={{
+                  height: '16px',
+                  fontSize: '7px',
+                  p: '4px',
+                  '& .MuiChip-deleteIcon': {
+                    width: '12px',
+                    height: '12px',
+                    fontSize: '10px',
+                  },
+                }}
+                label={typeOfStatus.toUpperCase()}
+                onDelete={() => setTypeOfStatus(null)}
+              />
+          )}
+          {typeOfMethod && (
+            <Chip
+              sx={{
+                height: '16px',
+                fontSize: '7px',
+                p: '4px',
+                '& .MuiChip-deleteIcon': {
+                  width: '12px',
+                  height: '12px',
+                  fontSize: '10px',
+                },
+              }}
+              label={typeOfMethod.toUpperCase()}
+              onDelete={() => setTypeOfMethod(null)}
+            />
+          )}
+          {typeOfPackage && (
+            <Chip
+              sx={{
+                height: '16px',
+                fontSize: '7px',
+                p: '4px',
+                '& .MuiChip-deleteIcon': {
+                  width: '12px',
+                  height: '12px',
+                  fontSize: '10px',
+                },
+              }}
+              label={typeOfPackage.toUpperCase()}
+              onDelete={() => setTypeOfPackage(null)}
+            />
+          )}
         </div>
       ),
     },
