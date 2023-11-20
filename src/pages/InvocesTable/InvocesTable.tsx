@@ -110,7 +110,6 @@ const InvoicesTable: React.FC = () => {
       status?: string | null | undefined;
       method?: string | null | undefined;
     }) => {
-      // console.log(sortPackage, status, method);
       setIsLoading(true);
       if (customerId) {
         try {

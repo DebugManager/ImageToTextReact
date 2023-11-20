@@ -1,234 +1,317 @@
 .wrapper {
-    display: flex;
-    flex-direction: column;
-    margin: 0 auto;
-    padding: 20px;
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+  padding: 20px;
 }
 
 .btnReply {
-    display: flex;
-    padding: 2px 8px;
-    justify-content: center;
-    align-items: center;
-    gap: 4px;
-    border-radius: 4px;
-    background: var(--text-color-60, #EFF2F7);
-    color: var(--text-color-20, #495057);
-    text-decoration: none;
-    font-family: Poppins;
-    font-size: 7px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: 14px;
-    text-transform: capitalize;
-    /* width: 47px; */
-    cursor: pointer;
+  display: flex;
+  padding: 2px 8px;
+  justify-content: center;
+  align-items: center;
+  gap: 4px;
+  border-radius: 4px;
+  background: var(--text-color-60, #eff2f7);
+  color: var(--text-color-20, #495057);
+  text-decoration: none;
+  font-family: Poppins;
+  font-size: 7px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 14px;
+  text-transform: capitalize;
+  /* width: 47px; */
+  cursor: pointer;
 }
 
 .addCompanie {
-    display: flex;
-    padding: 2px 8px;
-    justify-content: center;
-    align-items: center;
-    gap: 4px;
-    border-radius: 4px;
-    background: var(--main-main, #556EE6);
-    color: var(--text-color-white, #FFF);
-    font-family: Poppins;
-    font-size: 7px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: 14px;
-    text-transform: capitalize;
-    border: none;
-    margin-left: 10px;
-    cursor: pointer;
+  display: flex;
+  padding: 2px 8px;
+  justify-content: center;
+  align-items: center;
+  gap: 4px;
+  border-radius: 4px;
+  background: var(--main-main, #556ee6);
+  color: var(--text-color-white, #fff);
+  font-family: Poppins;
+  font-size: 7px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 14px;
+  text-transform: capitalize;
+  border: none;
+  margin-left: 10px;
+  cursor: pointer;
 }
 
-
 .searchInputWrapper {
-    padding: 8px 10px;
-    display: flex;
-    flex: 1 0 0;
-    background: var(--text-color-white, #FFF);
-    align-items: center;
-    position: relative;
-    border-left: 1px solid var(--text-color-50, #EFF2F7);
+  padding: 8px 10px;
+  display: flex;
+  flex: 1 0 0;
+  background: var(--text-color-white, #fff);
+  align-items: center;
+  position: relative;
+  border-left: 1px solid var(--text-color-50, #eff2f7);
 }
 
 .inputSearch {
-    display: flex;
-    height: 30px;
-    padding: 11px 16px;
-    align-items: center;
-    gap: 7px;
-    flex: 1 0 0;
-    background: var(--text-color-white, #FFF);
-    border: none;
-    color: var(--text-color-80, #555B6D);
-    font-family: Poppins;
-    font-size: 8px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: 15px;
-    text-transform: capitalize;
+  display: flex;
+  height: 30px;
+  padding: 11px 16px;
+  align-items: center;
+  gap: 7px;
+  flex: 1 0 0;
+  background: var(--text-color-white, #fff);
+  border: none;
+  color: var(--text-color-80, #555b6d);
+  font-family: Poppins;
+  font-size: 8px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 15px;
+  text-transform: capitalize;
 }
 
 .inputSearch:focus,
 .inputSearch:focus {
-    outline: none;
+  outline: none;
 }
 
 .searchIcon {
-    position: absolute;
-    left: 11px;
-    top: 18px;
+  position: absolute;
+  left: 11px;
+  top: 18px;
 }
 
 .btnSearch {
-    display: flex;
-    padding: 2px 8px;
-    justify-content: center;
-    align-items: center;
-    gap: 4px;
-    border-radius: 4px;
-    background: var(--main-main, #556EE6);
-    border: none;
+  display: flex;
+  padding: 2px 8px;
+  justify-content: center;
+  align-items: center;
+  gap: 4px;
+  border-radius: 4px;
+  background: var(--main-main, #556ee6);
+  border: none;
 
-    color: var(--text-color-white, #FFF);
-    font-family: Poppins;
-    font-size: 7px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: 14px;
-    text-transform: capitalize;
-    cursor: pointer;
+  color: var(--text-color-white, #fff);
+  font-family: Poppins;
+  font-size: 7px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 14px;
+  text-transform: capitalize;
+  cursor: pointer;
 }
 
 .tableWrapper {
-    margin: 20px auto;
-    /* width: 484px; */
+  margin: 20px auto;
+  /* width: 484px; */
 }
 
 .clearIcon {
-    position: absolute;
-    height: 8px;
-    width: 8px;
-    right: 80px;
+  position: absolute;
+  height: 8px;
+  width: 8px;
+  right: 80px;
 }
 
 .pending {
-    display: flex;
-    padding: 0px 5px;
-    align-items: center;
-    text-align: center;
-    gap: 5px;
-    border-radius: 4px;
-    background: var(--warning-main, #F1B44C);
-    width: 39px;
-    color: var(--text-color-10, #FFF);
-    font-family: Poppins;
-    font-size: 7px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: 10px;
-    text-transform: capitalize;
-    justify-content: center;
+  display: flex;
+  padding: 0px 5px;
+  align-items: center;
+  text-align: center;
+  gap: 5px;
+  border-radius: 4px;
+  background: var(--warning-main, #f1b44c);
+  width: 39px;
+  color: var(--text-color-10, #fff);
+  font-family: Poppins;
+  font-size: 7px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 10px;
+  text-transform: capitalize;
+  justify-content: center;
 }
 
 .succes {
-    display: flex;
-    padding: 0px 5px;
-    align-items: center;
-    gap: 5px;
-    border-radius: 4px;
-    background: var(--success-main, #34C38F);
-    width: 39px;
-    color: var(--text-color-10, #FFF);
-    font-family: Poppins;
-    font-size: 7px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: 10px;
-    text-transform: capitalize;
-    text-align: center;
-    justify-content: center;
+  display: flex;
+  padding: 0px 5px;
+  align-items: center;
+  gap: 5px;
+  border-radius: 4px;
+  background: var(--success-main, #34c38f);
+  width: 39px;
+  color: var(--text-color-10, #fff);
+  font-family: Poppins;
+  font-size: 7px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 10px;
+  text-transform: capitalize;
+  text-align: center;
+  justify-content: center;
 }
 
 .btnWrapper {
-    display: flex;
-    align-items: center;
-    text-decoration: none;
+  display: flex;
+  align-items: center;
+  text-decoration: none;
 }
 
 .closeTicket {
-    display: flex;
-    padding: 2px 8px;
-    justify-content: center;
-    align-items: center;
-    gap: 4px;
-    border-radius: 4px;
-    background: var(--primary-main, #556EE6);
-    color: var(--text-color-10, #FFF);
-    /* Text 7/Regular */
-    font-family: Poppins;
-    font-size: 7px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: 14px;
-    /* 200% */
-    text-transform: capitalize;
-    cursor: pointer;
-    margin-left: 8px;
+  display: flex;
+  padding: 2px 8px;
+  justify-content: center;
+  align-items: center;
+  gap: 4px;
+  border-radius: 4px;
+  background: var(--primary-main, #556ee6);
+  color: var(--text-color-10, #fff);
+  /* Text 7/Regular */
+  font-family: Poppins;
+  font-size: 7px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 14px;
+  /* 200% */
+  text-transform: capitalize;
+  cursor: pointer;
+  margin-left: 8px;
 }
 
 /************* PAGINATION *************/
 
 .pagination {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    list-style: none;
-    padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  list-style: none;
+  padding: 0;
 }
 
 .pagination__prev {
-    display: flex;
-    padding: 2px 8px;
-    justify-content: center;
-    align-items: center;
-    gap: 4px;
-    border-radius: 4px;
-    background: var(--text-color-60, #EFF2F7);
-    color: var(--text-color-20, #495057);
-    font-family: Poppins;
-    font-size: 7px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: 14px;
-    text-transform: capitalize;
-    border: none;
-    cursor: pointer;
+  display: flex;
+  padding: 2px 8px;
+  justify-content: center;
+  align-items: center;
+  gap: 4px;
+  border-radius: 4px;
+  background: var(--text-color-60, #eff2f7);
+  color: var(--text-color-20, #495057);
+  font-family: Poppins;
+  font-size: 7px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 14px;
+  text-transform: capitalize;
+  border: none;
+  cursor: pointer;
 }
 
 .pagination a {
-    display: block;
-    padding: 8px 16px;
-    text-decoration: none;
-    border-radius: 4px;
-    cursor: pointer;
+  display: block;
+  padding: 8px 16px;
+  text-decoration: none;
+  border-radius: 4px;
+  cursor: pointer;
 
-    font-family: Poppins;
-    font-size: 7px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: 14px;
-    text-transform: capitalize;
+  font-family: Poppins;
+  font-size: 7px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 14px;
+  text-transform: capitalize;
 }
 
 .activePage {
-    border-radius: 4px;
-    background-color: #556EE6;
-    color: #fff;
-    font-weight: bold;
+  border-radius: 4px;
+  background-color: #556ee6;
+  color: #fff;
+  font-weight: bold;
+}
+
+.tableDescription {
+  display: flex;
+  padding: 8px 10px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 26px;
+  align-self: stretch;
+  border-bottom: 1px solid var(--text-color-50, #eff2f7);
+  background: var(--text-color-10, #fff);
+}
+
+.smallWrapper {
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.filterTitle {
+  color: var(--text-color-90, #495057);
+  font-family: Poppins;
+  font-size: 7px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 14px;
+  margin-right: 10px;
+}
+
+.filterBtnWrapper {
+  display: flex;
+  align-items: center;
+  display: flex;
+  padding: 2px 8px;
+  justify-content: center;
+  align-items: center;
+  gap: 4px;
+  border-radius: 4px;
+  border: 1px solid var(--text-color-20, #eff2f7);
+  background: var(--text-color-70, #fff);
+
+  color: var(--text-color-20, #495057);
+  font-family: Poppins;
+  font-size: 7px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 14px;
+  text-transform: capitalize;
+  margin-right: 4px;
+  cursor: pointer;
+}
+
+.optionWrapper {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  top: 22px;
+  left: 21px;
+  border-radius: 4px;
+  font-family: Poppins;
+  font-size: 7px;
+  font-style: normal;
+  font-weight: 400;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 4px;
+  padding-right: 4px;
+  line-height: 14px;
+  width: 57px;
+  text-transform: capitalize;
+  z-index: 3;
+  background: var(--text-color-60, #eff2f7);
+}
+
+.optionFilter {
+  margin-top: 4px;
+  cursor: pointer;
+  padding: 2px 8px;
+  border-radius: 4px;
+}
+
+.optionFilter:hover {
+  background: var(--text-color-60, #e5ebf4);
 }

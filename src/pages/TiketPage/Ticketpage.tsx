@@ -1,10 +1,11 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { format } from 'date-fns';
 import { Column } from 'react-table';
 import ReactPaginate from 'react-paginate';
 import { toast } from 'react-toastify';
 import { CircleLoader } from 'react-spinners';
 import { Link } from 'react-router-dom';
+import Chip from '@mui/material/Chip';
 
 import { TableComponent, TableHeader } from '../../components';
 import {
@@ -16,10 +17,10 @@ import { TicketModal } from './TicketModal/TicketModal';
 import { getUser } from '../../services/locastorage.service';
 import { useLanguage } from '../../context/LanguageContext';
 
-
 import styles from './TicketPage.module.css';
 
 import reply from '../../assets/ticket/reply.svg';
+import online from '../../assets/ticket/status-online.svg';
 import plusIcon from '../../assets/users-page/plus.svg';
 import searchIcon from '../../assets/users-page/search.svg';
 import clearIcon from '../../assets/users-page/x-circle.svg';
@@ -67,6 +68,9 @@ const ticketsPerPage = 5;
 
 const Ticketpage = () => {
   const { t } = useLanguage();
+  const methotPopUpRef = useRef<HTMLDivElement | null>(null);
+
+  const [uniqueMethods, setUniqueMethods] = useState<string[]>([]);
   const [currentPage, setCurrentPage] = useState(0);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [resultsFound, setResultsFound] = useState(true);
@@ -74,6 +78,8 @@ const Ticketpage = () => {
   const [currentUser, setCurrentUser] = useState<number | null>(null);
   const [openRequestModal, setOpenRequestModal] = useState<boolean>(false);
   const [searchValue, setSearchValue] = useState('');
+  const [isMethodDropdownOpen, setIsMethodDropdownOpen] = useState(false);
+  const [typeOfMethod, setTypeOfMethod] = useState<string | null>(null);
   const [loadingStates, setLoadingStates] = useState<{
     [key: number]: boolean;
   }>({});
@@ -104,11 +110,19 @@ const Ticketpage = () => {
   }, []);
 
   const fetchData = useCallback(
-    async ({ key, sortDirection }: { key: string; sortDirection?: string }) => {
+    async ({
+      key,
+      sortDirection,
+      status
+    }: {
+      key?: string;
+      sortDirection?: string;
+      status?: string | null
+    }) => {
       setIsLoading(true);
       try {
         const sortParam = sortDirection === 'descending' ? `-${key}` : key;
-        const data = await getAllTickets(sortParam);
+        const data = await getAllTickets(sortParam, status);
         setTickets(data);
         setIsLoading(false);
         setResultsFound(true);
@@ -119,6 +133,12 @@ const Ticketpage = () => {
     },
     []
   );
+
+  useEffect(() => {
+    fetchData({
+      status: typeOfMethod,
+    });
+  }, [typeOfMethod, fetchData]);
 
   useEffect(() => {
     fetchData(activeSortQuery);
@@ -195,6 +215,12 @@ const Ticketpage = () => {
     )?.direction;
     setActiveSortQuery({ key, sortDirection });
   };
+
+  useEffect(() => {
+    const methods = tickets.map((invoice) => invoice.status);
+    const uniqueMethods = [...new Set(methods)];
+    setUniqueMethods(uniqueMethods);
+  }, [tickets]);
 
   const columns = [
     {
@@ -479,9 +505,30 @@ const Ticketpage = () => {
     },
   ];
 
+  const toggleDropdown = useCallback(() => {
+    setIsMethodDropdownOpen((prev) => !prev);
+  }, []);
+
   const handlePageClick = ({ selected }: { selected: number }) => {
     setCurrentPage(selected);
   };
+
+  const handleClickOutsideStatuses = (event: MouseEvent) => {
+    if (
+      methotPopUpRef.current &&
+      !methotPopUpRef.current.contains(event.target as Node)
+    ) {
+      setIsMethodDropdownOpen(false);
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener('click', handleClickOutsideStatuses);
+
+    return () => {
+      document.removeEventListener('click', handleClickOutsideStatuses);
+    };
+  }, []);
 
   const indexOfLastUser = (currentPage + 1) * ticketsPerPage;
   const indexOfFirstUser = indexOfLastUser - ticketsPerPage;
@@ -491,6 +538,50 @@ const Ticketpage = () => {
     <div className={styles.wrapper}>
       <div className={styles.tableWrapper}>
         <TableHeader columns={columnsHeader} />
+        <div className={styles.tableDescription}>
+          <div className={styles.smallWrapper}>
+            <p className={styles.filterTitle}>Filter</p>
+            <div
+              className={styles.filterBtnWrapper}
+              onClick={toggleDropdown}
+              ref={methotPopUpRef}
+            >
+              <img src={online} alt='Method' />
+              <p>Status</p>
+            </div>
+            {isMethodDropdownOpen && (
+              <div className={styles.optionWrapper}>
+                {uniqueMethods.map((method) => (
+                  <div
+                    key={method}
+                    onClick={() => {
+                      setTypeOfMethod(method);
+                    }}
+                    className={styles.optionFilter}
+                  >
+                    {method}
+                  </div>
+                ))}
+              </div>
+            )}
+            {typeOfMethod && (
+              <Chip
+                sx={{
+                  height: '16px',
+                  fontSize: '7px',
+                  p: '4px',
+                  '& .MuiChip-deleteIcon': {
+                    width: '12px',
+                    height: '12px',
+                    fontSize: '10px',
+                  },
+                }}
+                label={typeOfMethod.toUpperCase()}
+                onDelete={() => setTypeOfMethod(null)}
+              />
+            )}
+          </div>
+        </div>
         <TableComponent
           resultsFound={resultsFound}
           columns={columns}
