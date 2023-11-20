@@ -25,7 +25,7 @@ const SEARCH_USERS =
   process.env.SEARCH_USERS || 'http://157.230.50.75:8000/v1/users?search=';
 const SEARCH_USER_WITH_SORTOPTION =
   process.env.SEARCH_USER_WITH_SORTOPTION ||
-  'http://157.230.50.75:8000/v1/users/?ordering=';
+  'http://157.230.50.75:8000/v1/users/';
 const GET_USER_SUBSCRIPTION =
   'http://157.230.50.75:8000/v1/stripe/subscriptions/';
 const UPDATE_USER = 'http://157.230.50.75:8000/v1/stripe/update-user/';
@@ -81,11 +81,19 @@ export const getAllUsers = async () => {
   }
 };
 
-export const getAllUsersWithSort = async (sortOption: string) => {
+export const getAllUsersWithSort = async (
+  sortOption: string | undefined,
+  sortType?: string | null | undefined
+) => {
   try {
-    const response = await axios.get(
-      `${SEARCH_USER_WITH_SORTOPTION}${sortOption}`
-    );
+    let queryString = `?ordering=${sortOption}`;
+
+    if (sortType) {
+      queryString += `&type=${sortType}`;
+    }
+
+    const url = `${SEARCH_USER_WITH_SORTOPTION}${queryString}`;
+    const response = await axios.get(url);
     return response.data;
   } catch (error) {
     console.error(error);
@@ -154,27 +162,27 @@ export const updateUsers = async (userData: IUpdateUser) => {
   try {
     const response = await axios.post(`${UPDATE_USER}`, userData);
     if (response.status === 200) {
-        toast.success('The user has been successfully edited', {
-          position: 'top-right',
-          autoClose: 3000,
-          className: 'my-custom-toast',
-          style: myCustomStyles,
-          progressClassName: 'my-custom-progress-bar',
-          progressStyle: progressBarStyles,
-          icon: <CustomCheckmark />,
-        });
-      }
-    return response.data;
-  } catch (error) {
-    toast.error('Something goes wrong', {
+      toast.success('The user has been successfully edited', {
         position: 'top-right',
         autoClose: 3000,
-        className: 'my-custom-toast-error',
+        className: 'my-custom-toast',
         style: myCustomStyles,
         progressClassName: 'my-custom-progress-bar',
         progressStyle: progressBarStyles,
-        icon: <CustomErrorIcon />,
+        icon: <CustomCheckmark />,
       });
+    }
+    return response.data;
+  } catch (error) {
+    toast.error('Something goes wrong', {
+      position: 'top-right',
+      autoClose: 3000,
+      className: 'my-custom-toast-error',
+      style: myCustomStyles,
+      progressClassName: 'my-custom-progress-bar',
+      progressStyle: progressBarStyles,
+      icon: <CustomErrorIcon />,
+    });
     console.error(error);
   }
 };
