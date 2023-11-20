@@ -54,8 +54,6 @@ export const getAllInvoces = async (
     customer_id: customerId,
   };
 
-  console.log(sortPackage);
-
   let queryString = `?sort=${sortOption}`;
 
   if (sortPackage) {
