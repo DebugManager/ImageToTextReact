@@ -1,4 +1,10 @@
-import React, { useEffect, useState, useMemo, useCallback } from 'react';
+import React, {
+  useEffect,
+  useState,
+  useMemo,
+  useCallback,
+  useRef,
+} from 'react';
 import { CircleLoader } from 'react-spinners';
 
 import PlanCard from './PlanCard/PlanCard';
@@ -89,6 +95,10 @@ const PricingPage = () => {
 
   const exchangeRateData = useExchangeRate();
 
+  const currencyPopUpRef = useRef<HTMLDivElement | null>(null);
+
+  const packagePopUpRef = useRef<HTMLDivElement | null>(null);
+
   const [typeOfPrice, setTypeOfPrice] = useState<PricingTypes>('month');
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [isCurrencyDropdownOpen, setIsCurrencyDropdownOpen] = useState(false);
@@ -154,6 +164,40 @@ const PricingPage = () => {
     setCurrencyName(currencyName);
   };
 
+  const handleClickOutsideCurrency = (event: MouseEvent) => {
+    if (
+      currencyPopUpRef.current &&
+      !currencyPopUpRef.current.contains(event.target as Node)
+    ) {
+      setIsCurrencyDropdownOpen(false);
+    }
+  };
+
+  const handleClickOutsidePackages = (event: MouseEvent) => {
+    if (
+      packagePopUpRef.current &&
+      !packagePopUpRef.current.contains(event.target as Node)
+    ) {
+      setIsDropdownOpen(false);
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener('click', handleClickOutsideCurrency);
+
+    return () => {
+      document.removeEventListener('click', handleClickOutsideCurrency);
+    };
+  }, []);
+
+  useEffect(() => {
+    document.addEventListener('click', handleClickOutsidePackages);
+
+    return () => {
+      document.removeEventListener('click', handleClickOutsidePackages);
+    };
+  }, []);
+
   filteredPlans?.sort((a, b) => a.unit_amount - b.unit_amount);
 
   return (
@@ -165,7 +209,11 @@ const PricingPage = () => {
       <div className={styles.dropDownWrapper}>
         <div className={styles.filterWrapper}>
           <p className={styles.option}>{t('viewPackages')}</p>
-          <div className={styles.filter} onClick={toggleDropdown}>
+          <div
+            className={styles.filter}
+            onClick={toggleDropdown}
+            ref={packagePopUpRef}
+          >
             <p>{typeOfPrice}</p>
             <img alt='arrow' src={arrow} className={styles.arrow} />
           </div>
@@ -188,8 +236,12 @@ const PricingPage = () => {
         </div>
 
         <div className={styles.filterWrapper}>
-          <p className={styles.option}>View currency</p>
-          <div className={styles.filter} onClick={toggleCurencyDropdown}>
+          <p className={styles.option}>{t('View_Currency')}</p>
+          <div
+            className={styles.filter}
+            onClick={toggleCurencyDropdown}
+            ref={currencyPopUpRef}
+          >
             <p>{!currencyName ? 'USD' : currencyName}</p>
             <img alt='arrow' src={arrow} className={styles.arrow} />
           </div>
